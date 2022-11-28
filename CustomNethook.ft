@@ -1,0 +1,10 @@
+﻿APPLICATION "_customnethook_"
+FUNC_DLL "chooks\CustomNethook.dll"
+RES_DLL "SAME"
+dnRES_NAME "_CustomNethook.CustomNethook"
+CATEGORY "Automation"
+FUNCTION NET "CustomNethookRun"
+dnSPNG "Run16"
+dnLPNG"Run32"
+dnTIP "RunTip"
+END_FUNCTION
