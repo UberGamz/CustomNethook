@@ -1,32 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic;
-using System.ComponentModel;
-using System.Windows.Forms;
-using CustomNethook;
 using Mastercam.Database;
-using System.Drawing;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices;
 using Mastercam.Math;
 using Mastercam.IO;
 using Mastercam.Database.Types;
-using System.Numerics;
-using System.Security.Policy;
 using Mastercam.GeometryUtility.Types;
 using Mastercam.App.Types;
 using Mastercam.GeometryUtility;
 using Mastercam.Support;
-using System.ComponentModel.Design;
-using System.Management.Instrumentation;
 using Mastercam.Curves;
-using Mastercam.IO.Types;
-using System.Runtime.Remoting.Lifetime;
 using Mastercam.BasicGeometry;
-using System.Security.Cryptography;
+using Mastercam.Database.Interop;
+using System.Diagnostics;
+using System.Windows.Forms.VisualStyles;
+using System.Security.Claims;
 
 namespace _CustomNethook
 {
@@ -43,13 +30,25 @@ namespace _CustomNethook
             var tempList7 = new List<Geometry>(); // arcs to break
             var tempList8 = new List<int>(); // list of starting entities
             var tempList9 = new List<int>(); // list of all points
-            void translate(){
+            var templist10 = new List<int>(); // temporarily holds geoID of chainEntities
+            var templist80 = new List<int>();
+            var templist81 = new List<int>();
+            var upperCreaseID = new List<int>();
+            var lowerCreaseID = new List<int>();
+            var creaseX1 = 0.0;
+            var creaseX2 = 0.0;
+            var creaseY1 = 0.0;
+            var creaseY2 = 0.0;
+            var creaseX3 = 0.0;
+            var creaseX4 = 0.0;
+            var creaseY3 = 0.0;
+            var creaseY4 = 0.0;
+
+            void translate()
+            {
                 SelectionManager.UnselectAllGeometry();
                 var tempChain1 = SearchManager.SelectAllGeometryOnLevel(75, true);
                 var tempSelectedGeometry1 = SearchManager.GetSelectedGeometry();
-                foreach (var i in tempSelectedGeometry1){
-                    tempList8.Add(i.GetEntityID());
-                }
                 var temp1 = GeometryManipulationManager.CopySelectedGeometryToLevel(10, true);
                 SelectionManager.UnselectAllGeometry();
                 var tempChain2 = SearchManager.SelectAllGeometryOnLevel(75, true);
@@ -60,13 +59,15 @@ namespace _CustomNethook
                 Point3D endPointLower = new Point3D(0.001, 0.001, 0.0);
                 Point3D resultPoint = new Point3D(-0.001, 0.001, 0.0);
                 MCView Top = new MCView();
-                foreach (var i in tempSelectedGeometry1){
+                foreach (var i in tempSelectedGeometry1)
+                {
                     tempList3.Add(i.GetEntityID());
                 }
 
                 var temp1Geometry = SearchManager.SelectAllGeometryOnLevel(10, true);
                 var tempSelectedGeometry1Result = SearchManager.GetSelectedGeometry();
-                foreach (var entity in tempSelectedGeometry1Result){
+                foreach (var entity in tempSelectedGeometry1Result)
+                {
                     entity.Color = 10;
                     entity.Translate(startPoint, endPointUpper, Top, Top);
                     tempList1.Add(entity.GetEntityID());
@@ -78,7 +79,8 @@ namespace _CustomNethook
 
                 var temp2Geometry = SearchManager.SelectAllGeometryOnLevel(11, true);
                 var tempSelectedGeometry2Result = SearchManager.GetSelectedGeometry();
-                foreach (var entity in tempSelectedGeometry2Result){
+                foreach (var entity in tempSelectedGeometry2Result)
+                {
                     entity.Color = 11;
                     entity.Translate(startPoint, endPointLower, Top, Top);
                     tempList2.Add(entity.GetEntityID());
@@ -95,11 +97,14 @@ namespace _CustomNethook
 
 
             } // Moves line in X+Y+ direction and in X-Y- direction
-            void findIntersectionOfArcs(){
+            void findIntersectionOfArcs()
+            {
                 SelectionManager.UnselectAllGeometry();
-                foreach (var v in tempList1){
+                foreach (var v in tempList1)
+                {
                     var ArcID = Geometry.RetrieveEntity(v);
-                    if (ArcID is ArcGeometry arc){
+                    if (ArcID is ArcGeometry arc)
+                    {
                         arc = (ArcGeometry)ArcID;
                         var arc1X1 = arc.EndPoint1.x; // Arc 1 x 1
                         var arc1X2 = arc.EndPoint2.x; // Arc 1 x 2
@@ -110,9 +115,11 @@ namespace _CustomNethook
                         var arc1Rad = VectorManager.Distance(arc1Center, arc1StartPoint);
                         var arcStartDegrees = arc.Data.StartAngleDegrees;
                         var arcEndDegrees = arc.Data.EndAngleDegrees;
-                        foreach (var u in tempList2){
+                        foreach (var u in tempList2)
+                        {
                             var secondArcID = Geometry.RetrieveEntity(u);
-                            if (secondArcID is ArcGeometry secondArc){
+                            if (secondArcID is ArcGeometry secondArc)
+                            {
                                 secondArc = (ArcGeometry)secondArcID;
                                 var arc2X1 = secondArc.EndPoint1.x; // Arc 2 x 1
                                 var arc2X2 = secondArc.EndPoint2.x; // Arc 2 x 2
@@ -124,7 +131,8 @@ namespace _CustomNethook
                                 var arc2StartDegrees = secondArc.Data.StartAngleDegrees;
                                 var arc2EndDegrees = secondArc.Data.EndAngleDegrees;
                                 var C1C2 = VectorManager.Distance(arc1Center, arc2Center);
-                                if (C1C2 < arc1Rad + arc2Rad){
+                                if (C1C2 < arc1Rad + arc2Rad)
+                                {
                                     var x1 = arc1Center.x;
                                     var x2 = arc2Center.x;
                                     var y1 = arc1Center.y;
@@ -150,22 +158,28 @@ namespace _CustomNethook
                                     var delta4Radneg = Math.Atan2(delta4Xneg, delta4Yneg);
                                     var pt3degreeNeg = VectorManager.RadiansToDegrees(delta3Radneg);
                                     var pt4degreeNeg = VectorManager.RadiansToDegrees(delta4Radneg);
-                                    if (pt3degreeNeg < 0.0){
+                                    if (pt3degreeNeg < 0.0)
+                                    {
                                         pt3degreeNeg = (pt3degreeNeg + 360);
                                     }
-                                    if (pt4degreeNeg < 0.0){
+                                    if (pt4degreeNeg < 0.0)
+                                    {
                                         pt4degreeNeg = (pt4degreeNeg + 360);
                                     }
-                                    if (((arc2StartDegrees < pt3degreeNeg) && (pt3degreeNeg < arc2EndDegrees)) || ((pt3degreeNeg < arc2StartDegrees) && (arc2EndDegrees < pt3degreeNeg))){
+                                    if (((arc2StartDegrees < pt3degreeNeg) && (pt3degreeNeg < arc2EndDegrees)) || ((pt3degreeNeg < arc2StartDegrees) && (arc2EndDegrees < pt3degreeNeg)))
+                                    {
                                         var point3 = new Mastercam.BasicGeometry.PointGeometry(pt3);
                                         point3.Color = 94;
+                                        point3.Level = 94;
                                         point3.Commit();
                                         tempList4.Add(point3.GetEntityID());
                                         tempList9.Add(point3.GetEntityID());
                                     }
-                                    if (((arc2StartDegrees < pt4degreeNeg) && (pt4degreeNeg < arc2EndDegrees)) || ((pt4degreeNeg < arc2StartDegrees) && (arc2EndDegrees < pt4degreeNeg))){
+                                    if (((arc2StartDegrees < pt4degreeNeg) && (pt4degreeNeg < arc2EndDegrees)) || ((pt4degreeNeg < arc2StartDegrees) && (arc2EndDegrees < pt4degreeNeg)))
+                                    {
                                         var point4 = new Mastercam.BasicGeometry.PointGeometry(pt4);
                                         point4.Color = 94;
+                                        point4.Level = 94;
                                         point4.Commit();
                                         tempList9.Add(point4.GetEntityID());
                                     }
@@ -174,7 +188,7 @@ namespace _CustomNethook
                         }
                     }
                 }
-            }
+            } // Finds intersections of arcs
             void findIntersectionOfLines()
             {
                 SelectionManager.UnselectAllGeometry();
@@ -229,6 +243,7 @@ namespace _CustomNethook
                                             { // if needs to shift up and left
                                                 var newPoint = new Mastercam.BasicGeometry.PointGeometry(pt1);
                                                 newPoint.Color = 94;
+                                                newPoint.Level = 94;
                                                 newPoint.Translate(startPoint, resultPointUp, Top, Top);
                                                 newPoint.Commit();
                                                 tempList9.Add(newPoint.GetEntityID());
@@ -238,6 +253,7 @@ namespace _CustomNethook
                                             { // if needs to shift down and right
                                                 var newPoint = new Mastercam.BasicGeometry.PointGeometry(pt1);
                                                 newPoint.Color = 94;
+                                                newPoint.Level = 94;
                                                 newPoint.Translate(startPoint, resultPointDown, Top, Top);
                                                 newPoint.Commit();
                                                 tempList9.Add(newPoint.GetEntityID());
@@ -250,23 +266,29 @@ namespace _CustomNethook
                         }
                     }
                 }
-            }
-            void clearTempLinesAndArcs(){
-                foreach (var i in tempList1){
+            } // Finds intersections of lines
+            void clearTempLinesAndArcs()
+            {
+                foreach (var i in tempList1)
+                {
                     var tempI = Geometry.RetrieveEntity(i);
                     tempI.Delete();
                 }
-                foreach (var i in tempList2){
+                foreach (var i in tempList2)
+                {
                     var tempI = Geometry.RetrieveEntity(i);
                     tempI.Delete();
                 }
                 GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 GraphicsManager.Repaint(true);
-            }
-            void breakArcsWithPoints(){
-                foreach (var i in tempList3){
+            } // Deletes temporary lines and arcs
+            void breakArcsWithPoints()
+            {
+                foreach (var i in tempList3)
+                {
                     var ArcID = Geometry.RetrieveEntity(i);
-                    if (ArcID is ArcGeometry arc){
+                    if (ArcID is ArcGeometry arc)
+                    {
                         var arc1X1 = arc.EndPoint1.x; // Arc x 1
                         var arc1X2 = arc.EndPoint2.x; // Arc x 2
                         var arc1Y1 = arc.EndPoint1.y; // Arc y 1
@@ -275,9 +297,11 @@ namespace _CustomNethook
                         Point3D arc1StartPoint = new Point3D(arc1X1, arc1Y1, 0.0);
                         Point3D arc1EndPoint = new Point3D(arc1X2, arc1Y2, 0.0);
                         var tolerance = 0.001;
-                        foreach (var v in tempList4){
+                        foreach (var v in tempList4)
+                        {
                             var u = PointGeometry.RetrieveEntity(v);
-                            if (u is PointGeometry point){
+                            if (u is PointGeometry point)
+                            {
                                 var ux = point.Data.x;
                                 var uy = point.Data.y;
                                 Point3D uPoint = new Point3D(uy, ux, 0.0);
@@ -285,25 +309,38 @@ namespace _CustomNethook
                                 var delta3Yneg = (arc1Center.y - uPoint.y);
                                 var delta3Radneg = Math.Atan2(delta3Xneg, delta3Yneg);
                                 var pt3degreeNeg = VectorManager.RadiansToDegrees(delta3Radneg);
-                                if (pt3degreeNeg < 0.0){
+                                if (pt3degreeNeg < 0.0)
+                                {
                                     pt3degreeNeg = (pt3degreeNeg + 360);
                                 }
                                 var startToUDist = Math.Abs(VectorManager.Distance(arc1StartPoint, uPoint));
                                 var endToUDist = Math.Abs(VectorManager.Distance(arc1EndPoint, uPoint));
-                                if ((startToUDist >= (endToUDist - tolerance)) && (startToUDist <= (endToUDist + tolerance))){
-                                    BreakManyPiecesParameters broken = new BreakManyPiecesParameters(){
+                                if ((startToUDist >= (endToUDist - tolerance)) && (startToUDist <= (endToUDist + tolerance)))
+                                {
+                                    BreakManyPiecesParameters broken = new BreakManyPiecesParameters()
+                                    {
                                         Curves = true,
                                         Number = 2,
                                         Method = 0
                                     };
                                     tempList7.Add(arc);
-                                    GeometryManipulationManager.BreakManyPieces(tempList7,broken,ref tempList5,ref tempList6);
+                                    GeometryManipulationManager.BreakManyPieces(tempList7, broken, ref tempList5, ref tempList6);
                                 }
                             }
                         }
                     }
                 }
-            }
+            } // Breaks arcs where intersections were
+            void selectNewGeo() {
+                SelectionManager.UnselectAllGeometry();
+                SearchManager.SelectAllGeometryOnLevel(75, true);
+                var tempSelectedGeometry1 = SearchManager.GetSelectedGeometry();
+                foreach (var i in tempSelectedGeometry1)
+                {
+                    tempList8.Add(i.GetEntityID());
+                }
+                SelectionManager.UnselectAllGeometry();
+            } // Selects all geometry (there are new entities)
             void colorCrossovers(){
                 var tolerance = .005;
                 var arcX1 = 0.0;
@@ -318,154 +355,1578 @@ namespace _CustomNethook
                 var lineY2 = 0.0;
                 Point3D lineStartPoint = new Point3D(lineX1, lineY1, 0.0);
                 Point3D lineEndPoint = new Point3D(lineX2, lineY2, 0.0);
-                var nextarcX1 = 0.0;
-                var nextarcX2 = 0.0;
-                var nextarcY1 = 0.0;
-                var nextarcY2 = 0.0;
-                Point3D nextarcStartPoint = new Point3D(nextarcX1, nextarcY1, 0.0);
-                Point3D nextarcEndPoint = new Point3D(nextarcX2, nextarcY2, 0.0);
-                var nextlineX1 = 0.0;
-                var nextlineX2 = 0.0;
-                var nextlineY1 = 0.0;
-                var nextlineY2 = 0.0;
-                Point3D nextlineStartPoint = new Point3D(nextlineX1, nextlineY1, 0.0);
-                Point3D nextlineEndPoint = new Point3D(nextlineX2, nextlineY2, 0.0);
-                foreach (var i in tempList8){
-                    var GeoID = Geometry.RetrieveEntity(i);
-                    var firstEntity = 0;
-                    var secondEntity = 0;
-
-                    if (GeoID is ArcGeometry arc){ // if first entity is arc
-                        arcX1 = arc.EndPoint1.x; // Arc 1 x 1
-                        arcX2 = arc.EndPoint2.x; // Arc 1 x 2
-                        arcY1 = arc.EndPoint1.y; // Arc 1 y 1
-                        arcY2 = arc.EndPoint2.y; // Arc 1 y 2
-                        arcStartPoint = new Point3D(arcX1, arcY1, 0.0);
-                        arcEndPoint = new Point3D(arcX2, arcY2, 0.0);
-                        firstEntity = 1;
+                var nextArcX1 = 0.0;
+                var nextArcX2 = 0.0;
+                var nextArcY1 = 0.0;
+                var nextArcY2 = 0.0;
+                Point3D nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0);
+                Point3D nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0);
+                var nextLineX1 = 0.0;
+                var nextLineX2 = 0.0;
+                var nextLineY1 = 0.0;
+                var nextLineY2 = 0.0;
+                Point3D nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0);
+                Point3D nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0);
+                var firstEntity = 0;
+                var step = 0;
+                var chainDetails = new Mastercam.Database.Interop.ChainDetails();// Preps the ChainDetails plugin
+                var selectedChains = ChainManager.ChainAll(75);// Chains all geometry on level 75
+                var chainDirection = ChainDirectionType.CounterClockwise;// Going to be used to make sure all chains go the same direction
+                ChainManager.StartChainAtLongest(selectedChains);
+                foreach (var chain in selectedChains){
+                    var chainData = chainDetails.GetData(chain);
+                    var chainEntityList = chainData.ChainEntities;
+                    foreach (var t in chainEntityList){
+                        (t.Key).Color = 9;
+                        (t.Key).Commit();
                     }
-
-                    if (GeoID is LineGeometry line){ // if first entity is line
-                        lineX1 = line.EndPoint1.x; // line 1 x 1
-                        lineX2 = line.EndPoint2.x; // line 1 x 2
-                        lineY1 = line.EndPoint1.y; // line 1 y 1
-                        lineY2 = line.EndPoint2.y; // line 1 y 2
-                        lineStartPoint = new Point3D(lineX1, lineY1, 0.0);
-                        lineEndPoint = new Point3D(lineX2, lineY2, 0.0);
-                        firstEntity = 2;
-                    }
-
-                    foreach (var u in tempList8){
-                        var nextGeoID = Geometry.RetrieveEntity(u);
-
-                        if (nextGeoID is ArcGeometry nextarc){ // if second entity is arc
-                            nextarcX1 = nextarc.EndPoint1.x; // Arc 2 x 1
-                            nextarcX2 = nextarc.EndPoint2.x; // Arc 2 x 2
-                            nextarcY1 = nextarc.EndPoint1.y; // Arc 2 y 1
-                            nextarcY2 = nextarc.EndPoint2.y; // Arc 2 y 2
-                            nextarcStartPoint = new Point3D(nextarcX1, nextarcY1, 0.0);
-                            nextarcEndPoint = new Point3D(nextarcX2, nextarcY2, 0.0);
-                            secondEntity = 1;
-                        }
-
-                        if (nextGeoID is LineGeometry nextline){ // if second entity is line
-                            nextlineX1 = nextline.EndPoint1.x; // line 2 x 1
-                            nextlineX2 = nextline.EndPoint2.x; // line 2 x 2
-                            nextlineY1 = nextline.EndPoint1.y; // line 2 y 1
-                            nextlineY2 = nextline.EndPoint2.y; // line 2 y 2
-                            nextlineStartPoint = new Point3D(nextlineX1, nextlineY1, 0.0);
-                            nextlineEndPoint = new Point3D(nextlineX2, nextlineY2, 0.0);
-                            secondEntity = 2;
-                        }
-
-                        if ((firstEntity == 1) && (secondEntity == 1)){
-                            foreach (var v in tempList9){
-                                var w = PointGeometry.RetrieveEntity(v);
-                                if (w is PointGeometry point){
-                                    var ux = point.Data.x;
-                                    var uy = point.Data.y;
-                                    Point3D uPoint = new Point3D(ux, uy, 0.0);
-                                    var startDistance = Math.Abs(VectorManager.Distance(uPoint, arcStartPoint));
-                                    var endDistance = Math.Abs(VectorManager.Distance(uPoint, arcEndPoint));
-                                    if (startDistance <= tolerance){
-                                        GeoID.Color = 10;
-                                        GeoID.Commit();
+                }
+                foreach (var chain in selectedChains){
+                    templist10.Clear();
+                    step = 0;
+                    chain.Direction = chainDirection;
+                    var chainEntity = ChainManager.GetGeometryInChain(chain);
+                stepStart:
+                    if (step == 0){
+                        foreach (var entity in chainEntity){
+                            if (entity is ArcGeometry arc && step == 0){
+                                arcX1 = arc.EndPoint1.x; // Arc 1 x 1
+                                arcX2 = arc.EndPoint2.x; // Arc 1 x 2
+                                arcY1 = arc.EndPoint1.y; // Arc 1 y 1
+                                arcY2 = arc.EndPoint2.y; // Arc 1 y 2
+                                arcStartPoint = new Point3D(arcX1, arcY1, 0.0); // Arc 1 start point
+                                arcEndPoint = new Point3D(arcX2, arcY2, 0.0); // Arc 1 end point
+                                firstEntity = 1; // Saves that first entity is Arc
+                                foreach (var v in tempList9){
+                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                    if (w is PointGeometry point && step == 0){
+                                        var ux = point.Data.x;// X location of point
+                                        var uy = point.Data.y;// Y location of point
+                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                        var arcStartDistance = Math.Abs(VectorManager.Distance(uPoint, arcStartPoint));// Distance between entity start point and crossover point
+                                        var arcEndDistance = Math.Abs(VectorManager.Distance(uPoint, arcEndPoint));// Distance between entity end point and crossover point
+                                        if (arcStartDistance <= tolerance && step == 0){
+                                            entity.Color = 10;// Changes color of entity to 10
+                                            entity.Commit();// Saves entity into Mastercam Database
+                                            step = 1;// Sets step to 1
+                                            templist10.Add(entity.GetEntityID());
+                                        }
                                     }
                                 }
                             }
-                        }//If arc and arc
-                        if ((firstEntity == 1) && (secondEntity == 2)){
-
-                        }//If arc and line
-                        if ((firstEntity == 2) && (secondEntity == 1)){
-
-                        }//If line and arc
-                        if ((firstEntity == 2) && (secondEntity == 2)){
-
-                        }//If line and line
+                            if (entity is LineGeometry line && step == 0){
+                                lineX1 = line.EndPoint1.x; // line 1 x 1
+                                lineX2 = line.EndPoint2.x; // line 1 x 2
+                                lineY1 = line.EndPoint1.y; // line 1 y 1
+                                lineY2 = line.EndPoint2.y; // line 1 y 2
+                                lineStartPoint = new Point3D(lineX1, lineY1, 0.0); // Line 1 start point
+                                lineEndPoint = new Point3D(lineX2, lineY2, 0.0); // Line 1 end point
+                                firstEntity = 2; // Saves that first entity is Line
+                                foreach (var v in tempList9){
+                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                    if (w is PointGeometry point && step == 0){
+                                        var ux = point.Data.x;// X location of point
+                                        var uy = point.Data.y;// Y location of point
+                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                        var lineStartDistance = Math.Abs(VectorManager.Distance(uPoint, lineStartPoint));// Distance between entity start point and crossover point
+                                        var lineEndDistance = Math.Abs(VectorManager.Distance(uPoint, lineEndPoint));// Distance between entity end point and crossover point
+                                        if (lineStartDistance <= tolerance && step == 0){
+                                            entity.Color = 10;// Changes color of entity to 10
+                                            entity.Commit();// Saves entity into Mastercam Database
+                                            step = 1;// Sets step to 1
+                                            templist10.Add(entity.GetEntityID());
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
+                    if (step == 1){
+                        foreach (var entity in chainEntity){
+                            if (firstEntity == 1 && step == 1){
+                                var thisEntity = ArcGeometry.RetrieveEntity(templist10[0]);
+                                if (thisEntity is ArcGeometry arc && step == 1){
+                                arcX1 = arc.EndPoint1.x; // Arc 1 x 1
+                                arcX2 = arc.EndPoint2.x; // Arc 1 x 2
+                                arcY1 = arc.EndPoint1.y; // Arc 1 y 1
+                                arcY2 = arc.EndPoint2.y; // Arc 1 y 2
+                                arcStartPoint = new Point3D(arcX1, arcY1, 0.0); // Arc 1 start point
+                                arcEndPoint = new Point3D(arcX2, arcY2, 0.0); // Arc 1 end point
+                                    if (entity is ArcGeometry nextArc && (entity.GetEntityID() != templist10[0]) && step == 1){
+                                        nextArcX1 = nextArc.EndPoint1.x;
+                                        nextArcX2 = nextArc.EndPoint2.x;
+                                        nextArcY1 = nextArc.EndPoint1.y;
+                                        nextArcY2 = nextArc.EndPoint2.y;
+                                        nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                        nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                        var entityStartDistance = VectorManager.Distance(arcEndPoint, nextArcStartPoint);
+                                        var entityEndDistance = VectorManager.Distance(arcEndPoint, nextArcEndPoint);
+                                        if (entityStartDistance <= tolerance && step == 1){
+                                            entity.Color = 10;
+                                            entity.Commit();
+                                            templist10.Clear();
+                                            templist10.Add(entity.GetEntityID());
+                                            step = 2;
+                                            firstEntity = 1;
+                                            foreach (var v in tempList9){
+                                                var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                if (w is PointGeometry point){
+                                                    var ux = point.Data.x;// X location of point
+                                                    var uy = point.Data.y;// Y location of point
+                                                    Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                    var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                    if (entityPointDistance <= tolerance){
+                                                        step = 3;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (entityEndDistance <= tolerance && step == 1){
+                                            entity.Color = 10;
+                                            entity.Commit();
+                                            templist10.Clear();
+                                            templist10.Add(entity.GetEntityID());
+                                            step = 4;
+                                            firstEntity = 1;
+                                            foreach (var v in tempList9){
+                                                var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                if (w is PointGeometry point){
+                                                    var ux = point.Data.x;// X location of point
+                                                    var uy = point.Data.y;// Y location of point
+                                                    Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                    var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                    if (entityPointDistance <= tolerance){
+                                                        step = 5;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (entity is LineGeometry nextLine && (entity.GetEntityID() != templist10[0]) && step == 1){
+                                        nextLineX1 = nextLine.EndPoint1.x;
+                                        nextLineX2 = nextLine.EndPoint2.x;
+                                        nextLineY1 = nextLine.EndPoint1.y;
+                                        nextLineY2 = nextLine.EndPoint2.y;
+                                        nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                        nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                        var entityStartDistance = VectorManager.Distance(arcEndPoint, nextLineStartPoint);
+                                        var entityEndDistance = VectorManager.Distance(arcEndPoint, nextLineEndPoint);
+                                        if (entityStartDistance <= tolerance && step == 1){
+                                            entity.Color = 10;
+                                            entity.Commit();
+                                            templist10.Clear();
+                                            templist10.Add(entity.GetEntityID());
+                                            step = 2;
+                                            firstEntity = 2;
+                                            foreach (var v in tempList9){
+                                                var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                if (w is PointGeometry point){
+                                                    var ux = point.Data.x;// X location of point
+                                                    var uy = point.Data.y;// Y location of point
+                                                    Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                    var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                    if (entityPointDistance <= tolerance){
+                                                        step = 3;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (entityEndDistance <= tolerance && step == 1){
+                                            entity.Color = 10;
+                                            entity.Commit();
+                                            templist10.Clear();
+                                            templist10.Add(entity.GetEntityID());
+                                            step = 4;
+                                            firstEntity = 2;
+                                            foreach (var v in tempList9){
+                                                var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                if (w is PointGeometry point){
+                                                    var ux = point.Data.x;// X location of point
+                                                    var uy = point.Data.y;// Y location of point
+                                                    Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                    var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                    if (entityPointDistance <= tolerance){
+                                                        step = 5;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (firstEntity == 2 && step == 1){
+                                
+                                    var thisEntity = LineGeometry.RetrieveEntity(templist10[0]);
+                                    if (thisEntity is LineGeometry line && step == 1){
+                                        lineX1 = line.EndPoint1.x; // Arc 1 x 1
+                                        lineX2 = line.EndPoint2.x; // Arc 1 x 2
+                                        lineY1 = line.EndPoint1.y; // Arc 1 y 1
+                                        lineY2 = line.EndPoint2.y; // Arc 1 y 2
+                                        lineStartPoint = new Point3D(lineX1, lineY1, 0.0); // Arc 1 start point
+                                        lineEndPoint = new Point3D(lineX2, lineY2, 0.0); // Arc 1 end point
+                                        if (entity is ArcGeometry nextArc && (entity.GetEntityID() != templist10[0]) && step == 1){
+                                            nextArcX1 = nextArc.EndPoint1.x;
+                                            nextArcX2 = nextArc.EndPoint2.x;
+                                            nextArcY1 = nextArc.EndPoint1.y;
+                                            nextArcY2 = nextArc.EndPoint2.y;
+                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextArcStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextArcEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 1){
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9){
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point){
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                        if (entityPointDistance <= tolerance){
+                                                            step = 3;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 1){
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9){
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point){
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                        if (entityPointDistance <= tolerance){
+                                                            step = 5;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (entity is LineGeometry nextLine && (entity.GetEntityID() != templist10[0]) && step == 1){
+                                            nextLineX1 = nextLine.EndPoint1.x;
+                                            nextLineX2 = nextLine.EndPoint2.x;
+                                            nextLineY1 = nextLine.EndPoint1.y;
+                                            nextLineY2 = nextLine.EndPoint2.y;
+                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextLineStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextLineEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 1){
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9){
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point){
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                        if (entityPointDistance <= tolerance){
+                                                            step = 3;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 1){
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9){
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point){
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                        if (entityPointDistance <= tolerance){
+                                                            step = 5;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                
+                            }
+                        }
+                    }
+                    if (step == 2){
+                        foreach (var entity in chainEntity)
+                        {
+                            if (entity.Color != 10 || entity.Color != 11)
+                            {
+                                if (firstEntity == 1 && step == 2)
+                                {
+                                    var thisEntity = ArcGeometry.RetrieveEntity(templist10[0]);
+                                    if (thisEntity is ArcGeometry arc && step == 2)
+                                    {
+                                        arcX1 = arc.EndPoint1.x; // Arc 1 x 1
+                                        arcX2 = arc.EndPoint2.x; // Arc 1 x 2
+                                        arcY1 = arc.EndPoint1.y; // Arc 1 y 1
+                                        arcY2 = arc.EndPoint2.y; // Arc 1 y 2
+                                        arcStartPoint = new Point3D(arcX1, arcY1, 0.0); // Arc 1 start point
+                                        arcEndPoint = new Point3D(arcX2, arcY2, 0.0); // Arc 1 end point
+                                        if (entity is ArcGeometry nextArc && (entity.Color != 10) && (entity.Color != 11) && step == 2)
+                                        {
+                                            nextArcX1 = nextArc.EndPoint1.x;
+                                            nextArcX2 = nextArc.EndPoint2.x;
+                                            nextArcY1 = nextArc.EndPoint1.y;
+                                            nextArcY2 = nextArc.EndPoint2.y;
+                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(arcEndPoint, nextArcStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(arcEndPoint, nextArcEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 2)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 3;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 2)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 5;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                        if (entity is LineGeometry nextLine && (entity.Color != 10) && (entity.Color != 11) && step == 2)
+                                        {
+                                            nextLineX1 = nextLine.EndPoint1.x;
+                                            nextLineX2 = nextLine.EndPoint2.x;
+                                            nextLineY1 = nextLine.EndPoint1.y;
+                                            nextLineY2 = nextLine.EndPoint2.y;
+                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(arcEndPoint, nextLineStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(arcEndPoint, nextLineEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 2)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 3;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 2)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 5;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                    }
+                                }
+                                if (firstEntity == 2 && step == 2)
+                                {
+                                    var thisEntity = LineGeometry.RetrieveEntity(templist10[0]);
+                                    if (thisEntity is LineGeometry line && step == 2)
+                                    {
+                                        lineX1 = line.EndPoint1.x; // Arc 1 x 1
+                                        lineX2 = line.EndPoint2.x; // Arc 1 x 2
+                                        lineY1 = line.EndPoint1.y; // Arc 1 y 1
+                                        lineY2 = line.EndPoint2.y; // Arc 1 y 2
+                                        lineStartPoint = new Point3D(lineX1, lineY1, 0.0); // Arc 1 start point
+                                        lineEndPoint = new Point3D(lineX2, lineY2, 0.0); // Arc 1 end point
+                                        if (entity is ArcGeometry nextArc && (entity.Color != 10) && (entity.Color != 11) && step == 2)
+                                        {
+                                            nextArcX1 = nextArc.EndPoint1.x;
+                                            nextArcX2 = nextArc.EndPoint2.x;
+                                            nextArcY1 = nextArc.EndPoint1.y;
+                                            nextArcY2 = nextArc.EndPoint2.y;
+                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextArcStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextArcEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 2)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 3;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 2)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 5;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                        if (entity is LineGeometry nextLine && (entity.Color != 10) && (entity.Color != 11) && step == 2)
+                                        {
+                                            nextLineX1 = nextLine.EndPoint1.x;
+                                            nextLineX2 = nextLine.EndPoint2.x;
+                                            nextLineY1 = nextLine.EndPoint1.y;
+                                            nextLineY2 = nextLine.EndPoint2.y;
+                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextLineStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextLineEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 2)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 3;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 2)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 5;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } // Gets Geo that connects first entity end point to second entity start point (offset 2)
+                    if (step == 3){
+                        foreach (var entity in chainEntity)
+                        {
+                            if (entity.Color != 10 || entity.Color != 11)
+                            {
+                                if (firstEntity == 1 && step == 3)
+                                {
+                                    var thisEntity = ArcGeometry.RetrieveEntity(templist10[0]);
+                                    if (thisEntity is ArcGeometry arc && step == 3)
+                                    {
+                                        arcX1 = arc.EndPoint1.x; // Arc 1 x 1
+                                        arcX2 = arc.EndPoint2.x; // Arc 1 x 2
+                                        arcY1 = arc.EndPoint1.y; // Arc 1 y 1
+                                        arcY2 = arc.EndPoint2.y; // Arc 1 y 2
+                                        arcStartPoint = new Point3D(arcX1, arcY1, 0.0); // Arc 1 start point
+                                        arcEndPoint = new Point3D(arcX2, arcY2, 0.0); // Arc 1 end point
+                                        if (entity is ArcGeometry nextArc && (entity.Color != 10) && (entity.Color != 11) && step == 3)
+                                        {
+                                            nextArcX1 = nextArc.EndPoint1.x;
+                                            nextArcX2 = nextArc.EndPoint2.x;
+                                            nextArcY1 = nextArc.EndPoint1.y;
+                                            nextArcY2 = nextArc.EndPoint2.y;
+                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(arcEndPoint, nextArcStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(arcEndPoint, nextArcEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 3)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 3;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 2;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 3)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 5;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 4;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                        if (entity is LineGeometry nextLine && (entity.Color != 10) && (entity.Color != 11) && step == 3)
+                                        {
+                                            nextLineX1 = nextLine.EndPoint1.x;
+                                            nextLineX2 = nextLine.EndPoint2.x;
+                                            nextLineY1 = nextLine.EndPoint1.y;
+                                            nextLineY2 = nextLine.EndPoint2.y;
+                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(arcEndPoint, nextLineStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(arcEndPoint, nextLineEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 3)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 3;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 2;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 3)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 5;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 4;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                    }
+                                }
+                                if (firstEntity == 2 && step == 3)
+                                {
+                                    var thisEntity = LineGeometry.RetrieveEntity(templist10[0]);
+                                    if (thisEntity is LineGeometry line && step == 3)
+                                    {
+                                        lineX1 = line.EndPoint1.x; // Arc 1 x 1
+                                        lineX2 = line.EndPoint2.x; // Arc 1 x 2
+                                        lineY1 = line.EndPoint1.y; // Arc 1 y 1
+                                        lineY2 = line.EndPoint2.y; // Arc 1 y 2
+                                        lineStartPoint = new Point3D(lineX1, lineY1, 0.0); // Arc 1 start point
+                                        lineEndPoint = new Point3D(lineX2, lineY2, 0.0); // Arc 1 end point
+                                        if (entity is ArcGeometry nextArc && (entity.Color != 10) && (entity.Color != 11) && step == 3)
+                                        {
+                                            nextArcX1 = nextArc.EndPoint1.x;
+                                            nextArcX2 = nextArc.EndPoint2.x;
+                                            nextArcY1 = nextArc.EndPoint1.y;
+                                            nextArcY2 = nextArc.EndPoint2.y;
+                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextArcStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextArcEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 3)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 3;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 2;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 3)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 5;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 4;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                        if (entity is LineGeometry nextLine && (entity.Color != 10) && (entity.Color != 11) && step == 3)
+                                        {
+                                            nextLineX1 = nextLine.EndPoint1.x;
+                                            nextLineX2 = nextLine.EndPoint2.x;
+                                            nextLineY1 = nextLine.EndPoint1.y;
+                                            nextLineY2 = nextLine.EndPoint2.y;
+                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextLineStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextLineEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 3)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 3;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 2;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 3)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 5;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 4;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } // Gets Geo that connects first entity end point to second entity start point (offset 1)
+                    if (step == 4)
+                    {
+                        foreach (var entity in chainEntity)
+                        {
+                            if (entity.Color != 10 || entity.Color != 11)
+                            {
+                                if (firstEntity == 1 && step == 4)
+                                {
+                                    var thisEntity = ArcGeometry.RetrieveEntity(templist10[0]);
+                                    if (thisEntity is ArcGeometry arc && step == 4)
+                                    {
+                                        arcX1 = arc.EndPoint1.x; // Arc 1 x 1
+                                        arcX2 = arc.EndPoint2.x; // Arc 1 x 2
+                                        arcY1 = arc.EndPoint1.y; // Arc 1 y 1
+                                        arcY2 = arc.EndPoint2.y; // Arc 1 y 2
+                                        arcEndPoint = new Point3D(arcX1, arcY1, 0.0); // Arc 1 start point
+                                        arcStartPoint = new Point3D(arcX2, arcY2, 0.0); // Arc 1 end point
+                                        if (entity is ArcGeometry nextArc && (entity.Color != 10) && (entity.Color != 11) && step == 4)
+                                        {
+                                            nextArcX1 = nextArc.EndPoint1.x;
+                                            nextArcX2 = nextArc.EndPoint2.x;
+                                            nextArcY1 = nextArc.EndPoint1.y;
+                                            nextArcY2 = nextArc.EndPoint2.y;
+                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(arcEndPoint, nextArcStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(arcEndPoint, nextArcEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 4)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 3;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 4)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 5;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                        if (entity is LineGeometry nextLine && (entity.Color != 10) && (entity.Color != 11) && step == 4)
+                                        {
+                                            nextLineX1 = nextLine.EndPoint1.x;
+                                            nextLineX2 = nextLine.EndPoint2.x;
+                                            nextLineY1 = nextLine.EndPoint1.y;
+                                            nextLineY2 = nextLine.EndPoint2.y;
+                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(arcEndPoint, nextLineStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(arcEndPoint, nextLineEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 4)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 3;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 4)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 5;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                    }
+                                }
+                                if (firstEntity == 2 && step == 4)
+                                {
+                                    var thisEntity = LineGeometry.RetrieveEntity(templist10[0]);
+                                    if (thisEntity is LineGeometry line && step == 4)
+                                    {
+                                        lineX1 = line.EndPoint1.x; // Arc 1 x 1
+                                        lineX2 = line.EndPoint2.x; // Arc 1 x 2
+                                        lineY1 = line.EndPoint1.y; // Arc 1 y 1
+                                        lineY2 = line.EndPoint2.y; // Arc 1 y 2
+                                        lineEndPoint = new Point3D(lineX1, lineY1, 0.0); // Arc 1 start point
+                                        lineStartPoint = new Point3D(lineX2, lineY2, 0.0); // Arc 1 end point
+                                        if (entity is ArcGeometry nextArc && (entity.Color != 10) && (entity.Color != 11) && step == 4)
+                                        {
+                                            nextArcX1 = nextArc.EndPoint1.x;
+                                            nextArcX2 = nextArc.EndPoint2.x;
+                                            nextArcY1 = nextArc.EndPoint1.y;
+                                            nextArcY2 = nextArc.EndPoint2.y;
+                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextArcStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextArcEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 4)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 3;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 4)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 5;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                        if (entity is LineGeometry nextLine && (entity.Color != 10) && (entity.Color != 11) && step == 4)
+                                        {
+                                            nextLineX1 = nextLine.EndPoint1.x;
+                                            nextLineX2 = nextLine.EndPoint2.x;
+                                            nextLineY1 = nextLine.EndPoint1.y;
+                                            nextLineY2 = nextLine.EndPoint2.y;
+                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextLineStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextLineEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 4)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 2;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 3;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 4)
+                                            {
+                                                entity.Color = 10;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 4;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 5;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } // Gets Geo that connects first entity start point to second entity start point (offset 2)
+                    if (step == 5){
+                        foreach (var entity in chainEntity)
+                        {
+                            if (entity.Color != 10 || entity.Color != 11)
+                            {
+                                if (firstEntity == 1 && step == 5)
+                                {
+                                    var thisEntity = ArcGeometry.RetrieveEntity(templist10[0]);
+                                    if (thisEntity is ArcGeometry arc && step == 5)
+                                    {
+                                        arcX1 = arc.EndPoint1.x; // Arc 1 x 1
+                                        arcX2 = arc.EndPoint2.x; // Arc 1 x 2
+                                        arcY1 = arc.EndPoint1.y; // Arc 1 y 1
+                                        arcY2 = arc.EndPoint2.y; // Arc 1 y 2
+                                        arcEndPoint = new Point3D(arcX1, arcY1, 0.0); // Arc 1 start point
+                                        arcStartPoint = new Point3D(arcX2, arcY2, 0.0); // Arc 1 end point
+                                        if (entity is ArcGeometry nextArc && (entity.Color != 10) && (entity.Color != 11) && step == 5)
+                                        {
+                                            nextArcX1 = nextArc.EndPoint1.x;
+                                            nextArcX2 = nextArc.EndPoint2.x;
+                                            nextArcY1 = nextArc.EndPoint1.y;
+                                            nextArcY2 = nextArc.EndPoint2.y;
+                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(arcEndPoint, nextArcStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(arcEndPoint, nextArcEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 5)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 3;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 2;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 5)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 5;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 4;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                        if (entity is LineGeometry nextLine && (entity.Color != 10) && (entity.Color != 11) && step == 5)
+                                        {
+                                            nextLineX1 = nextLine.EndPoint1.x;
+                                            nextLineX2 = nextLine.EndPoint2.x;
+                                            nextLineY1 = nextLine.EndPoint1.y;
+                                            nextLineY2 = nextLine.EndPoint2.y;
+                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(arcEndPoint, nextLineStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(arcEndPoint, nextLineEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 5)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 3;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 2;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 5)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 5;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 4;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                    }
+                                }
+                                if (firstEntity == 2 && step == 5)
+                                {
+                                    var thisEntity = LineGeometry.RetrieveEntity(templist10[0]);
+                                    if (thisEntity is LineGeometry line && step == 5)
+                                    {
+                                        lineX1 = line.EndPoint1.x; // Arc 1 x 1
+                                        lineX2 = line.EndPoint2.x; // Arc 1 x 2
+                                        lineY1 = line.EndPoint1.y; // Arc 1 y 1
+                                        lineY2 = line.EndPoint2.y; // Arc 1 y 2
+                                        lineEndPoint = new Point3D(lineX1, lineY1, 0.0); // Arc 1 start point
+                                        lineStartPoint = new Point3D(lineX2, lineY2, 0.0); // Arc 1 end point
+                                        if (entity is ArcGeometry nextArc && (entity.Color != 10) && (entity.Color != 11) && step == 5)
+                                        {
+                                            nextArcX1 = nextArc.EndPoint1.x;
+                                            nextArcX2 = nextArc.EndPoint2.x;
+                                            nextArcY1 = nextArc.EndPoint1.y;
+                                            nextArcY2 = nextArc.EndPoint2.y;
+                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextArcStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextArcEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 5)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 3;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 2;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 5)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 5;
+                                                firstEntity = 1;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 4;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                        if (entity is LineGeometry nextLine && (entity.Color != 10) && (entity.Color != 11) && step == 5)
+                                        {
+                                            nextLineX1 = nextLine.EndPoint1.x;
+                                            nextLineX2 = nextLine.EndPoint2.x;
+                                            nextLineY1 = nextLine.EndPoint1.y;
+                                            nextLineY2 = nextLine.EndPoint2.y;
+                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextLineStartPoint);
+                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextLineEndPoint);
+                                            if (entityStartDistance <= tolerance && step == 5)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 3;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 2;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                            if (entityEndDistance <= tolerance && step == 5)
+                                            {
+                                                entity.Color = 11;
+                                                entity.Commit();
+                                                templist10.Clear();
+                                                templist10.Add(entity.GetEntityID());
+                                                step = 5;
+                                                firstEntity = 2;
+                                                foreach (var v in tempList9)
+                                                {
+                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                    if (w is PointGeometry point)
+                                                    {
+                                                        var ux = point.Data.x;// X location of point
+                                                        var uy = point.Data.y;// Y location of point
+                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                        if (entityPointDistance <= tolerance)
+                                                        {
+                                                            step = 4;
+                                                        }
+                                                    }
+                                                }
+                                                goto stepStart;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } // Gets Geo that connects first entity start point to second entity start point (offset 1)
+
                 }
-            }
-            translate();
-            findIntersectionOfLines();
-            findIntersectionOfArcs();
-            clearTempLinesAndArcs();
-            breakArcsWithPoints();
-            colorCrossovers();
+            } // Color cut sides of each section
+            void movePoints() {
+                SelectionManager.SelectGeometryByMask(Mastercam.IO.Types.QuickMaskType.Points);
+                var selectedGeometry = SearchManager.GetSelectedGeometry();
+                foreach (var point in selectedGeometry)
+                {
+                    point.Level = 90;
+                    point.Selected = false;
+                    point.Commit();
+                }
 
-            return MCamReturn.NoErrors;
-        } 
-    } 
-}
-
-
-
-
-            /*
-
-            var upperCreaseID = new List<int>();
-            var lowerCreaseID = new List<int>();
-            var creaseX1 = 0.0;
-            var creaseX2 = 0.0;
-            var creaseY1 = 0.0;
-            var creaseY2 = 0.0;
-            var creaseX3 = 0.0;
-            var creaseX4 = 0.0;
-            var creaseY3 = 0.0;
-            var creaseY4 = 0.0;
-
-            void offsetCutchain()
+            } // Moves intersection points to different level
+            void seperateGeometry()
             {
-                //Unselects all Geometry
+                GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 SelectionManager.UnselectAllGeometry();
-                //Turns off all visible levels
+                LevelsManager.RefreshLevelsManager();
+                LevelsManager.SetMainLevel(75);
                 var shown = LevelsManager.GetVisibleLevelNumbers();
                 foreach (var level in shown)
                 {
                     LevelsManager.SetLevelVisible(level, false);
                 }
-                LevelsManager.RefreshLevelsManager();
-                //Sets level 75 to main level and visible
-                LevelsManager.SetMainLevel(75);
                 LevelsManager.SetLevelVisible(75, true);
                 LevelsManager.RefreshLevelsManager();
                 GraphicsManager.Repaint(true);
+                SelectionManager.SelectAllGeometry();
+                var selectedGeometry = SearchManager.GetSelectedGeometry();
+                foreach (var geometry in selectedGeometry)
+                {
+                    if (geometry.Color == 10)
+                    {
+                        geometry.Level = 80;
+                        geometry.Selected = false;
+                        geometry.Commit();
+                    }
+                    if (geometry.Color == 11)
+                    {
+                        geometry.Level = 81;
+                        geometry.Selected = false;
+                        geometry.Commit();
+                    }
+                }
 
-                //Selects all geometry on level 75
-                var selectedCutChain = ChainManager.ChainAll(75);
-                //Creates and names level 500 and level 501
+            } // Moves cut side and non-cut side geometry to  different levels
+            void offsetCutchain80(){
+                SelectionManager.UnselectAllGeometry();
+                LevelsManager.RefreshLevelsManager();
+                LevelsManager.SetMainLevel(80);
+                var shown = LevelsManager.GetVisibleLevelNumbers();
+                foreach (var level in shown){
+                    LevelsManager.SetLevelVisible(level, false);
+                }
+                LevelsManager.SetLevelVisible(80, true);
+                LevelsManager.RefreshLevelsManager();
+                GraphicsManager.Repaint(true);
+                int createdUpperLevel = 500;
+                int createdLowerLevel = 501;
+                LevelsManager.SetLevelName(500, "Upper Created Cut Geo");
+                LevelsManager.SetLevelName(501, "Lower Created Cut Geo");
+                var selectedCutChain = ChainManager.ChainAll(80);
+                foreach (var chain in selectedCutChain){
+                    chain.Direction = ChainDirectionType.Clockwise;
+                    var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Right, .0225, OffsetRollCornerType.None, .5, false, .005, false);
+                    var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Left, .0025, OffsetRollCornerType.None, .5, false, .005, false);
+                    var cutResultGeometry = SearchManager.GetResultGeometry();
+                    foreach (var entity in cutResultGeometry){
+                        entity.Color = 11;
+                        entity.Selected = true;
+                        entity.Commit();
+                    }
+                    GeometryManipulationManager.MoveSelectedGeometryToLevel(createdLowerLevel, true);
+                    GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                    var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Right, .0025, OffsetRollCornerType.None, .5, false, .005, false);
+                    var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Left, .0385, OffsetRollCornerType.None, .5, false, .005, false);
+                    var cutResultGeometryNew = SearchManager.GetResultGeometry();
+                    foreach (var entity in cutResultGeometryNew){
+                        entity.Color = 10;
+                        entity.Selected = true;
+                        entity.Commit();
+                    }
+                    GeometryManipulationManager.MoveSelectedGeometryToLevel(createdUpperLevel, true);
+                    GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                }
+            } // Offsets cut side geometry
+            void offsetCutchain81()
+            {
+                SelectionManager.UnselectAllGeometry();
+                LevelsManager.RefreshLevelsManager();
+                LevelsManager.SetMainLevel(81);
+                var shown = LevelsManager.GetVisibleLevelNumbers();
+                foreach (var level in shown)
+                {
+                    LevelsManager.SetLevelVisible(level, false);
+                }
+                LevelsManager.SetLevelVisible(81, true);
+                LevelsManager.RefreshLevelsManager();
+                GraphicsManager.Repaint(true);
+
+
                 int createdUpperLevel = 500;
                 int createdLowerLevel = 501;
                 LevelsManager.SetLevelName(500, "Upper Created Cut Geo");
                 LevelsManager.SetLevelName(501, "Lower Created Cut Geo");
 
-                //edits each entity of all chains
-                foreach (var chain in selectedCutChain)
-                {
-                    //offsets line of lower
+                var selectedCutChain = ChainManager.ChainAll(81);
+                var chainDirection = ChainDirectionType.Clockwise;
+                foreach (var chain in selectedCutChain){
+                    chain.Direction = chainDirection;
                     var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Left, .0225, OffsetRollCornerType.None, .5, false, .005, false);
                     var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Right, .0025, OffsetRollCornerType.None, .5, false, .005, false);
-                    //Colors and selects result geometry
                     var cutResultGeometry = SearchManager.GetResultGeometry();
                     foreach (var entity in cutResultGeometry)
                     {
@@ -473,15 +1934,11 @@ namespace _CustomNethook
                         entity.Selected = true;
                         entity.Commit();
                     }
-                    //Moves result geometry
                     GeometryManipulationManager.MoveSelectedGeometryToLevel(createdLowerLevel, true);
-                    //Clears geometry in result
                     GraphicsManager.ClearColors(new GroupSelectionMask(true));
 
-                    //offsets line of upper
                     var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Left, .0025, OffsetRollCornerType.None, .5, false, .005, false);
                     var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Right, .0385, OffsetRollCornerType.None, .5, false, .005, false);
-                    //Colors and selects result geometry
                     var cutResultGeometryNew = SearchManager.GetResultGeometry();
                     foreach (var entity in cutResultGeometryNew)
                     {
@@ -489,14 +1946,10 @@ namespace _CustomNethook
                         entity.Selected = true;
                         entity.Commit();
                     }
-                    //Moves result geometry
                     GeometryManipulationManager.MoveSelectedGeometryToLevel(createdUpperLevel, true);
-                    //Clears geometry in result
                     GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 }
-            }
-
-
+            } // offsets non-cut side geometry
             bool CreateLine1()
             {
                 bool result = false;
@@ -506,8 +1959,7 @@ namespace _CustomNethook
                 Line1.Selected = true;
                 result = Line1.Commit();
                 return result;
-            }
-
+            } // Used for one line at end of crease
             bool CreateLine2()
             {
                 bool result = false;
@@ -517,8 +1969,7 @@ namespace _CustomNethook
                 Line2.Selected = true;
                 result = Line2.Commit();
                 return result;
-            }
-
+            } // Used for other line at other end of crease
             void offsetCreasechain()
             {
                 //Unselects all Geometry
@@ -583,8 +2034,7 @@ namespace _CustomNethook
                     //Clears geometry in result
                     GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 }
-            }
-
+            } // Offsets creases
             void connectUpperLines()
             {
                 var set = 0;
@@ -629,8 +2079,7 @@ namespace _CustomNethook
                         set = 0;
                     }
                 }
-            }
-
+            } // Connects crease offsets for the upper
             void connectLowerLines()
             {
                 var set = 0;
@@ -675,9 +2124,7 @@ namespace _CustomNethook
                         set = 0;
                     }
                 }
-            }
-
-
+            } // Connects crease offsets for the lower
             void DemoAlterLine()
             {
                 //Unselects all Geometry
@@ -742,22 +2189,283 @@ namespace _CustomNethook
                     //Updates screen shown
                     GraphicsManager.Repaint(true);
                 }
-            }
+            } // Shortens creases
+            void shortenChains500()
+            {
+                SelectionManager.UnselectAllGeometry();
+                LevelsManager.RefreshLevelsManager();
+                LevelsManager.SetMainLevel(500);
+                var shown = LevelsManager.GetVisibleLevelNumbers();
+                foreach (var level in shown)
+                {
+                    LevelsManager.SetLevelVisible(level, false);
+                }
+                LevelsManager.SetLevelVisible(500, true);
+                LevelsManager.RefreshLevelsManager();
+                GraphicsManager.Repaint(true);
+                var chainDetails = new Mastercam.Database.Interop.ChainDetails();// Preps the ChainDetails plugin
+                var selectedChains = ChainManager.ChainAll(500);
+                var chainDirection = ChainDirectionType.CounterClockwise;// Going to be used to make sure all chains go the same direction
+                ChainManager.StartChainAtLongest(selectedChains);
+                foreach (var chain in selectedChains){
+                    chain.Direction = chainDirection;
+                    var chainData = chainDetails.GetData(chain);
+                    var firstEntity = chainData.FirstEntity.GetEntityID();
+                    var lastEntity = chainData.LastEntity.GetEntityID();
+                    var firstIsFlipped = chainData.FirstEntityIsFlipped;
+                    var lastIsFlipped = chainData.LastEntityIsFlipped;
+                    if (firstIsFlipped == false){
+                        var entity = Mastercam.Database.Geometry.RetrieveEntity(firstEntity);
+                        if (entity is LineGeometry line){
+                            Point3D lineStartPoint = (line.Data.Point1);
+                            Point3D lineEndPoint = (line.Data.Point2);
+                            var lineLength = VectorManager.Distance(lineStartPoint, lineEndPoint);  
+                            var scale = ((lineLength-0.010)/lineLength);
+                            entity.Scale(lineEndPoint, scale);
+                            entity.Commit();
+                        }
+                        if (entity is ArcGeometry arc)
+                        {
+                            var arcStartPoint = (arc.Data.StartAngleDegrees);
+                            var arcEndPoint = (arc.Data.EndAngleDegrees);
+                            var arcRad = arc.Data.Radius;
+                            var arcLength = ((VectorManager.DegreesToRadians(arcStartPoint - arcEndPoint)) * arcRad);
+                            var newArcLength = (arcLength - 0.010);
+                            var circumference = 2 * Math.PI * arcRad;
+                            var arcMeasure = ((newArcLength / circumference) * 360);
+                            arc.Data.StartAngleDegrees = (arcEndPoint + arcMeasure);
+                            entity.Commit();
+                        }
+                    }
+                    if (firstIsFlipped == true){
+                        var entity = Mastercam.Database.Geometry.RetrieveEntity(firstEntity);
+                        if (entity is LineGeometry line){
+                            Point3D lineEndPoint = (line.Data.Point1);
+                            Point3D lineStartPoint = (line.Data.Point2);
+                            var lineLength = VectorManager.Distance(lineStartPoint, lineEndPoint);
+                            var scale = ((lineLength - 0.010) / lineLength);
+                            entity.Scale(lineEndPoint, scale);
+                            entity.Commit();
+                        }
+                        if (entity is ArcGeometry arc)
+                        {
+                            var arcStartPoint = (arc.Data.StartAngleDegrees);
+                            var arcEndPoint = (arc.Data.EndAngleDegrees);
+                            var arcRad = arc.Data.Radius;
+                            var arcLength = ((VectorManager.DegreesToRadians(arcStartPoint - arcEndPoint)) * arcRad);
+                            var newArcLength = (arcLength - 0.010);
+                            var circumference = 2 * Math.PI * arcRad;
+                            var arcMeasure = ((newArcLength / circumference) * 360);
+                            arc.Data.EndAngleDegrees = (arcStartPoint - arcMeasure);
+                            entity.Commit();
+                        }
+                    }
+                    if (lastIsFlipped == false){
+                        var entity = Mastercam.Database.Geometry.RetrieveEntity(lastEntity);
+                        if (entity is LineGeometry line){
+                            Point3D lineStartPoint = (line.Data.Point1);
+                            Point3D lineEndPoint = (line.Data.Point2);
+                            var lineLength = VectorManager.Distance(lineStartPoint, lineEndPoint);
+                            var scale = ((lineLength - 0.010) / lineLength);
+                            entity.Scale(lineStartPoint, scale);
+                            entity.Commit();
+                        }
+                        if (entity is ArcGeometry arc)
+                        {
+                            var arcStartPoint = (arc.Data.StartAngleDegrees);
+                            var arcEndPoint = (arc.Data.EndAngleDegrees);
+                            var arcRad = arc.Data.Radius;
+                            var arcLength = ((VectorManager.DegreesToRadians(arcStartPoint - arcEndPoint)) * arcRad);
+                            var newArcLength = (arcLength - 0.010);
+                            var circumference = 2 * Math.PI * arcRad;
+                            var arcMeasure = ((newArcLength / circumference) * 360);
+                            arc.Data.EndAngleDegrees = (arcStartPoint - arcMeasure);
+                            entity.Commit();
+                        }
+                    }
+                    if (lastIsFlipped == true){
+                        var entity = Mastercam.Database.Geometry.RetrieveEntity(lastEntity);
+                        if (entity is LineGeometry line){
+                            Point3D lineEndPoint = (line.Data.Point1);
+                            Point3D lineStartPoint = (line.Data.Point2);
+                            var lineLength = VectorManager.Distance(lineStartPoint, lineEndPoint);
+                            var scale = ((lineLength - 0.010) / lineLength);
+                            entity.Scale(lineStartPoint, scale);
+                            entity.Commit();
+                        }
+                        if (entity is ArcGeometry arc)
+                        {
+                            var arcStartPoint = (arc.Data.StartAngleDegrees);
+                            var arcEndPoint = (arc.Data.EndAngleDegrees);
+                            var arcRad = arc.Data.Radius;
+                            var arcLength = ((VectorManager.DegreesToRadians(arcStartPoint - arcEndPoint)) * arcRad);
+                            var newArcLength = (arcLength - 0.010);
+                            var circumference = 2 * Math.PI * arcRad;
+                            var arcMeasure = ((newArcLength / circumference) * 360);
+                            arc.Data.StartAngleDegrees = (arcEndPoint + arcMeasure);
+                            entity.Commit();
+                        }
+                    }
+                }
+                GraphicsManager.Repaint(true);
+            } // Shortens chains on level 500
+            void shortenChains501()
+            {
+                SelectionManager.UnselectAllGeometry();
+                LevelsManager.RefreshLevelsManager();
+                LevelsManager.SetMainLevel(501);
+                var shown = LevelsManager.GetVisibleLevelNumbers();
+                foreach (var level in shown)
+                {
+                    LevelsManager.SetLevelVisible(level, false);
+                }
+                LevelsManager.SetLevelVisible(501, true);
+                LevelsManager.RefreshLevelsManager();
+                GraphicsManager.Repaint(true);
+                var chainDetails = new Mastercam.Database.Interop.ChainDetails();// Preps the ChainDetails plugin
+                var selectedChains = ChainManager.ChainAll(501);
+                var chainDirection = ChainDirectionType.CounterClockwise;// Going to be used to make sure all chains go the same direction
+                ChainManager.StartChainAtLongest(selectedChains);
+                foreach (var chain in selectedChains)
+                {
+                    chain.Direction = chainDirection;
+                    var chainData = chainDetails.GetData(chain);
+                    var firstEntity = chainData.FirstEntity.GetEntityID();
+                    var lastEntity = chainData.LastEntity.GetEntityID();
+                    var firstIsFlipped = chainData.FirstEntityIsFlipped;
+                    var lastIsFlipped = chainData.LastEntityIsFlipped;
+                    if (firstIsFlipped == false)
+                    {
+                        var entity = Mastercam.Database.Geometry.RetrieveEntity(firstEntity);
+                        if (entity is LineGeometry line)
+                        {
+                            Point3D lineStartPoint = (line.Data.Point1);
+                            Point3D lineEndPoint = (line.Data.Point2);
+                            var lineLength = VectorManager.Distance(lineStartPoint, lineEndPoint);
+                            var scale = ((lineLength - 0.010) / lineLength);
+                            entity.Scale(lineEndPoint, scale);
+                            entity.Commit();
+                        }
+                        if (entity is ArcGeometry arc)
+                        {
+                            var arcStartPoint = (arc.Data.StartAngleDegrees);
+                            var arcEndPoint = (arc.Data.EndAngleDegrees);
+                            var arcRad = arc.Data.Radius;
+                            var arcLength = ((VectorManager.DegreesToRadians(arcStartPoint - arcEndPoint)) * arcRad);
+                            var newArcLength = (arcLength - 0.010);
+                            var circumference = 2 * Math.PI * arcRad;
+                            var arcMeasure = ((newArcLength / circumference) * 360);
+                            arc.Data.StartAngleDegrees = (arcEndPoint + arcMeasure);
+                            entity.Commit();
+                        }
+                    }
+                    if (firstIsFlipped == true)
+                    {
+                        var entity = Mastercam.Database.Geometry.RetrieveEntity(firstEntity);
+                        if (entity is LineGeometry line)
+                        {
+                            Point3D lineEndPoint = (line.Data.Point1);
+                            Point3D lineStartPoint = (line.Data.Point2);
+                            var lineLength = VectorManager.Distance(lineStartPoint, lineEndPoint);
+                            var scale = ((lineLength - 0.010) / lineLength);
+                            entity.Scale(lineEndPoint, scale);
+                            entity.Commit();
+                        }
+                        if (entity is ArcGeometry arc)
+                        {
+                            var arcStartPoint = (arc.Data.StartAngleDegrees);
+                            var arcEndPoint = (arc.Data.EndAngleDegrees);
+                            var arcRad = arc.Data.Radius;
+                            var arcLength = ((VectorManager.DegreesToRadians(arcStartPoint - arcEndPoint))*arcRad);
+                            var newArcLength = (arcLength - 0.010);
+                            var circumference = 2 * Math.PI * arcRad;
+                            var arcMeasure = ((newArcLength / circumference) * 360);
+                            arc.Data.EndAngleDegrees = (arcStartPoint - arcMeasure);
+                            entity.Commit();
+                        }
+                    }
+                    if (lastIsFlipped == false)
+                    {
+                        var entity = Mastercam.Database.Geometry.RetrieveEntity(lastEntity);
+                        if (entity is LineGeometry line)
+                        {
+                            Point3D lineStartPoint = (line.Data.Point1);
+                            Point3D lineEndPoint = (line.Data.Point2);
+                            var lineLength = VectorManager.Distance(lineStartPoint, lineEndPoint);
+                            var scale = ((lineLength - 0.010) / lineLength);
+                            entity.Scale(lineStartPoint, scale);
+                            entity.Commit();
+                        }
+                        if (entity is ArcGeometry arc)
+                        {
+                            var arcStartPoint = (arc.Data.StartAngleDegrees);
+                            var arcEndPoint = (arc.Data.EndAngleDegrees);
+                            var arcRad = arc.Data.Radius;
+                            var arcLength = ((VectorManager.DegreesToRadians(arcStartPoint - arcEndPoint)) * arcRad);
+                            var newArcLength = (arcLength - 0.010);
+                            var circumference = 2 * Math.PI * arcRad;
+                            var arcMeasure = ((newArcLength / circumference) * 360);
+                            arc.Data.EndAngleDegrees = (arcStartPoint - arcMeasure);
+                            entity.Commit();
+                        }
+                    }
+                    if (lastIsFlipped == true)
+                    {
+                        var entity = Mastercam.Database.Geometry.RetrieveEntity(lastEntity);
+                        if (entity is LineGeometry line)
+                        {
+                            Point3D lineEndPoint = (line.Data.Point1);
+                            Point3D lineStartPoint = (line.Data.Point2);
+                            var lineLength = VectorManager.Distance(lineStartPoint, lineEndPoint);
+                            var scale = ((lineLength - 0.010) / lineLength);
+                            entity.Scale(lineStartPoint, scale);
+                            entity.Commit();
+                        }
+                        if (entity is ArcGeometry arc)
+                        {
+                            var arcStartPoint = (arc.Data.StartAngleDegrees);
+                            var arcEndPoint = (arc.Data.EndAngleDegrees);
+                            var arcRad = arc.Data.Radius;
+                            var arcLength = ((VectorManager.DegreesToRadians(arcStartPoint - arcEndPoint)) * arcRad);
+                            var newArcLength = (arcLength - 0.010);
+                            var circumference = 2 * Math.PI * arcRad;
+                            var arcMeasure = ((newArcLength / circumference) * 360);
+                            arc.Data.StartAngleDegrees = (arcEndPoint + arcMeasure);
+                            entity.Commit();
+                        }
+                    }
+                }
+                GraphicsManager.Repaint(true);
+            } // Shortens chains on level 501
 
-            DemoAlterLine();
-            offsetCreasechain();
-            connectUpperLines();
-            connectLowerLines();
-            offsetCutchain();
-
-
+            //translate();
+            //findIntersectionOfLines();
+            //findIntersectionOfArcs();
+            //clearTempLinesAndArcs();
+            //breakArcsWithPoints();
+            //selectNewGeo();
+            //colorCrossovers();
+            //movePoints();
+            //seperateGeometry();
+            //DemoAlterLine();
+            //offsetCreasechain();
+            //connectUpperLines();
+            //connectLowerLines();
+            //offsetCutchain80();
+            //offsetCutchain81();
+            shortenChains500();
+            shortenChains501();
 
             return MCamReturn.NoErrors;
         }
     }
 }
 
-            */
+        
+    
+
+
+            
 
                 
 

@@ -77,9 +77,7 @@
   <ItemGroup>
     <Compile Include="CustomNethook.cs" />
     <Compile Include="CustomNethook.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomNethook.resx</DependentUpon>
+      <DependentUpon>CustomNethook.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -91,8 +89,6 @@
   <ItemGroup>
     <EmbeddedResource Include="CustomNethook.resx">
       <DependentUpon>CustomNethook.cs</DependentUpon>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CustomNethook.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
