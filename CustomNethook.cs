@@ -1868,8 +1868,8 @@ namespace _CustomNethook
                         geometry.Commit();
                     }
                 }
-                GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 SelectionManager.UnselectAllGeometry();
+                GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 LevelsManager.RefreshLevelsManager();
                 GraphicsManager.Repaint(true);
 
@@ -2534,9 +2534,9 @@ namespace _CustomNethook
             //connectUpperLines();
             //connectLowerLines();
             offsetCutchain80();
-            offsetCutchain81();
-            shortenChains500();
-            shortenChains501();
+            //offsetCutchain81();
+            //shortenChains500();
+            //shortenChains501();
 
             return MCamReturn.NoErrors;
         }
