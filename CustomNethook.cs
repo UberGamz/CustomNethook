@@ -14,11 +14,20 @@ using Mastercam.Database.Interop;
 using System.Diagnostics;
 using System.Windows.Forms.VisualStyles;
 using System.Security.Claims;
+using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace _CustomNethook
 {
     public class CustomNethook : Mastercam.App.NetHook3App
     {
+        [DllImport("user32.dll")]
+        static extern void mouse_event(UInt32 dwFlags, UInt32 dx, UInt32 dy, UInt32 dwData, IntPtr dwExtraInfo);
+
+        const UInt32 MouseEventLeftDown = 0x0201;
+        const UInt32 MouseEventLeftUp = 0x0202;
         public Mastercam.App.Types.MCamReturn CustomNethookRun(Mastercam.App.Types.MCamReturn notused)
         {
             var tempList1 = new List<int>(); // list of x+, y+ entities
@@ -1859,6 +1868,10 @@ namespace _CustomNethook
                         geometry.Commit();
                     }
                 }
+                GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                SelectionManager.UnselectAllGeometry();
+                LevelsManager.RefreshLevelsManager();
+                GraphicsManager.Repaint(true);
 
             } // Moves cut side and non-cut side geometry to  different levels
             void offsetCutchain80(){
@@ -1876,30 +1889,66 @@ namespace _CustomNethook
                 int createdLowerLevel = 501;
                 LevelsManager.SetLevelName(500, "Upper Created Cut Geo");
                 LevelsManager.SetLevelName(501, "Lower Created Cut Geo");
-                var selectedCutChain = ChainManager.ChainAll(80);
-                foreach (var chain in selectedCutChain){
-                    chain.Direction = ChainDirectionType.Clockwise;
-                    var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Right, .0225, OffsetRollCornerType.None, .5, false, .005, false);
-                    var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Left, .0025, OffsetRollCornerType.None, .5, false, .005, false);
-                    var cutResultGeometry = SearchManager.GetResultGeometry();
-                    foreach (var entity in cutResultGeometry){
-                        entity.Color = 11;
-                        entity.Selected = true;
-                        entity.Commit();
-                    }
-                    GeometryManipulationManager.MoveSelectedGeometryToLevel(createdLowerLevel, true);
-                    GraphicsManager.ClearColors(new GroupSelectionMask(true));
-                    var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Right, .0025, OffsetRollCornerType.None, .5, false, .005, false);
-                    var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Left, .0385, OffsetRollCornerType.None, .5, false, .005, false);
-                    var cutResultGeometryNew = SearchManager.GetResultGeometry();
-                    foreach (var entity in cutResultGeometryNew){
-                        entity.Color = 10;
-                        entity.Selected = true;
-                        entity.Commit();
-                    }
-                    GeometryManipulationManager.MoveSelectedGeometryToLevel(createdUpperLevel, true);
-                    GraphicsManager.ClearColors(new GroupSelectionMask(true));
+
+                var commonParams = new BoundingBoxCommonParams { CreateLinesArcs = true };
+                var rectangularParams = new BoundingBoxRectangularParams { ExpandXMinus = 2.0, ExpandXPlus = 2.0, ExpandYMinus = 2.0, ExpandYPlus = 2.0 };
+                var boundingBox = Mastercam.GeometryUtility.GeometryCreationManager.RectangularBoundingBox(commonParams, rectangularParams);
+                var boundingBoxChain = ChainManager.ChainGeometry(boundingBox);
+
+                GraphicsManager.FitScreen();
+                void SendLeftClick(int posX, int posY)
+                {
+                    Cursor.Position = new Point(posX, posY);
+                    mouse_event(MouseEventLeftDown, 0, 0, 0, new System.IntPtr());
+                    Thread.Sleep(100);
+                    mouse_event(MouseEventLeftUp, 0, 0, 0, new System.IntPtr());
                 }
+                new System.Threading.Timer((x) => { GraphicsManager.SetFocusToGraphicsWindow(); }, null, 1000, Timeout.Infinite);
+                new System.Threading.Timer((x) => { SendKeys.SendWait("{A}"); }, null, 2000, Timeout.Infinite);
+                new System.Threading.Timer((x) => { SendLeftClick(1200, 600); }, null, 3000, Timeout.Infinite);
+                new System.Threading.Timer((x) => { SendKeys.SendWait("{ENTER}"); }, null, 4000, Timeout.Infinite);
+
+                var selectedCutChain = ChainManager.GetMultipleChains("");
+                foreach (var chain in selectedCutChain){
+                    foreach (var t in boundingBoxChain)
+                    {
+                        if (chain.Area != t.Area)
+                        {
+                            chain.Direction = ChainDirectionType.Clockwise;
+                            var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Right, .0225, OffsetRollCornerType.None, .5, false, .005, false);
+                            var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Left, .0025, OffsetRollCornerType.None, .5, false, .005, false);
+                            var cutResultGeometry = SearchManager.GetResultGeometry();
+                            foreach (var entity in cutResultGeometry)
+                            {
+                                entity.Color = 11;
+                                entity.Selected = true;
+                                entity.Commit();
+                            }
+                            GeometryManipulationManager.MoveSelectedGeometryToLevel(createdLowerLevel, true);
+                            GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                            GraphicsManager.Repaint(true);
+                            var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Right, .0025, OffsetRollCornerType.None, .5, false, .005, false);
+                            var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Left, .0385, OffsetRollCornerType.None, .5, false, .005, false);
+                            var cutResultGeometryNew = SearchManager.GetResultGeometry();
+                            foreach (var entity in cutResultGeometryNew)
+                            {
+                                entity.Color = 10;
+                                entity.Selected = true;
+                                entity.Commit();
+                            }
+                            GeometryManipulationManager.MoveSelectedGeometryToLevel(createdUpperLevel, true);
+                            GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                            GraphicsManager.Repaint(true);
+                        }
+                    }
+
+                }
+                foreach (var entity in boundingBox)
+                {
+                    entity.Retrieve();
+                    entity.Delete();
+                }
+                GraphicsManager.Repaint(true);
             } // Offsets cut side geometry
             void offsetCutchain81()
             {
@@ -1920,35 +1969,66 @@ namespace _CustomNethook
                 int createdLowerLevel = 501;
                 LevelsManager.SetLevelName(500, "Upper Created Cut Geo");
                 LevelsManager.SetLevelName(501, "Lower Created Cut Geo");
+                var commonParams = new BoundingBoxCommonParams { CreateLinesArcs = true };
+                var rectangularParams = new BoundingBoxRectangularParams { ExpandXMinus = 2.0, ExpandXPlus = 2.0, ExpandYMinus = 2.0, ExpandYPlus = 2.0 };
+                var boundingBox = Mastercam.GeometryUtility.GeometryCreationManager.RectangularBoundingBox(commonParams, rectangularParams);
+                var boundingBoxChain = ChainManager.ChainGeometry(boundingBox);
 
-                var selectedCutChain = ChainManager.ChainAll(81);
+                GraphicsManager.FitScreen();
+                void SendLeftClick(int posX, int posY)
+                {
+                    Cursor.Position = new Point(posX, posY);
+                    mouse_event(MouseEventLeftDown, 0, 0, 0, new System.IntPtr());
+                    Thread.Sleep(100);
+                    mouse_event(MouseEventLeftUp, 0, 0, 0, new System.IntPtr());
+                }
+                new System.Threading.Timer((x) => { GraphicsManager.SetFocusToGraphicsWindow(); }, null, 1000, Timeout.Infinite);
+                new System.Threading.Timer((x) => { SendKeys.SendWait("{A}"); }, null, 2000, Timeout.Infinite);
+                new System.Threading.Timer((x) => { SendLeftClick(1200, 600); }, null, 3000, Timeout.Infinite);
+                new System.Threading.Timer((x) => { SendKeys.SendWait("{ENTER}"); }, null, 4000, Timeout.Infinite);
+
+                var selectedCutChain = ChainManager.GetMultipleChains("");
                 var chainDirection = ChainDirectionType.Clockwise;
                 foreach (var chain in selectedCutChain){
-                    chain.Direction = chainDirection;
-                    var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Left, .0225, OffsetRollCornerType.None, .5, false, .005, false);
-                    var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Right, .0025, OffsetRollCornerType.None, .5, false, .005, false);
-                    var cutResultGeometry = SearchManager.GetResultGeometry();
-                    foreach (var entity in cutResultGeometry)
+                    foreach (var t in boundingBoxChain)
                     {
-                        entity.Color = 11;
-                        entity.Selected = true;
-                        entity.Commit();
-                    }
-                    GeometryManipulationManager.MoveSelectedGeometryToLevel(createdLowerLevel, true);
-                    GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                        if (chain.Area != t.Area)
+                        {
+                            chain.Direction = chainDirection;
+                            var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Left, .0225, OffsetRollCornerType.None, .5, false, .005, false);
+                            var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Right, .0025, OffsetRollCornerType.None, .5, false, .005, false);
+                            var cutResultGeometry = SearchManager.GetResultGeometry();
+                            foreach (var entity in cutResultGeometry)
+                            {
+                                entity.Color = 11;
+                                entity.Selected = true;
+                                entity.Commit();
+                            }
+                            GeometryManipulationManager.MoveSelectedGeometryToLevel(createdLowerLevel, true);
+                            GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                            GraphicsManager.Repaint(true);
 
-                    var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Left, .0025, OffsetRollCornerType.None, .5, false, .005, false);
-                    var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Right, .0385, OffsetRollCornerType.None, .5, false, .005, false);
-                    var cutResultGeometryNew = SearchManager.GetResultGeometry();
-                    foreach (var entity in cutResultGeometryNew)
-                    {
-                        entity.Color = 10;
-                        entity.Selected = true;
-                        entity.Commit();
+                            var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Left, .0025, OffsetRollCornerType.None, .5, false, .005, false);
+                            var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Right, .0385, OffsetRollCornerType.None, .5, false, .005, false);
+                            var cutResultGeometryNew = SearchManager.GetResultGeometry();
+                            foreach (var entity in cutResultGeometryNew)
+                            {
+                                entity.Color = 10;
+                                entity.Selected = true;
+                                entity.Commit();
+                            }
+                            GeometryManipulationManager.MoveSelectedGeometryToLevel(createdUpperLevel, true);
+                            GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                            GraphicsManager.Repaint(true);
+                        }
                     }
-                    GeometryManipulationManager.MoveSelectedGeometryToLevel(createdUpperLevel, true);
-                    GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 }
+                foreach (var entity in boundingBox)
+                {
+                    entity.Retrieve();
+                    entity.Delete();
+                }
+                GraphicsManager.Repaint(true);
             } // offsets non-cut side geometry
             bool CreateLine1()
             {
@@ -2307,6 +2387,7 @@ namespace _CustomNethook
                         }
                     }
                 }
+                GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 GraphicsManager.Repaint(true);
             } // Shortens chains on level 500
             void shortenChains501()
@@ -2435,6 +2516,7 @@ namespace _CustomNethook
                         }
                     }
                 }
+                GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 GraphicsManager.Repaint(true);
             } // Shortens chains on level 501
 
@@ -2451,8 +2533,8 @@ namespace _CustomNethook
             //offsetCreasechain();
             //connectUpperLines();
             //connectLowerLines();
-            //offsetCutchain80();
-            //offsetCutchain81();
+            offsetCutchain80();
+            offsetCutchain81();
             shortenChains500();
             shortenChains501();
 
