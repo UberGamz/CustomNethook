@@ -98,12 +98,10 @@ namespace _CustomNethook
                 GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 SelectionManager.UnselectAllGeometry();
 
-
-
-
-
-
-
+                tempSelectedGeometry1Result = null;
+                tempSelectedGeometry1 = null;
+                tempSelectedGeometry2Result = null;
+                tempSelectedGeometry2 = null;
 
             } // Moves line in X+Y+ direction and in X-Y- direction
             void findIntersectionOfArcs()
@@ -338,6 +336,7 @@ namespace _CustomNethook
                             }
                         }
                     }
+                    ArcID = null;
                 }
             } // Breaks arcs where intersections were
             void selectNewGeo() {
@@ -348,6 +347,7 @@ namespace _CustomNethook
                 {
                     tempList8.Add(i.GetEntityID());
                 }
+                tempSelectedGeometry1 = null;
                 SelectionManager.UnselectAllGeometry();
             } // Selects all geometry (there are new entities)
             void colorCrossovers(){
@@ -1825,6 +1825,7 @@ namespace _CustomNethook
                     } // Gets Geo that connects first entity start point to second entity start point (offset 1)
 
                 }
+                selectedChains = null;
             } // Color cut sides of each section
             void movePoints() {
                 SelectionManager.SelectGeometryByMask(Mastercam.IO.Types.QuickMaskType.Points);
@@ -1835,6 +1836,7 @@ namespace _CustomNethook
                     point.Selected = false;
                     point.Commit();
                 }
+                selectedGeometry = null;
 
             } // Moves intersection points to different level
             void seperateGeometry()
@@ -1867,6 +1869,12 @@ namespace _CustomNethook
                         geometry.Selected = false;
                         geometry.Commit();
                     }
+                    //invalidate the list of geometry
+                    selectedGeometry = null;
+                    //ask to reclaim the memory from the list
+                    System.GC.Collect();
+                    //repaint the scren
+                    Mastercam.IO.GraphicsManager.Repaint(true);//force rebuild
                 }
                 SelectionManager.UnselectAllGeometry();
                 GraphicsManager.ClearColors(new GroupSelectionMask(true));
@@ -1948,6 +1956,7 @@ namespace _CustomNethook
                     entity.Retrieve();
                     entity.Delete();
                 }
+                selectedCutChain = null;
                 GraphicsManager.Repaint(true);
             } // Offsets cut side geometry
             void offsetCutchain81()
@@ -2028,6 +2037,7 @@ namespace _CustomNethook
                     entity.Retrieve();
                     entity.Delete();
                 }
+                selectedCutChain = null;    
                 GraphicsManager.Repaint(true);
             } // offsets non-cut side geometry
             bool CreateLine1()
@@ -2519,20 +2529,37 @@ namespace _CustomNethook
                 GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 GraphicsManager.Repaint(true);
             } // Shortens chains on level 501
+            void commit()
+            {
+                var levels = LevelsManager.GetLevelNumbersWithGeometry();
+                foreach (var i in levels){
+                    var geometryFound = SearchManager.GetGeometry(i);
 
-            //translate();
-            //findIntersectionOfLines();
-            //findIntersectionOfArcs();
-            //clearTempLinesAndArcs();
-            //breakArcsWithPoints();
-            //selectNewGeo();
-            //colorCrossovers();
-            //movePoints();
-            //seperateGeometry();
+                        //invalidate the list of geometry
+                        geometryFound = null;
+                        //ask to reclaim the memory from the list
+                        System.GC.Collect();
+                        //repaint the scren
+                        Mastercam.IO.GraphicsManager.Repaint(true);//force rebuild
+                    
+
+                }
+            }
+
+            translate();
+            findIntersectionOfLines();
+            findIntersectionOfArcs();
+            clearTempLinesAndArcs();
+            breakArcsWithPoints();
+            selectNewGeo();
+            colorCrossovers();
+            movePoints();
+            seperateGeometry();
             //DemoAlterLine();
             //offsetCreasechain();
             //connectUpperLines();
             //connectLowerLines();
+            commit();
             offsetCutchain80();
             //offsetCutchain81();
             //shortenChains500();
