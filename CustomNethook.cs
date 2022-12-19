@@ -1931,7 +1931,7 @@ namespace _CustomNethook
                 }
                 LevelsManager.SetLevelVisible(75, true);
                 LevelsManager.RefreshLevelsManager();
-                //GraphicsManager.Repaint(true);
+                GraphicsManager.Repaint(true);
                 SelectionManager.SelectAllGeometry();
                 var selectedGeometry = SearchManager.GetSelectedGeometry();
                 foreach (var geometry in selectedGeometry)
