@@ -18,6 +18,8 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using Mastercam.IO.Types;
+using System.Drawing.Drawing2D;
 
 namespace _CustomNethook
 {
@@ -2733,14 +2735,21 @@ namespace _CustomNethook
                 foreach (var level in shown) { LevelsManager.SetLevelVisible(level, false); }
                 LevelsManager.SetLevelVisible(500, true);
                 LevelsManager.SetLevelVisible(50, true);
-                //GraphicsManager.Repaint(true);
+                GraphicsManager.Repaint(true);
                 LevelsManager.RefreshLevelsManager();
-                SelectionManager.SelectGeometryByMask(Mastercam.IO.Types.QuickMaskType.Points);
+                var geoMask = new GeometryMask(true,false,false,false,false,false,false,false);
+                var selectionMask = new SelectionMask(true);
+                var tempPoints = SearchManager.GetGeometry(geoMask, selectionMask,  50) ;
+                foreach(var point in tempPoints)
+                {
+                    point.Selected = true;
+                    point.Commit();
+                }
                 var selectedGeometry = SearchManager.GetSelectedGeometry();
                 foreach (var point in selectedGeometry) { pointList.Add(point.GetEntityID()); }
                 LevelsManager.SetLevelVisible(50, false);
                 LevelsManager.RefreshLevelsManager();
-                //GraphicsManager.Repaint(true);
+                GraphicsManager.Repaint(true);
                 var chainDetails = new Mastercam.Database.Interop.ChainDetails();// Preps the ChainDetails plugin
                 var selectedChains = ChainManager.ChainAll(500);
                 var chainDirection = ChainDirectionType.CounterClockwise;// Going to be used to make sure all chains go the same direction
