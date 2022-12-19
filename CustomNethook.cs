@@ -60,8 +60,10 @@ namespace _CustomNethook
             var creaseY4 = 0.0;
             int createdUpperCrease = 502;
             int createdLowerCrease = 503;
-            var materialWidth = 0.010;
-            var materialType = "OogyBooby";
+            var maleLandWidth = 0.0;
+            var femaleLandWidth = 0.0;
+            var overlap = 0.005;
+
 
 
 

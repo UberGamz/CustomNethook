@@ -29,39 +29,39 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
-            this.button27 = new System.Windows.Forms.Button();
-            this.button28 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
-            this.button30 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
-            this.button33 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
+            this.BC10 = new System.Windows.Forms.Button();
+            this.BC11 = new System.Windows.Forms.Button();
+            this.BC12 = new System.Windows.Forms.Button();
+            this.BC13 = new System.Windows.Forms.Button();
+            this.BC14 = new System.Windows.Forms.Button();
+            this.BC15 = new System.Windows.Forms.Button();
+            this.BC16 = new System.Windows.Forms.Button();
+            this.BC17 = new System.Windows.Forms.Button();
+            this.BC18 = new System.Windows.Forms.Button();
+            this.BC19 = new System.Windows.Forms.Button();
+            this.BC20 = new System.Windows.Forms.Button();
+            this.BC21 = new System.Windows.Forms.Button();
+            this.BC22 = new System.Windows.Forms.Button();
+            this.BC23 = new System.Windows.Forms.Button();
+            this.BC24 = new System.Windows.Forms.Button();
+            this.BC25 = new System.Windows.Forms.Button();
+            this.BC26 = new System.Windows.Forms.Button();
+            this.BC27 = new System.Windows.Forms.Button();
+            this.BC28 = new System.Windows.Forms.Button();
+            this.BC29 = new System.Windows.Forms.Button();
+            this.BC30 = new System.Windows.Forms.Button();
+            this.BC31 = new System.Windows.Forms.Button();
+            this.BC32 = new System.Windows.Forms.Button();
+            this.BC33 = new System.Windows.Forms.Button();
+            this.BC34 = new System.Windows.Forms.Button();
+            this.BC35 = new System.Windows.Forms.Button();
+            this.BC36 = new System.Windows.Forms.Button();
+            this.BC37 = new System.Windows.Forms.Button();
+            this.BC38 = new System.Windows.Forms.Button();
+            this.MaleLandWidthWithGrain = new System.Windows.Forms.Button();
+            this.MaleLandWidthAgainstGrain = new System.Windows.Forms.Button();
+            this.FemaleLandWidthWithGrain = new System.Windows.Forms.Button();
+            this.FealeLandWidthAgainstGrain = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -181,8 +181,8 @@
             this.label119 = new System.Windows.Forms.Label();
             this.label120 = new System.Windows.Forms.Label();
             this.label121 = new System.Windows.Forms.Label();
-            this.button34 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.OK = new System.Windows.Forms.Button();
+            this.OverlapTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -195,39 +195,39 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.5F));
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.button5, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.button6, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.button7, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.button8, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.button9, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.button10, 0, 11);
-            this.tableLayoutPanel1.Controls.Add(this.button11, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.button12, 0, 13);
-            this.tableLayoutPanel1.Controls.Add(this.button13, 0, 14);
-            this.tableLayoutPanel1.Controls.Add(this.button14, 0, 15);
-            this.tableLayoutPanel1.Controls.Add(this.button15, 0, 16);
-            this.tableLayoutPanel1.Controls.Add(this.button16, 0, 17);
-            this.tableLayoutPanel1.Controls.Add(this.button17, 0, 18);
-            this.tableLayoutPanel1.Controls.Add(this.button18, 0, 19);
-            this.tableLayoutPanel1.Controls.Add(this.button19, 0, 20);
-            this.tableLayoutPanel1.Controls.Add(this.button20, 0, 21);
-            this.tableLayoutPanel1.Controls.Add(this.button21, 0, 22);
-            this.tableLayoutPanel1.Controls.Add(this.button22, 0, 23);
-            this.tableLayoutPanel1.Controls.Add(this.button23, 0, 24);
-            this.tableLayoutPanel1.Controls.Add(this.button24, 0, 25);
-            this.tableLayoutPanel1.Controls.Add(this.button25, 0, 26);
-            this.tableLayoutPanel1.Controls.Add(this.button26, 0, 27);
-            this.tableLayoutPanel1.Controls.Add(this.button27, 0, 28);
-            this.tableLayoutPanel1.Controls.Add(this.button28, 0, 29);
-            this.tableLayoutPanel1.Controls.Add(this.button29, 0, 30);
-            this.tableLayoutPanel1.Controls.Add(this.button30, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button31, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button32, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button33, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BC10, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BC11, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BC12, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.BC13, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.BC14, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.BC15, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.BC16, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.BC17, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.BC18, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.BC19, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.BC20, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.BC21, 0, 13);
+            this.tableLayoutPanel1.Controls.Add(this.BC22, 0, 14);
+            this.tableLayoutPanel1.Controls.Add(this.BC23, 0, 15);
+            this.tableLayoutPanel1.Controls.Add(this.BC24, 0, 16);
+            this.tableLayoutPanel1.Controls.Add(this.BC25, 0, 17);
+            this.tableLayoutPanel1.Controls.Add(this.BC26, 0, 18);
+            this.tableLayoutPanel1.Controls.Add(this.BC27, 0, 19);
+            this.tableLayoutPanel1.Controls.Add(this.BC28, 0, 20);
+            this.tableLayoutPanel1.Controls.Add(this.BC29, 0, 21);
+            this.tableLayoutPanel1.Controls.Add(this.BC30, 0, 22);
+            this.tableLayoutPanel1.Controls.Add(this.BC31, 0, 23);
+            this.tableLayoutPanel1.Controls.Add(this.BC32, 0, 24);
+            this.tableLayoutPanel1.Controls.Add(this.BC33, 0, 25);
+            this.tableLayoutPanel1.Controls.Add(this.BC34, 0, 26);
+            this.tableLayoutPanel1.Controls.Add(this.BC35, 0, 27);
+            this.tableLayoutPanel1.Controls.Add(this.BC36, 0, 28);
+            this.tableLayoutPanel1.Controls.Add(this.BC37, 0, 29);
+            this.tableLayoutPanel1.Controls.Add(this.BC38, 0, 30);
+            this.tableLayoutPanel1.Controls.Add(this.MaleLandWidthWithGrain, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.MaleLandWidthAgainstGrain, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.FemaleLandWidthWithGrain, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.FealeLandWidthAgainstGrain, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 1, 0);
@@ -385,434 +385,434 @@
             this.tableLayoutPanel1.TabIndex = 35;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
-            // button1
-            // 
-            this.button1.AutoSize = true;
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(0, 40);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(202, 20);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "0.010";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.AutoSize = true;
-            this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(0, 60);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(202, 20);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "0.011";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.AutoSize = true;
-            this.button3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(0, 80);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(202, 20);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "0.012";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.AutoSize = true;
-            this.button4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Location = new System.Drawing.Point(0, 100);
-            this.button4.Margin = new System.Windows.Forms.Padding(0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(202, 20);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "0.013";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.AutoSize = true;
-            this.button5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button5.Location = new System.Drawing.Point(0, 120);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(202, 20);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "0.014";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.AutoSize = true;
-            this.button6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button6.Location = new System.Drawing.Point(0, 140);
-            this.button6.Margin = new System.Windows.Forms.Padding(0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(202, 20);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "0.015";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.AutoSize = true;
-            this.button7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button7.Location = new System.Drawing.Point(0, 160);
-            this.button7.Margin = new System.Windows.Forms.Padding(0);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(202, 20);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "0.016";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.AutoSize = true;
-            this.button8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button8.Location = new System.Drawing.Point(0, 180);
-            this.button8.Margin = new System.Windows.Forms.Padding(0);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(202, 20);
-            this.button8.TabIndex = 7;
-            this.button8.Text = "0.017";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // button9
-            // 
-            this.button9.AutoSize = true;
-            this.button9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button9.Location = new System.Drawing.Point(0, 200);
-            this.button9.Margin = new System.Windows.Forms.Padding(0);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(202, 20);
-            this.button9.TabIndex = 8;
-            this.button9.Text = "0.018";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // button10
-            // 
-            this.button10.AutoSize = true;
-            this.button10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button10.Location = new System.Drawing.Point(0, 220);
-            this.button10.Margin = new System.Windows.Forms.Padding(0);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(202, 20);
-            this.button10.TabIndex = 9;
-            this.button10.Text = "0.019";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            this.button11.AutoSize = true;
-            this.button11.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button11.Location = new System.Drawing.Point(0, 240);
-            this.button11.Margin = new System.Windows.Forms.Padding(0);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(202, 20);
-            this.button11.TabIndex = 10;
-            this.button11.Text = "0.020";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
-            // button12
-            // 
-            this.button12.AutoSize = true;
-            this.button12.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button12.Location = new System.Drawing.Point(0, 260);
-            this.button12.Margin = new System.Windows.Forms.Padding(0);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(202, 20);
-            this.button12.TabIndex = 11;
-            this.button12.Text = "0.021";
-            this.button12.UseVisualStyleBackColor = true;
-            // 
-            // button13
-            // 
-            this.button13.AutoSize = true;
-            this.button13.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button13.Location = new System.Drawing.Point(0, 280);
-            this.button13.Margin = new System.Windows.Forms.Padding(0);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(202, 20);
-            this.button13.TabIndex = 12;
-            this.button13.Text = "0.022";
-            this.button13.UseVisualStyleBackColor = true;
-            // 
-            // button14
-            // 
-            this.button14.AutoSize = true;
-            this.button14.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button14.Location = new System.Drawing.Point(0, 300);
-            this.button14.Margin = new System.Windows.Forms.Padding(0);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(202, 20);
-            this.button14.TabIndex = 13;
-            this.button14.Text = "0.023";
-            this.button14.UseVisualStyleBackColor = true;
-            // 
-            // button15
-            // 
-            this.button15.AutoSize = true;
-            this.button15.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button15.Location = new System.Drawing.Point(0, 320);
-            this.button15.Margin = new System.Windows.Forms.Padding(0);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(202, 20);
-            this.button15.TabIndex = 14;
-            this.button15.Text = "0.024";
-            this.button15.UseVisualStyleBackColor = true;
-            // 
-            // button16
-            // 
-            this.button16.AutoSize = true;
-            this.button16.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button16.Location = new System.Drawing.Point(0, 340);
-            this.button16.Margin = new System.Windows.Forms.Padding(0);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(202, 20);
-            this.button16.TabIndex = 15;
-            this.button16.Text = "0.025";
-            this.button16.UseVisualStyleBackColor = true;
-            // 
-            // button17
-            // 
-            this.button17.AutoSize = true;
-            this.button17.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button17.Location = new System.Drawing.Point(0, 360);
-            this.button17.Margin = new System.Windows.Forms.Padding(0);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(202, 20);
-            this.button17.TabIndex = 16;
-            this.button17.Text = "0.026";
-            this.button17.UseVisualStyleBackColor = true;
-            // 
-            // button18
-            // 
-            this.button18.AutoSize = true;
-            this.button18.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button18.Location = new System.Drawing.Point(0, 380);
-            this.button18.Margin = new System.Windows.Forms.Padding(0);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(202, 20);
-            this.button18.TabIndex = 17;
-            this.button18.Text = "0.027";
-            this.button18.UseVisualStyleBackColor = true;
-            // 
-            // button19
-            // 
-            this.button19.AutoSize = true;
-            this.button19.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button19.Location = new System.Drawing.Point(0, 400);
-            this.button19.Margin = new System.Windows.Forms.Padding(0);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(202, 20);
-            this.button19.TabIndex = 18;
-            this.button19.Text = "0.028";
-            this.button19.UseVisualStyleBackColor = true;
-            // 
-            // button20
-            // 
-            this.button20.AutoSize = true;
-            this.button20.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button20.Location = new System.Drawing.Point(0, 420);
-            this.button20.Margin = new System.Windows.Forms.Padding(0);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(202, 20);
-            this.button20.TabIndex = 19;
-            this.button20.Text = "0.029";
-            this.button20.UseVisualStyleBackColor = true;
-            // 
-            // button21
-            // 
-            this.button21.AutoSize = true;
-            this.button21.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button21.Location = new System.Drawing.Point(0, 440);
-            this.button21.Margin = new System.Windows.Forms.Padding(0);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(202, 20);
-            this.button21.TabIndex = 20;
-            this.button21.Text = "0.030";
-            this.button21.UseVisualStyleBackColor = true;
-            // 
-            // button22
-            // 
-            this.button22.AutoSize = true;
-            this.button22.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button22.Location = new System.Drawing.Point(0, 460);
-            this.button22.Margin = new System.Windows.Forms.Padding(0);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(202, 20);
-            this.button22.TabIndex = 21;
-            this.button22.Text = "0.031";
-            this.button22.UseVisualStyleBackColor = true;
-            // 
-            // button23
-            // 
-            this.button23.AutoSize = true;
-            this.button23.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button23.Location = new System.Drawing.Point(0, 480);
-            this.button23.Margin = new System.Windows.Forms.Padding(0);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(202, 20);
-            this.button23.TabIndex = 22;
-            this.button23.Text = "0.032";
-            this.button23.UseVisualStyleBackColor = true;
-            // 
-            // button24
-            // 
-            this.button24.AutoSize = true;
-            this.button24.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button24.Location = new System.Drawing.Point(0, 500);
-            this.button24.Margin = new System.Windows.Forms.Padding(0);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(202, 20);
-            this.button24.TabIndex = 23;
-            this.button24.Text = "0.033";
-            this.button24.UseVisualStyleBackColor = true;
-            // 
-            // button25
-            // 
-            this.button25.AutoSize = true;
-            this.button25.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button25.Location = new System.Drawing.Point(0, 520);
-            this.button25.Margin = new System.Windows.Forms.Padding(0);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(202, 20);
-            this.button25.TabIndex = 24;
-            this.button25.Text = "0.034";
-            this.button25.UseVisualStyleBackColor = true;
-            // 
-            // button26
-            // 
-            this.button26.AutoSize = true;
-            this.button26.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button26.Location = new System.Drawing.Point(0, 540);
-            this.button26.Margin = new System.Windows.Forms.Padding(0);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(202, 20);
-            this.button26.TabIndex = 25;
-            this.button26.Text = "0.035";
-            this.button26.UseVisualStyleBackColor = true;
-            // 
-            // button27
-            // 
-            this.button27.AutoSize = true;
-            this.button27.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button27.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button27.Location = new System.Drawing.Point(0, 560);
-            this.button27.Margin = new System.Windows.Forms.Padding(0);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(202, 20);
-            this.button27.TabIndex = 26;
-            this.button27.Text = "0.036";
-            this.button27.UseVisualStyleBackColor = true;
-            // 
-            // button28
-            // 
-            this.button28.AutoSize = true;
-            this.button28.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button28.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button28.Location = new System.Drawing.Point(0, 580);
-            this.button28.Margin = new System.Windows.Forms.Padding(0);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(202, 20);
-            this.button28.TabIndex = 27;
-            this.button28.Text = "0.037";
-            this.button28.UseVisualStyleBackColor = true;
-            // 
-            // button29
-            // 
-            this.button29.AutoSize = true;
-            this.button29.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button29.Location = new System.Drawing.Point(0, 600);
-            this.button29.Margin = new System.Windows.Forms.Padding(0);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(202, 22);
-            this.button29.TabIndex = 28;
-            this.button29.Text = "0.038";
-            this.button29.UseVisualStyleBackColor = true;
-            // 
-            // button30
-            // 
-            this.button30.AutoSize = true;
-            this.button30.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button30.Location = new System.Drawing.Point(202, 20);
-            this.button30.Margin = new System.Windows.Forms.Padding(0);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(98, 20);
-            this.button30.TabIndex = 29;
-            this.button30.Text = "With Grain";
-            this.button30.UseVisualStyleBackColor = true;
-            // 
-            // button31
-            // 
-            this.button31.AutoSize = true;
-            this.button31.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button31.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button31.Location = new System.Drawing.Point(300, 20);
-            this.button31.Margin = new System.Windows.Forms.Padding(0);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(98, 20);
-            this.button31.TabIndex = 30;
-            this.button31.Text = "Against Grain";
-            this.button31.UseVisualStyleBackColor = true;
-            // 
-            // button33
-            // 
-            this.button33.AutoSize = true;
-            this.button33.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button33.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button33.Location = new System.Drawing.Point(496, 20);
-            this.button33.Margin = new System.Windows.Forms.Padding(0);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(99, 20);
-            this.button33.TabIndex = 32;
-            this.button33.Text = "Against Grain";
-            this.button33.UseVisualStyleBackColor = true;
-            // 
-            // button32
-            // 
-            this.button32.AutoSize = true;
-            this.button32.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button32.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button32.Location = new System.Drawing.Point(398, 20);
-            this.button32.Margin = new System.Windows.Forms.Padding(0);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(98, 20);
-            this.button32.TabIndex = 31;
-            this.button32.Text = "With Grain";
-            this.button32.UseVisualStyleBackColor = true;
+            // BC10
+            // 
+            this.BC10.AutoSize = true;
+            this.BC10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC10.Location = new System.Drawing.Point(0, 40);
+            this.BC10.Margin = new System.Windows.Forms.Padding(0);
+            this.BC10.Name = "BC10";
+            this.BC10.Size = new System.Drawing.Size(202, 20);
+            this.BC10.TabIndex = 0;
+            this.BC10.Text = "0.010";
+            this.BC10.UseVisualStyleBackColor = true;
+            // 
+            // BC11
+            // 
+            this.BC11.AutoSize = true;
+            this.BC11.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC11.Location = new System.Drawing.Point(0, 60);
+            this.BC11.Margin = new System.Windows.Forms.Padding(0);
+            this.BC11.Name = "BC11";
+            this.BC11.Size = new System.Drawing.Size(202, 20);
+            this.BC11.TabIndex = 1;
+            this.BC11.Text = "0.011";
+            this.BC11.UseVisualStyleBackColor = true;
+            // 
+            // BC12
+            // 
+            this.BC12.AutoSize = true;
+            this.BC12.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC12.Location = new System.Drawing.Point(0, 80);
+            this.BC12.Margin = new System.Windows.Forms.Padding(0);
+            this.BC12.Name = "BC12";
+            this.BC12.Size = new System.Drawing.Size(202, 20);
+            this.BC12.TabIndex = 2;
+            this.BC12.Text = "0.012";
+            this.BC12.UseVisualStyleBackColor = true;
+            // 
+            // BC13
+            // 
+            this.BC13.AutoSize = true;
+            this.BC13.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC13.Location = new System.Drawing.Point(0, 100);
+            this.BC13.Margin = new System.Windows.Forms.Padding(0);
+            this.BC13.Name = "BC13";
+            this.BC13.Size = new System.Drawing.Size(202, 20);
+            this.BC13.TabIndex = 3;
+            this.BC13.Text = "0.013";
+            this.BC13.UseVisualStyleBackColor = true;
+            // 
+            // BC14
+            // 
+            this.BC14.AutoSize = true;
+            this.BC14.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC14.Location = new System.Drawing.Point(0, 120);
+            this.BC14.Margin = new System.Windows.Forms.Padding(0);
+            this.BC14.Name = "BC14";
+            this.BC14.Size = new System.Drawing.Size(202, 20);
+            this.BC14.TabIndex = 4;
+            this.BC14.Text = "0.014";
+            this.BC14.UseVisualStyleBackColor = true;
+            // 
+            // BC15
+            // 
+            this.BC15.AutoSize = true;
+            this.BC15.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC15.Location = new System.Drawing.Point(0, 140);
+            this.BC15.Margin = new System.Windows.Forms.Padding(0);
+            this.BC15.Name = "BC15";
+            this.BC15.Size = new System.Drawing.Size(202, 20);
+            this.BC15.TabIndex = 5;
+            this.BC15.Text = "0.015";
+            this.BC15.UseVisualStyleBackColor = true;
+            // 
+            // BC16
+            // 
+            this.BC16.AutoSize = true;
+            this.BC16.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC16.Location = new System.Drawing.Point(0, 160);
+            this.BC16.Margin = new System.Windows.Forms.Padding(0);
+            this.BC16.Name = "BC16";
+            this.BC16.Size = new System.Drawing.Size(202, 20);
+            this.BC16.TabIndex = 6;
+            this.BC16.Text = "0.016";
+            this.BC16.UseVisualStyleBackColor = true;
+            // 
+            // BC17
+            // 
+            this.BC17.AutoSize = true;
+            this.BC17.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC17.Location = new System.Drawing.Point(0, 180);
+            this.BC17.Margin = new System.Windows.Forms.Padding(0);
+            this.BC17.Name = "BC17";
+            this.BC17.Size = new System.Drawing.Size(202, 20);
+            this.BC17.TabIndex = 7;
+            this.BC17.Text = "0.017";
+            this.BC17.UseVisualStyleBackColor = true;
+            // 
+            // BC18
+            // 
+            this.BC18.AutoSize = true;
+            this.BC18.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC18.Location = new System.Drawing.Point(0, 200);
+            this.BC18.Margin = new System.Windows.Forms.Padding(0);
+            this.BC18.Name = "BC18";
+            this.BC18.Size = new System.Drawing.Size(202, 20);
+            this.BC18.TabIndex = 8;
+            this.BC18.Text = "0.018";
+            this.BC18.UseVisualStyleBackColor = true;
+            // 
+            // BC19
+            // 
+            this.BC19.AutoSize = true;
+            this.BC19.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC19.Location = new System.Drawing.Point(0, 220);
+            this.BC19.Margin = new System.Windows.Forms.Padding(0);
+            this.BC19.Name = "BC19";
+            this.BC19.Size = new System.Drawing.Size(202, 20);
+            this.BC19.TabIndex = 9;
+            this.BC19.Text = "0.019";
+            this.BC19.UseVisualStyleBackColor = true;
+            // 
+            // BC20
+            // 
+            this.BC20.AutoSize = true;
+            this.BC20.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC20.Location = new System.Drawing.Point(0, 240);
+            this.BC20.Margin = new System.Windows.Forms.Padding(0);
+            this.BC20.Name = "BC20";
+            this.BC20.Size = new System.Drawing.Size(202, 20);
+            this.BC20.TabIndex = 10;
+            this.BC20.Text = "0.020";
+            this.BC20.UseVisualStyleBackColor = true;
+            // 
+            // BC21
+            // 
+            this.BC21.AutoSize = true;
+            this.BC21.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC21.Location = new System.Drawing.Point(0, 260);
+            this.BC21.Margin = new System.Windows.Forms.Padding(0);
+            this.BC21.Name = "BC21";
+            this.BC21.Size = new System.Drawing.Size(202, 20);
+            this.BC21.TabIndex = 11;
+            this.BC21.Text = "0.021";
+            this.BC21.UseVisualStyleBackColor = true;
+            // 
+            // BC22
+            // 
+            this.BC22.AutoSize = true;
+            this.BC22.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC22.Location = new System.Drawing.Point(0, 280);
+            this.BC22.Margin = new System.Windows.Forms.Padding(0);
+            this.BC22.Name = "BC22";
+            this.BC22.Size = new System.Drawing.Size(202, 20);
+            this.BC22.TabIndex = 12;
+            this.BC22.Text = "0.022";
+            this.BC22.UseVisualStyleBackColor = true;
+            // 
+            // BC23
+            // 
+            this.BC23.AutoSize = true;
+            this.BC23.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC23.Location = new System.Drawing.Point(0, 300);
+            this.BC23.Margin = new System.Windows.Forms.Padding(0);
+            this.BC23.Name = "BC23";
+            this.BC23.Size = new System.Drawing.Size(202, 20);
+            this.BC23.TabIndex = 13;
+            this.BC23.Text = "0.023";
+            this.BC23.UseVisualStyleBackColor = true;
+            // 
+            // BC24
+            // 
+            this.BC24.AutoSize = true;
+            this.BC24.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC24.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC24.Location = new System.Drawing.Point(0, 320);
+            this.BC24.Margin = new System.Windows.Forms.Padding(0);
+            this.BC24.Name = "BC24";
+            this.BC24.Size = new System.Drawing.Size(202, 20);
+            this.BC24.TabIndex = 14;
+            this.BC24.Text = "0.024";
+            this.BC24.UseVisualStyleBackColor = true;
+            // 
+            // BC25
+            // 
+            this.BC25.AutoSize = true;
+            this.BC25.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC25.Location = new System.Drawing.Point(0, 340);
+            this.BC25.Margin = new System.Windows.Forms.Padding(0);
+            this.BC25.Name = "BC25";
+            this.BC25.Size = new System.Drawing.Size(202, 20);
+            this.BC25.TabIndex = 15;
+            this.BC25.Text = "0.025";
+            this.BC25.UseVisualStyleBackColor = true;
+            // 
+            // BC26
+            // 
+            this.BC26.AutoSize = true;
+            this.BC26.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC26.Location = new System.Drawing.Point(0, 360);
+            this.BC26.Margin = new System.Windows.Forms.Padding(0);
+            this.BC26.Name = "BC26";
+            this.BC26.Size = new System.Drawing.Size(202, 20);
+            this.BC26.TabIndex = 16;
+            this.BC26.Text = "0.026";
+            this.BC26.UseVisualStyleBackColor = true;
+            // 
+            // BC27
+            // 
+            this.BC27.AutoSize = true;
+            this.BC27.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC27.Location = new System.Drawing.Point(0, 380);
+            this.BC27.Margin = new System.Windows.Forms.Padding(0);
+            this.BC27.Name = "BC27";
+            this.BC27.Size = new System.Drawing.Size(202, 20);
+            this.BC27.TabIndex = 17;
+            this.BC27.Text = "0.027";
+            this.BC27.UseVisualStyleBackColor = true;
+            // 
+            // BC28
+            // 
+            this.BC28.AutoSize = true;
+            this.BC28.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC28.Location = new System.Drawing.Point(0, 400);
+            this.BC28.Margin = new System.Windows.Forms.Padding(0);
+            this.BC28.Name = "BC28";
+            this.BC28.Size = new System.Drawing.Size(202, 20);
+            this.BC28.TabIndex = 18;
+            this.BC28.Text = "0.028";
+            this.BC28.UseVisualStyleBackColor = true;
+            // 
+            // BC29
+            // 
+            this.BC29.AutoSize = true;
+            this.BC29.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC29.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC29.Location = new System.Drawing.Point(0, 420);
+            this.BC29.Margin = new System.Windows.Forms.Padding(0);
+            this.BC29.Name = "BC29";
+            this.BC29.Size = new System.Drawing.Size(202, 20);
+            this.BC29.TabIndex = 19;
+            this.BC29.Text = "0.029";
+            this.BC29.UseVisualStyleBackColor = true;
+            // 
+            // BC30
+            // 
+            this.BC30.AutoSize = true;
+            this.BC30.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC30.Location = new System.Drawing.Point(0, 440);
+            this.BC30.Margin = new System.Windows.Forms.Padding(0);
+            this.BC30.Name = "BC30";
+            this.BC30.Size = new System.Drawing.Size(202, 20);
+            this.BC30.TabIndex = 20;
+            this.BC30.Text = "0.030";
+            this.BC30.UseVisualStyleBackColor = true;
+            // 
+            // BC31
+            // 
+            this.BC31.AutoSize = true;
+            this.BC31.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC31.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC31.Location = new System.Drawing.Point(0, 460);
+            this.BC31.Margin = new System.Windows.Forms.Padding(0);
+            this.BC31.Name = "BC31";
+            this.BC31.Size = new System.Drawing.Size(202, 20);
+            this.BC31.TabIndex = 21;
+            this.BC31.Text = "0.031";
+            this.BC31.UseVisualStyleBackColor = true;
+            // 
+            // BC32
+            // 
+            this.BC32.AutoSize = true;
+            this.BC32.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC32.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC32.Location = new System.Drawing.Point(0, 480);
+            this.BC32.Margin = new System.Windows.Forms.Padding(0);
+            this.BC32.Name = "BC32";
+            this.BC32.Size = new System.Drawing.Size(202, 20);
+            this.BC32.TabIndex = 22;
+            this.BC32.Text = "0.032";
+            this.BC32.UseVisualStyleBackColor = true;
+            // 
+            // BC33
+            // 
+            this.BC33.AutoSize = true;
+            this.BC33.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC33.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC33.Location = new System.Drawing.Point(0, 500);
+            this.BC33.Margin = new System.Windows.Forms.Padding(0);
+            this.BC33.Name = "BC33";
+            this.BC33.Size = new System.Drawing.Size(202, 20);
+            this.BC33.TabIndex = 23;
+            this.BC33.Text = "0.033";
+            this.BC33.UseVisualStyleBackColor = true;
+            // 
+            // BC34
+            // 
+            this.BC34.AutoSize = true;
+            this.BC34.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC34.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC34.Location = new System.Drawing.Point(0, 520);
+            this.BC34.Margin = new System.Windows.Forms.Padding(0);
+            this.BC34.Name = "BC34";
+            this.BC34.Size = new System.Drawing.Size(202, 20);
+            this.BC34.TabIndex = 24;
+            this.BC34.Text = "0.034";
+            this.BC34.UseVisualStyleBackColor = true;
+            // 
+            // BC35
+            // 
+            this.BC35.AutoSize = true;
+            this.BC35.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC35.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC35.Location = new System.Drawing.Point(0, 540);
+            this.BC35.Margin = new System.Windows.Forms.Padding(0);
+            this.BC35.Name = "BC35";
+            this.BC35.Size = new System.Drawing.Size(202, 20);
+            this.BC35.TabIndex = 25;
+            this.BC35.Text = "0.035";
+            this.BC35.UseVisualStyleBackColor = true;
+            // 
+            // BC36
+            // 
+            this.BC36.AutoSize = true;
+            this.BC36.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC36.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC36.Location = new System.Drawing.Point(0, 560);
+            this.BC36.Margin = new System.Windows.Forms.Padding(0);
+            this.BC36.Name = "BC36";
+            this.BC36.Size = new System.Drawing.Size(202, 20);
+            this.BC36.TabIndex = 26;
+            this.BC36.Text = "0.036";
+            this.BC36.UseVisualStyleBackColor = true;
+            // 
+            // BC37
+            // 
+            this.BC37.AutoSize = true;
+            this.BC37.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC37.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC37.Location = new System.Drawing.Point(0, 580);
+            this.BC37.Margin = new System.Windows.Forms.Padding(0);
+            this.BC37.Name = "BC37";
+            this.BC37.Size = new System.Drawing.Size(202, 20);
+            this.BC37.TabIndex = 27;
+            this.BC37.Text = "0.037";
+            this.BC37.UseVisualStyleBackColor = true;
+            // 
+            // BC38
+            // 
+            this.BC38.AutoSize = true;
+            this.BC38.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BC38.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BC38.Location = new System.Drawing.Point(0, 600);
+            this.BC38.Margin = new System.Windows.Forms.Padding(0);
+            this.BC38.Name = "BC38";
+            this.BC38.Size = new System.Drawing.Size(202, 22);
+            this.BC38.TabIndex = 28;
+            this.BC38.Text = "0.038";
+            this.BC38.UseVisualStyleBackColor = true;
+            // 
+            // MaleLandWidthWithGrain
+            // 
+            this.MaleLandWidthWithGrain.AutoSize = true;
+            this.MaleLandWidthWithGrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MaleLandWidthWithGrain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MaleLandWidthWithGrain.Location = new System.Drawing.Point(202, 20);
+            this.MaleLandWidthWithGrain.Margin = new System.Windows.Forms.Padding(0);
+            this.MaleLandWidthWithGrain.Name = "MaleLandWidthWithGrain";
+            this.MaleLandWidthWithGrain.Size = new System.Drawing.Size(98, 20);
+            this.MaleLandWidthWithGrain.TabIndex = 29;
+            this.MaleLandWidthWithGrain.Text = "With Grain";
+            this.MaleLandWidthWithGrain.UseVisualStyleBackColor = true;
+            // 
+            // MaleLandWidthAgainstGrain
+            // 
+            this.MaleLandWidthAgainstGrain.AutoSize = true;
+            this.MaleLandWidthAgainstGrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MaleLandWidthAgainstGrain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MaleLandWidthAgainstGrain.Location = new System.Drawing.Point(300, 20);
+            this.MaleLandWidthAgainstGrain.Margin = new System.Windows.Forms.Padding(0);
+            this.MaleLandWidthAgainstGrain.Name = "MaleLandWidthAgainstGrain";
+            this.MaleLandWidthAgainstGrain.Size = new System.Drawing.Size(98, 20);
+            this.MaleLandWidthAgainstGrain.TabIndex = 30;
+            this.MaleLandWidthAgainstGrain.Text = "Against Grain";
+            this.MaleLandWidthAgainstGrain.UseVisualStyleBackColor = true;
+            // 
+            // FemaleLandWidthWithGrain
+            // 
+            this.FemaleLandWidthWithGrain.AutoSize = true;
+            this.FemaleLandWidthWithGrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FemaleLandWidthWithGrain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FemaleLandWidthWithGrain.Location = new System.Drawing.Point(398, 20);
+            this.FemaleLandWidthWithGrain.Margin = new System.Windows.Forms.Padding(0);
+            this.FemaleLandWidthWithGrain.Name = "FemaleLandWidthWithGrain";
+            this.FemaleLandWidthWithGrain.Size = new System.Drawing.Size(98, 20);
+            this.FemaleLandWidthWithGrain.TabIndex = 31;
+            this.FemaleLandWidthWithGrain.Text = "With Grain";
+            this.FemaleLandWidthWithGrain.UseVisualStyleBackColor = true;
+            // 
+            // FealeLandWidthAgainstGrain
+            // 
+            this.FealeLandWidthAgainstGrain.AutoSize = true;
+            this.FealeLandWidthAgainstGrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FealeLandWidthAgainstGrain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FealeLandWidthAgainstGrain.Location = new System.Drawing.Point(496, 20);
+            this.FealeLandWidthAgainstGrain.Margin = new System.Windows.Forms.Padding(0);
+            this.FealeLandWidthAgainstGrain.Name = "FealeLandWidthAgainstGrain";
+            this.FealeLandWidthAgainstGrain.Size = new System.Drawing.Size(99, 20);
+            this.FealeLandWidthAgainstGrain.TabIndex = 32;
+            this.FealeLandWidthAgainstGrain.Text = "Against Grain";
+            this.FealeLandWidthAgainstGrain.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -2242,22 +2242,22 @@
             this.label121.Text = "0.110";
             this.label121.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button34
+            // OK
             // 
-            this.button34.Location = new System.Drawing.Point(714, 611);
-            this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(75, 23);
-            this.button34.TabIndex = 36;
-            this.button34.Text = "OK";
-            this.button34.UseVisualStyleBackColor = true;
+            this.OK.Location = new System.Drawing.Point(714, 611);
+            this.OK.Name = "OK";
+            this.OK.Size = new System.Drawing.Size(75, 23);
+            this.OK.TabIndex = 36;
+            this.OK.Text = "OK";
+            this.OK.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // OverlapTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(688, 585);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 37;
-            this.textBox1.Text = "0.005";
+            this.OverlapTextBox.Location = new System.Drawing.Point(688, 585);
+            this.OverlapTextBox.Name = "OverlapTextBox";
+            this.OverlapTextBox.Size = new System.Drawing.Size(100, 20);
+            this.OverlapTextBox.TabIndex = 37;
+            this.OverlapTextBox.Text = "0.005";
             // 
             // label4
             // 
@@ -2276,8 +2276,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(801, 646);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button34);
+            this.Controls.Add(this.OverlapTextBox);
+            this.Controls.Add(this.OK);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Liquid Packaging";
@@ -2290,39 +2290,39 @@
 
         #endregion
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.Button button25;
-        private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button button27;
-        private System.Windows.Forms.Button button28;
-        private System.Windows.Forms.Button button29;
-        private System.Windows.Forms.Button button30;
-        private System.Windows.Forms.Button button31;
-        private System.Windows.Forms.Button button33;
-        private System.Windows.Forms.Button button32;
+        private System.Windows.Forms.Button BC10;
+        private System.Windows.Forms.Button BC11;
+        private System.Windows.Forms.Button BC12;
+        private System.Windows.Forms.Button BC13;
+        private System.Windows.Forms.Button BC14;
+        private System.Windows.Forms.Button BC15;
+        private System.Windows.Forms.Button BC16;
+        private System.Windows.Forms.Button BC17;
+        private System.Windows.Forms.Button BC18;
+        private System.Windows.Forms.Button BC19;
+        private System.Windows.Forms.Button BC20;
+        private System.Windows.Forms.Button BC21;
+        private System.Windows.Forms.Button BC22;
+        private System.Windows.Forms.Button BC23;
+        private System.Windows.Forms.Button BC24;
+        private System.Windows.Forms.Button BC25;
+        private System.Windows.Forms.Button BC26;
+        private System.Windows.Forms.Button BC27;
+        private System.Windows.Forms.Button BC28;
+        private System.Windows.Forms.Button BC29;
+        private System.Windows.Forms.Button BC30;
+        private System.Windows.Forms.Button BC31;
+        private System.Windows.Forms.Button BC32;
+        private System.Windows.Forms.Button BC33;
+        private System.Windows.Forms.Button BC34;
+        private System.Windows.Forms.Button BC35;
+        private System.Windows.Forms.Button BC36;
+        private System.Windows.Forms.Button BC37;
+        private System.Windows.Forms.Button BC38;
+        private System.Windows.Forms.Button MaleLandWidthWithGrain;
+        private System.Windows.Forms.Button MaleLandWidthAgainstGrain;
+        private System.Windows.Forms.Button FealeLandWidthAgainstGrain;
+        private System.Windows.Forms.Button FemaleLandWidthWithGrain;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -2442,8 +2442,8 @@
         private System.Windows.Forms.Label label119;
         private System.Windows.Forms.Label label120;
         private System.Windows.Forms.Label label121;
-        private System.Windows.Forms.Button button34;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button OK;
+        private System.Windows.Forms.TextBox OverlapTextBox;
         private System.Windows.Forms.Label label4;
     }
 }
