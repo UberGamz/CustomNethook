@@ -50,10 +50,29 @@ namespace _CustomNethook
             var upperCreaseID = new List<int>();
             var lowerCreaseID = new List<int>();
             MCView Top = new MCView();
+            var creaseX1 = 0.0;
+            var creaseX2 = 0.0;
+            var creaseY1 = 0.0;
+            var creaseY2 = 0.0;
+            var creaseX3 = 0.0;
+            var creaseX4 = 0.0;
+            var creaseY3 = 0.0;
+            var creaseY4 = 0.0;
+            int createdUpperCrease = 502;
+            int createdLowerCrease = 503;
 
             void translate()
             {
                 SelectionManager.UnselectAllGeometry();
+                LevelsManager.RefreshLevelsManager();
+                LevelsManager.SetMainLevel(75);
+                var shown = LevelsManager.GetVisibleLevelNumbers();
+                foreach (var level in shown)
+                {
+                    LevelsManager.SetLevelVisible(level, false);
+                }
+                LevelsManager.SetLevelVisible(75, true);
+                LevelsManager.RefreshLevelsManager();
                 var tempChain1 = SearchManager.SelectAllGeometryOnLevel(75, true);
                 var tempSelectedGeometry1 = SearchManager.GetSelectedGeometry();
                 var temp1 = GeometryManipulationManager.CopySelectedGeometryToLevel(10, true);
@@ -75,6 +94,7 @@ namespace _CustomNethook
                 foreach (var entity in tempSelectedGeometry1Result)
                 {
                     entity.Color = 10;
+                    entity.Selected = false;
                     entity.Translate(startPoint, endPointUpper, Top, Top);
                     tempList1.Add(entity.GetEntityID());
                     entity.Commit();
@@ -88,6 +108,7 @@ namespace _CustomNethook
                 foreach (var entity in tempSelectedGeometry2Result)
                 {
                     entity.Color = 11;
+                    entity.Selected = false;
                     entity.Translate(startPoint, endPointLower, Top, Top);
                     tempList2.Add(entity.GetEntityID());
                     entity.Commit();
@@ -283,7 +304,7 @@ namespace _CustomNethook
                     tempI.Delete();
                 }
                 GraphicsManager.ClearColors(new GroupSelectionMask(true));
-                GraphicsManager.Repaint(true);
+                //GraphicsManager.Repaint(true);
             } // Deletes temporary lines and arcs
             void breakArcsWithPoints()
             {
@@ -335,18 +356,21 @@ namespace _CustomNethook
                     ArcID = null;
                 }
             } // Breaks arcs where intersections were
-            void selectNewGeo() {
+            void selectNewGeo()
+            {
                 SelectionManager.UnselectAllGeometry();
                 SearchManager.SelectAllGeometryOnLevel(75, true);
                 var tempSelectedGeometry1 = SearchManager.GetSelectedGeometry();
                 foreach (var i in tempSelectedGeometry1)
                 {
+                    i.Selected = false;
                     tempList8.Add(i.GetEntityID());
                 }
                 tempSelectedGeometry1 = null;
                 SelectionManager.UnselectAllGeometry();
             } // Selects all geometry (there are new entities)
-            void colorCrossovers(){
+            void colorCrossovers()
+            {
                 var tolerance = .005;
                 var arcX1 = 0.0;
                 var arcX2 = 0.0;
@@ -378,23 +402,29 @@ namespace _CustomNethook
                 var selectedChains = ChainManager.ChainAll(75);// Chains all geometry on level 75
                 var chainDirection = ChainDirectionType.CounterClockwise;// Going to be used to make sure all chains go the same direction
                 ChainManager.StartChainAtLongest(selectedChains);
-                foreach (var chain in selectedChains){
+                foreach (var chain in selectedChains)
+                {
                     var chainData = chainDetails.GetData(chain);
                     var chainEntityList = chainData.ChainEntities;
-                    foreach (var t in chainEntityList){
+                    foreach (var t in chainEntityList)
+                    {
                         (t.Key).Color = 9;
                         (t.Key).Commit();
                     }
                 }
-                foreach (var chain in selectedChains){
+                foreach (var chain in selectedChains)
+                {
                     templist10.Clear();
                     step = 0;
                     chain.Direction = chainDirection;
                     var chainEntity = ChainManager.GetGeometryInChain(chain);
                 stepStart:
-                    if (step == 0){
-                        foreach (var entity in chainEntity){
-                            if (entity is ArcGeometry arc && step == 0){
+                    if (step == 0)
+                    {
+                        foreach (var entity in chainEntity)
+                        {
+                            if (entity is ArcGeometry arc && step == 0)
+                            {
                                 arcX1 = arc.EndPoint1.x; // Arc 1 x 1
                                 arcX2 = arc.EndPoint2.x; // Arc 1 x 2
                                 arcY1 = arc.EndPoint1.y; // Arc 1 y 1
@@ -402,15 +432,18 @@ namespace _CustomNethook
                                 arcStartPoint = new Point3D(arcX1, arcY1, 0.0); // Arc 1 start point
                                 arcEndPoint = new Point3D(arcX2, arcY2, 0.0); // Arc 1 end point
                                 firstEntity = 1; // Saves that first entity is Arc
-                                foreach (var v in tempList9){
+                                foreach (var v in tempList9)
+                                {
                                     var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                    if (w is PointGeometry point && step == 0){
+                                    if (w is PointGeometry point && step == 0)
+                                    {
                                         var ux = point.Data.x;// X location of point
                                         var uy = point.Data.y;// Y location of point
                                         Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
                                         var arcStartDistance = Math.Abs(VectorManager.Distance(uPoint, arcStartPoint));// Distance between entity start point and crossover point
                                         var arcEndDistance = Math.Abs(VectorManager.Distance(uPoint, arcEndPoint));// Distance between entity end point and crossover point
-                                        if (arcStartDistance <= tolerance && step == 0){
+                                        if (arcStartDistance <= tolerance && step == 0)
+                                        {
                                             entity.Color = 10;// Changes color of entity to 10
                                             entity.Commit();// Saves entity into Mastercam Database
                                             step = 1;// Sets step to 1
@@ -419,7 +452,8 @@ namespace _CustomNethook
                                     }
                                 }
                             }
-                            if (entity is LineGeometry line && step == 0){
+                            if (entity is LineGeometry line && step == 0)
+                            {
                                 lineX1 = line.EndPoint1.x; // line 1 x 1
                                 lineX2 = line.EndPoint2.x; // line 1 x 2
                                 lineY1 = line.EndPoint1.y; // line 1 y 1
@@ -427,15 +461,18 @@ namespace _CustomNethook
                                 lineStartPoint = new Point3D(lineX1, lineY1, 0.0); // Line 1 start point
                                 lineEndPoint = new Point3D(lineX2, lineY2, 0.0); // Line 1 end point
                                 firstEntity = 2; // Saves that first entity is Line
-                                foreach (var v in tempList9){
+                                foreach (var v in tempList9)
+                                {
                                     var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                    if (w is PointGeometry point && step == 0){
+                                    if (w is PointGeometry point && step == 0)
+                                    {
                                         var ux = point.Data.x;// X location of point
                                         var uy = point.Data.y;// Y location of point
                                         Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
                                         var lineStartDistance = Math.Abs(VectorManager.Distance(uPoint, lineStartPoint));// Distance between entity start point and crossover point
                                         var lineEndDistance = Math.Abs(VectorManager.Distance(uPoint, lineEndPoint));// Distance between entity end point and crossover point
-                                        if (lineStartDistance <= tolerance && step == 0){
+                                        if (lineStartDistance <= tolerance && step == 0)
+                                        {
                                             entity.Color = 10;// Changes color of entity to 10
                                             entity.Commit();// Saves entity into Mastercam Database
                                             step = 1;// Sets step to 1
@@ -446,18 +483,23 @@ namespace _CustomNethook
                             }
                         }
                     }
-                    if (step == 1){
-                        foreach (var entity in chainEntity){
-                            if (firstEntity == 1 && step == 1){
+                    if (step == 1)
+                    {
+                        foreach (var entity in chainEntity)
+                        {
+                            if (firstEntity == 1 && step == 1)
+                            {
                                 var thisEntity = ArcGeometry.RetrieveEntity(templist10[0]);
-                                if (thisEntity is ArcGeometry arc && step == 1){
-                                arcX1 = arc.EndPoint1.x; // Arc 1 x 1
-                                arcX2 = arc.EndPoint2.x; // Arc 1 x 2
-                                arcY1 = arc.EndPoint1.y; // Arc 1 y 1
-                                arcY2 = arc.EndPoint2.y; // Arc 1 y 2
-                                arcStartPoint = new Point3D(arcX1, arcY1, 0.0); // Arc 1 start point
-                                arcEndPoint = new Point3D(arcX2, arcY2, 0.0); // Arc 1 end point
-                                    if (entity is ArcGeometry nextArc && (entity.GetEntityID() != templist10[0]) && step == 1){
+                                if (thisEntity is ArcGeometry arc && step == 1)
+                                {
+                                    arcX1 = arc.EndPoint1.x; // Arc 1 x 1
+                                    arcX2 = arc.EndPoint2.x; // Arc 1 x 2
+                                    arcY1 = arc.EndPoint1.y; // Arc 1 y 1
+                                    arcY2 = arc.EndPoint2.y; // Arc 1 y 2
+                                    arcStartPoint = new Point3D(arcX1, arcY1, 0.0); // Arc 1 start point
+                                    arcEndPoint = new Point3D(arcX2, arcY2, 0.0); // Arc 1 end point
+                                    if (entity is ArcGeometry nextArc && (entity.GetEntityID() != templist10[0]) && step == 1)
+                                    {
                                         nextArcX1 = nextArc.EndPoint1.x;
                                         nextArcX2 = nextArc.EndPoint2.x;
                                         nextArcY1 = nextArc.EndPoint1.y;
@@ -466,48 +508,57 @@ namespace _CustomNethook
                                         nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
                                         var entityStartDistance = VectorManager.Distance(arcEndPoint, nextArcStartPoint);
                                         var entityEndDistance = VectorManager.Distance(arcEndPoint, nextArcEndPoint);
-                                        if (entityStartDistance <= tolerance && step == 1){
+                                        if (entityStartDistance <= tolerance && step == 1)
+                                        {
                                             entity.Color = 10;
                                             entity.Commit();
                                             templist10.Clear();
                                             templist10.Add(entity.GetEntityID());
                                             step = 2;
                                             firstEntity = 1;
-                                            foreach (var v in tempList9){
+                                            foreach (var v in tempList9)
+                                            {
                                                 var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                                if (w is PointGeometry point){
+                                                if (w is PointGeometry point)
+                                                {
                                                     var ux = point.Data.x;// X location of point
                                                     var uy = point.Data.y;// Y location of point
                                                     Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
                                                     var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
-                                                    if (entityPointDistance <= tolerance){
+                                                    if (entityPointDistance <= tolerance)
+                                                    {
                                                         step = 3;
                                                     }
                                                 }
                                             }
                                         }
-                                        if (entityEndDistance <= tolerance && step == 1){
+                                        if (entityEndDistance <= tolerance && step == 1)
+                                        {
                                             entity.Color = 10;
                                             entity.Commit();
                                             templist10.Clear();
                                             templist10.Add(entity.GetEntityID());
                                             step = 4;
                                             firstEntity = 1;
-                                            foreach (var v in tempList9){
+                                            foreach (var v in tempList9)
+                                            {
                                                 var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                                if (w is PointGeometry point){
+                                                if (w is PointGeometry point)
+                                                {
                                                     var ux = point.Data.x;// X location of point
                                                     var uy = point.Data.y;// Y location of point
                                                     Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
                                                     var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
-                                                    if (entityPointDistance <= tolerance){
+                                                    if (entityPointDistance <= tolerance)
+                                                    {
                                                         step = 5;
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                    if (entity is LineGeometry nextLine && (entity.GetEntityID() != templist10[0]) && step == 1){
+                                    if (entity is LineGeometry nextLine && (entity.GetEntityID() != templist10[0]) && step == 1)
+                                    {
                                         nextLineX1 = nextLine.EndPoint1.x;
                                         nextLineX2 = nextLine.EndPoint2.x;
                                         nextLineY1 = nextLine.EndPoint1.y;
@@ -516,41 +567,49 @@ namespace _CustomNethook
                                         nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
                                         var entityStartDistance = VectorManager.Distance(arcEndPoint, nextLineStartPoint);
                                         var entityEndDistance = VectorManager.Distance(arcEndPoint, nextLineEndPoint);
-                                        if (entityStartDistance <= tolerance && step == 1){
+                                        if (entityStartDistance <= tolerance && step == 1)
+                                        {
                                             entity.Color = 10;
                                             entity.Commit();
                                             templist10.Clear();
                                             templist10.Add(entity.GetEntityID());
                                             step = 2;
                                             firstEntity = 2;
-                                            foreach (var v in tempList9){
+                                            foreach (var v in tempList9)
+                                            {
                                                 var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                                if (w is PointGeometry point){
+                                                if (w is PointGeometry point)
+                                                {
                                                     var ux = point.Data.x;// X location of point
                                                     var uy = point.Data.y;// Y location of point
                                                     Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
                                                     var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
-                                                    if (entityPointDistance <= tolerance){
+                                                    if (entityPointDistance <= tolerance)
+                                                    {
                                                         step = 3;
                                                     }
                                                 }
                                             }
                                         }
-                                        if (entityEndDistance <= tolerance && step == 1){
+                                        if (entityEndDistance <= tolerance && step == 1)
+                                        {
                                             entity.Color = 10;
                                             entity.Commit();
                                             templist10.Clear();
                                             templist10.Add(entity.GetEntityID());
                                             step = 4;
                                             firstEntity = 2;
-                                            foreach (var v in tempList9){
+                                            foreach (var v in tempList9)
+                                            {
                                                 var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                                if (w is PointGeometry point){
+                                                if (w is PointGeometry point)
+                                                {
                                                     var ux = point.Data.x;// X location of point
                                                     var uy = point.Data.y;// Y location of point
                                                     Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
                                                     var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
-                                                    if (entityPointDistance <= tolerance){
+                                                    if (entityPointDistance <= tolerance)
+                                                    {
                                                         step = 5;
                                                     }
                                                 }
@@ -559,122 +618,143 @@ namespace _CustomNethook
                                     }
                                 }
                             }
-                            if (firstEntity == 2 && step == 1){
-                                
-                                    var thisEntity = LineGeometry.RetrieveEntity(templist10[0]);
-                                    if (thisEntity is LineGeometry line && step == 1){
-                                        lineX1 = line.EndPoint1.x; // Arc 1 x 1
-                                        lineX2 = line.EndPoint2.x; // Arc 1 x 2
-                                        lineY1 = line.EndPoint1.y; // Arc 1 y 1
-                                        lineY2 = line.EndPoint2.y; // Arc 1 y 2
-                                        lineStartPoint = new Point3D(lineX1, lineY1, 0.0); // Arc 1 start point
-                                        lineEndPoint = new Point3D(lineX2, lineY2, 0.0); // Arc 1 end point
-                                        if (entity is ArcGeometry nextArc && (entity.GetEntityID() != templist10[0]) && step == 1){
-                                            nextArcX1 = nextArc.EndPoint1.x;
-                                            nextArcX2 = nextArc.EndPoint2.x;
-                                            nextArcY1 = nextArc.EndPoint1.y;
-                                            nextArcY2 = nextArc.EndPoint2.y;
-                                            nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
-                                            nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
-                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextArcStartPoint);
-                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextArcEndPoint);
-                                            if (entityStartDistance <= tolerance && step == 1){
-                                                entity.Color = 10;
-                                                entity.Commit();
-                                                templist10.Clear();
-                                                templist10.Add(entity.GetEntityID());
-                                                step = 2;
-                                                firstEntity = 1;
-                                                foreach (var v in tempList9){
-                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                                    if (w is PointGeometry point){
-                                                        var ux = point.Data.x;// X location of point
-                                                        var uy = point.Data.y;// Y location of point
-                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
-                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
-                                                        if (entityPointDistance <= tolerance){
-                                                            step = 3;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            if (entityEndDistance <= tolerance && step == 1){
-                                                entity.Color = 10;
-                                                entity.Commit();
-                                                templist10.Clear();
-                                                templist10.Add(entity.GetEntityID());
-                                                step = 4;
-                                                firstEntity = 1;
-                                                foreach (var v in tempList9){
-                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                                    if (w is PointGeometry point){
-                                                        var ux = point.Data.x;// X location of point
-                                                        var uy = point.Data.y;// Y location of point
-                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
-                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
-                                                        if (entityPointDistance <= tolerance){
-                                                            step = 5;
-                                                        }
+                            if (firstEntity == 2 && step == 1)
+                            {
+
+                                var thisEntity = LineGeometry.RetrieveEntity(templist10[0]);
+                                if (thisEntity is LineGeometry line && step == 1)
+                                {
+                                    lineX1 = line.EndPoint1.x; // Arc 1 x 1
+                                    lineX2 = line.EndPoint2.x; // Arc 1 x 2
+                                    lineY1 = line.EndPoint1.y; // Arc 1 y 1
+                                    lineY2 = line.EndPoint2.y; // Arc 1 y 2
+                                    lineStartPoint = new Point3D(lineX1, lineY1, 0.0); // Arc 1 start point
+                                    lineEndPoint = new Point3D(lineX2, lineY2, 0.0); // Arc 1 end point
+                                    if (entity is ArcGeometry nextArc && (entity.GetEntityID() != templist10[0]) && step == 1)
+                                    {
+                                        nextArcX1 = nextArc.EndPoint1.x;
+                                        nextArcX2 = nextArc.EndPoint2.x;
+                                        nextArcY1 = nextArc.EndPoint1.y;
+                                        nextArcY2 = nextArc.EndPoint2.y;
+                                        nextArcStartPoint = new Point3D(nextArcX1, nextArcY1, 0.0); // Arc 2 start point
+                                        nextArcEndPoint = new Point3D(nextArcX2, nextArcY2, 0.0); // Arc 2 end point
+                                        var entityStartDistance = VectorManager.Distance(lineEndPoint, nextArcStartPoint);
+                                        var entityEndDistance = VectorManager.Distance(lineEndPoint, nextArcEndPoint);
+                                        if (entityStartDistance <= tolerance && step == 1)
+                                        {
+                                            entity.Color = 10;
+                                            entity.Commit();
+                                            templist10.Clear();
+                                            templist10.Add(entity.GetEntityID());
+                                            step = 2;
+                                            firstEntity = 1;
+                                            foreach (var v in tempList9)
+                                            {
+                                                var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                if (w is PointGeometry point)
+                                                {
+                                                    var ux = point.Data.x;// X location of point
+                                                    var uy = point.Data.y;// Y location of point
+                                                    Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                    var entityPointDistance = VectorManager.Distance(uPoint, nextArcEndPoint);
+                                                    if (entityPointDistance <= tolerance)
+                                                    {
+                                                        step = 3;
                                                     }
                                                 }
                                             }
                                         }
-                                        if (entity is LineGeometry nextLine && (entity.GetEntityID() != templist10[0]) && step == 1){
-                                            nextLineX1 = nextLine.EndPoint1.x;
-                                            nextLineX2 = nextLine.EndPoint2.x;
-                                            nextLineY1 = nextLine.EndPoint1.y;
-                                            nextLineY2 = nextLine.EndPoint2.y;
-                                            nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
-                                            nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
-                                            var entityStartDistance = VectorManager.Distance(lineEndPoint, nextLineStartPoint);
-                                            var entityEndDistance = VectorManager.Distance(lineEndPoint, nextLineEndPoint);
-                                            if (entityStartDistance <= tolerance && step == 1){
-                                                entity.Color = 10;
-                                                entity.Commit();
-                                                templist10.Clear();
-                                                templist10.Add(entity.GetEntityID());
-                                                step = 2;
-                                                firstEntity = 2;
-                                                foreach (var v in tempList9){
-                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                                    if (w is PointGeometry point){
-                                                        var ux = point.Data.x;// X location of point
-                                                        var uy = point.Data.y;// Y location of point
-                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
-                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
-                                                        if (entityPointDistance <= tolerance){
-                                                            step = 3;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            if (entityEndDistance <= tolerance && step == 1){
-                                                entity.Color = 10;
-                                                entity.Commit();
-                                                templist10.Clear();
-                                                templist10.Add(entity.GetEntityID());
-                                                step = 4;
-                                                firstEntity = 2;
-                                                foreach (var v in tempList9){
-                                                    var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
-                                                    if (w is PointGeometry point){
-                                                        var ux = point.Data.x;// X location of point
-                                                        var uy = point.Data.y;// Y location of point
-                                                        Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
-                                                        var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
-                                                        if (entityPointDistance <= tolerance){
-                                                            step = 5;
-                                                        }
+                                        if (entityEndDistance <= tolerance && step == 1)
+                                        {
+                                            entity.Color = 10;
+                                            entity.Commit();
+                                            templist10.Clear();
+                                            templist10.Add(entity.GetEntityID());
+                                            step = 4;
+                                            firstEntity = 1;
+                                            foreach (var v in tempList9)
+                                            {
+                                                var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                if (w is PointGeometry point)
+                                                {
+                                                    var ux = point.Data.x;// X location of point
+                                                    var uy = point.Data.y;// Y location of point
+                                                    Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                    var entityPointDistance = VectorManager.Distance(uPoint, nextArcStartPoint);
+                                                    if (entityPointDistance <= tolerance)
+                                                    {
+                                                        step = 5;
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                
+                                    if (entity is LineGeometry nextLine && (entity.GetEntityID() != templist10[0]) && step == 1)
+                                    {
+                                        nextLineX1 = nextLine.EndPoint1.x;
+                                        nextLineX2 = nextLine.EndPoint2.x;
+                                        nextLineY1 = nextLine.EndPoint1.y;
+                                        nextLineY2 = nextLine.EndPoint2.y;
+                                        nextLineStartPoint = new Point3D(nextLineX1, nextLineY1, 0.0); // Arc 2 start point
+                                        nextLineEndPoint = new Point3D(nextLineX2, nextLineY2, 0.0); // Arc 2 end point
+                                        var entityStartDistance = VectorManager.Distance(lineEndPoint, nextLineStartPoint);
+                                        var entityEndDistance = VectorManager.Distance(lineEndPoint, nextLineEndPoint);
+                                        if (entityStartDistance <= tolerance && step == 1)
+                                        {
+                                            entity.Color = 10;
+                                            entity.Commit();
+                                            templist10.Clear();
+                                            templist10.Add(entity.GetEntityID());
+                                            step = 2;
+                                            firstEntity = 2;
+                                            foreach (var v in tempList9)
+                                            {
+                                                var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                if (w is PointGeometry point)
+                                                {
+                                                    var ux = point.Data.x;// X location of point
+                                                    var uy = point.Data.y;// Y location of point
+                                                    Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                    var entityPointDistance = VectorManager.Distance(uPoint, nextLineEndPoint);
+                                                    if (entityPointDistance <= tolerance)
+                                                    {
+                                                        step = 3;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (entityEndDistance <= tolerance && step == 1)
+                                        {
+                                            entity.Color = 10;
+                                            entity.Commit();
+                                            templist10.Clear();
+                                            templist10.Add(entity.GetEntityID());
+                                            step = 4;
+                                            firstEntity = 2;
+                                            foreach (var v in tempList9)
+                                            {
+                                                var w = PointGeometry.RetrieveEntity(v);// Gets point based on GeoID
+                                                if (w is PointGeometry point)
+                                                {
+                                                    var ux = point.Data.x;// X location of point
+                                                    var uy = point.Data.y;// Y location of point
+                                                    Point3D uPoint = new Point3D(ux, uy, 0.0);// Saves point location
+                                                    var entityPointDistance = VectorManager.Distance(uPoint, nextLineStartPoint);
+                                                    if (entityPointDistance <= tolerance)
+                                                    {
+                                                        step = 5;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
                             }
                         }
                     }
-                    if (step == 2){
+                    if (step == 2)
+                    {
                         foreach (var entity in chainEntity)
                         {
                             if (entity.Color != 10 || entity.Color != 11)
@@ -968,7 +1048,8 @@ namespace _CustomNethook
                             }
                         }
                     } // Gets Geo that connects first entity end point to second entity start point (offset 2)
-                    if (step == 3){
+                    if (step == 3)
+                    {
                         foreach (var entity in chainEntity)
                         {
                             if (entity.Color != 10 || entity.Color != 11)
@@ -1541,7 +1622,8 @@ namespace _CustomNethook
                             }
                         }
                     } // Gets Geo that connects first entity start point to second entity start point (offset 2)
-                    if (step == 5){
+                    if (step == 5)
+                    {
                         foreach (var entity in chainEntity)
                         {
                             if (entity.Color != 10 || entity.Color != 11)
@@ -1823,7 +1905,8 @@ namespace _CustomNethook
                 }
                 selectedChains = null;
             } // Color cut sides of each section
-            void movePoints() {
+            void movePoints()
+            {
                 SelectionManager.SelectGeometryByMask(Mastercam.IO.Types.QuickMaskType.Points);
                 var selectedGeometry = SearchManager.GetSelectedGeometry();
                 foreach (var point in selectedGeometry)
@@ -1848,7 +1931,7 @@ namespace _CustomNethook
                 }
                 LevelsManager.SetLevelVisible(75, true);
                 LevelsManager.RefreshLevelsManager();
-                GraphicsManager.Repaint(true);
+                //GraphicsManager.Repaint(true);
                 SelectionManager.SelectAllGeometry();
                 var selectedGeometry = SearchManager.GetSelectedGeometry();
                 foreach (var geometry in selectedGeometry)
@@ -1866,13 +1949,13 @@ namespace _CustomNethook
                         geometry.Commit();
                     }
                 }
-                    //invalidate the list of geometry
-                    selectedGeometry = null;
-                    //ask to reclaim the memory from the list
-                    System.GC.Collect();
-                    //repaint the scren
-                    Mastercam.IO.GraphicsManager.Repaint(true);//force rebuild
-                
+                //invalidate the list of geometry
+                selectedGeometry = null;
+                //ask to reclaim the memory from the list
+                System.GC.Collect();
+                //repaint the scren
+                Mastercam.IO.GraphicsManager.Repaint(true);//force rebuild
+
                 SelectionManager.UnselectAllGeometry();
                 GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 LevelsManager.RefreshLevelsManager();
@@ -1930,10 +2013,10 @@ namespace _CustomNethook
                             foreach (var entity in cutResultGeometry)
                             {
                                 entity.Color = 11;
-                                entity.Selected = true;
+                                entity.Level = createdLowerLevel;
+                                entity.Selected = false;
                                 entity.Commit();
                             }
-                            GeometryManipulationManager.MoveSelectedGeometryToLevel(createdLowerLevel, true);
                             GraphicsManager.ClearColors(new GroupSelectionMask(true));
                             var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Right, .0025, OffsetRollCornerType.None, .5, false, .005, false);
                             var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Left, .0385, OffsetRollCornerType.None, .5, false, .005, false);
@@ -1941,10 +2024,10 @@ namespace _CustomNethook
                             foreach (var entity in cutResultGeometryNew)
                             {
                                 entity.Color = 10;
-                                entity.Selected = true;
+                                entity.Level = createdUpperLevel;
+                                entity.Selected = false;
                                 entity.Commit();
                             }
-                            GeometryManipulationManager.MoveSelectedGeometryToLevel(createdUpperLevel, true);
                             GraphicsManager.ClearColors(new GroupSelectionMask(true));
                         }
                     }
@@ -2007,10 +2090,10 @@ namespace _CustomNethook
                             foreach (var entity in cutResultGeometry)
                             {
                                 entity.Color = 11;
-                                entity.Selected = true;
+                                entity.Level = createdLowerLevel;
+                                entity.Selected = false;
                                 entity.Commit();
                             }
-                            GeometryManipulationManager.MoveSelectedGeometryToLevel(createdLowerLevel, true);
                             GraphicsManager.ClearColors(new GroupSelectionMask(true));
 
                             var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Left, .0025, OffsetRollCornerType.None, .5, false, .005, false);
@@ -2019,10 +2102,10 @@ namespace _CustomNethook
                             foreach (var entity in cutResultGeometryNew)
                             {
                                 entity.Color = 10;
-                                entity.Selected = true;
+                                entity.Level = createdUpperLevel;
+                                entity.Selected = false;
                                 entity.Commit();
                             }
-                            GeometryManipulationManager.MoveSelectedGeometryToLevel(createdUpperLevel, true);
                             GraphicsManager.ClearColors(new GroupSelectionMask(true));
                         }
                     }
@@ -2173,7 +2256,7 @@ namespace _CustomNethook
                 }
                 LevelsManager.SetLevelVisible(501, true);
                 LevelsManager.RefreshLevelsManager();
-                GraphicsManager.Repaint(true);
+                GraphicsManager.Repaint(true);//required
                 var chainDetails = new Mastercam.Database.Interop.ChainDetails();// Preps the ChainDetails plugin
                 var selectedChains = ChainManager.ChainAll(501);
                 var chainDirection = ChainDirectionType.CounterClockwise;// Going to be used to make sure all chains go the same direction
@@ -2512,7 +2595,7 @@ namespace _CustomNethook
                 }
                 LevelsManager.SetLevelVisible(501, true);
                 LevelsManager.RefreshLevelsManager();
-                GraphicsManager.Repaint(true);
+                //GraphicsManager.Repaint(true);
                 var chainDetails = new Mastercam.Database.Interop.ChainDetails();// Preps the ChainDetails plugin
                 var selectedChains = ChainManager.ChainAll(501);
                 var chainDirection = ChainDirectionType.CounterClockwise;// Going to be used to make sure all chains go the same direction
@@ -2723,10 +2806,10 @@ namespace _CustomNethook
                 LevelsManager.SetLevelVisible(50, true);
                 GraphicsManager.Repaint(true);
                 LevelsManager.RefreshLevelsManager();
-                var geoMask = new GeometryMask(true,false,false,false,false,false,false,false);
+                var geoMask = new GeometryMask(true, false, false, false, false, false, false, false);
                 var selectionMask = new SelectionMask(true);
-                var tempPoints = SearchManager.GetGeometry(geoMask, selectionMask,  50) ;
-                foreach(var point in tempPoints)
+                var tempPoints = SearchManager.GetGeometry(geoMask, selectionMask, 50);
+                foreach (var point in tempPoints)
                 {
                     point.Selected = true;
                     point.Commit();
@@ -2735,7 +2818,7 @@ namespace _CustomNethook
                 foreach (var point in selectedGeometry) { pointList.Add(point.GetEntityID()); }
                 LevelsManager.SetLevelVisible(50, false);
                 LevelsManager.RefreshLevelsManager();
-                GraphicsManager.Repaint(true);
+                //GraphicsManager.Repaint(true);
                 var chainDetails = new Mastercam.Database.Interop.ChainDetails();// Preps the ChainDetails plugin
                 var selectedChains = ChainManager.ChainAll(500);
                 var chainDirection = ChainDirectionType.CounterClockwise;// Going to be used to make sure all chains go the same direction
@@ -3497,7 +3580,7 @@ namespace _CustomNethook
                 foreach (var point in selectedGeometry) { pointList.Add(point.GetEntityID()); }
                 LevelsManager.SetLevelVisible(50, false);
                 LevelsManager.RefreshLevelsManager();
-                GraphicsManager.Repaint(true);
+                //GraphicsManager.Repaint(true);
                 var chainDetails = new Mastercam.Database.Interop.ChainDetails();// Preps the ChainDetails plugin
                 var selectedChains = ChainManager.ChainAll(501);
                 var chainDirection = ChainDirectionType.CounterClockwise;// Going to be used to make sure all chains go the same direction
@@ -4131,24 +4214,285 @@ namespace _CustomNethook
                     entity.Commit();
                 }
             }
+            bool CreateLine1()
+            {
+                bool result = false;
+                Point3D crease1 = new Point3D(creaseX1, creaseY1, 0.0);
+                Point3D crease3 = new Point3D(creaseX3, creaseY3, 0.0);
+                LineGeometry Line1 = new LineGeometry(crease1, crease3);
+                Line1.Selected = true;
+                result = Line1.Commit();
+                return result;
+            } // Used for one line at end of crease
+            bool CreateLine2()
+            {
+                bool result = false;
+                Point3D crease2 = new Point3D(creaseX2, creaseY2, 0.0);
+                Point3D crease4 = new Point3D(creaseX4, creaseY4, 0.0);
+                LineGeometry Line2 = new LineGeometry(crease2, crease4);
+                Line2.Selected = true;
+                result = Line2.Commit();
+                return result;
+            } // Used for other line at other end of crease
+            void offsetCreasechain()
+            {
+                //Unselects all Geometry
+                SelectionManager.UnselectAllGeometry();
+                //Turns off all visible levels
+                var shown = LevelsManager.GetVisibleLevelNumbers();
+                foreach (var level in shown)
+                {
+                    LevelsManager.SetLevelVisible(level, false);
+                }
+                LevelsManager.RefreshLevelsManager();
+                //Sets level 101 to main level and visible
+                LevelsManager.SetMainLevel(101);
+                LevelsManager.SetLevelVisible(101, true);
+                LevelsManager.RefreshLevelsManager();
+                GraphicsManager.Repaint(true);//required
 
+                //Selects all geometry on level 101
+                var selectedCreaseChain = ChainManager.ChainAll(101);
+                //Creates and names level 502 and level 503
+                LevelsManager.SetLevelName(502, "Upper Created Crease Geo");
+                LevelsManager.SetLevelName(503, "Lower Created Crease Geo");
+
+                //edits each entity of all chains
+                foreach (var chain in selectedCreaseChain)
+                {
+                    //offsets line of lower
+                    var lowerChainCrease1 = chain.OffsetChain2D(OffsetSideType.Left, .040, OffsetRollCornerType.None, .5, false, .005, false);
+                    var lowerChainCrease2 = chain.OffsetChain2D(OffsetSideType.Left, .065, OffsetRollCornerType.None, .5, false, .005, false);
+                    var lowerChainCrease3 = chain.OffsetChain2D(OffsetSideType.Right, .040, OffsetRollCornerType.None, .5, false, .005, false);
+                    var lowerChainCrease4 = chain.OffsetChain2D(OffsetSideType.Right, .065, OffsetRollCornerType.None, .5, false, .005, false);
+                    //Colors and selects result geometry
+                    var creaseResultGeometry = SearchManager.GetResultGeometry();
+                    foreach (var entity in creaseResultGeometry)
+                    {
+                        lowerCreaseID.Add(entity.GetEntityID());
+                        entity.Color = 11;
+                        entity.Level = createdLowerCrease;
+                        entity.Selected = false;
+                        entity.Commit();
+                    }
+                    //Clears geometry in result
+                    GraphicsManager.ClearColors(new GroupSelectionMask(true));
+
+                    //offsets line of upper
+                    var upperChainCrease1 = chain.OffsetChain2D(OffsetSideType.Left, .014, OffsetRollCornerType.None, .5, false, .005, false);
+                    var upperChainCrease2 = chain.OffsetChain2D(OffsetSideType.Right, .014, OffsetRollCornerType.None, .5, false, .005, false);
+                    //Colors and selects result geometry
+                    var creaseResultGeometryNew = SearchManager.GetResultGeometry();
+                    foreach (var entity in creaseResultGeometryNew)
+                    {
+                        upperCreaseID.Add(entity.GetEntityID());
+                        entity.Color = 10;
+                        entity.Level = createdUpperCrease;
+                        entity.Selected = true;
+                        entity.Commit();
+                    }
+                    //Clears geometry in result
+                    GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                }
+            } // Offsets creases
+            void connectUpperLines()
+            {
+                var set = 0;
+                foreach (var i in upperCreaseID)
+                {
+                    if (set == 0)
+                    {
+                        var creaseGeo = Geometry.RetrieveEntity(i);
+                        var line = (LineGeometry)creaseGeo;
+                        creaseX1 = line.EndPoint1.x;
+                        creaseX2 = line.EndPoint2.x;
+                        creaseY1 = line.EndPoint1.y;
+                        creaseY2 = line.EndPoint2.y;
+                        set = 1;
+                    }
+                    else
+                    {
+                        var creaseGeo2 = Geometry.RetrieveEntity(i);
+                        var line2 = (LineGeometry)creaseGeo2;
+                        creaseX3 = line2.EndPoint1.x;
+                        creaseX4 = line2.EndPoint2.x;
+                        creaseY3 = line2.EndPoint1.y;
+                        creaseY4 = line2.EndPoint2.y;
+                        CreateLine1();
+                        CreateLine2();
+
+                        var creaseResultGeometryNew = SearchManager.GetSelectedGeometry();
+                        foreach (var entity in creaseResultGeometryNew)
+                        {
+                            entity.Color = 10;
+                            entity.Level = createdUpperCrease;
+                            entity.Selected = false;
+                            entity.Commit();
+                        }
+                        //Moves result geometry
+                        //Clears geometry in result
+                        GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                        //Deselects all
+                        SelectionManager.UnselectAllGeometry();
+
+                        set = 0;
+                    }
+                }
+            } // Connects crease offsets for the upper
+            void connectLowerLines()
+            {
+                var set = 0;
+                foreach (var i in lowerCreaseID)
+                {
+                    if (set == 0)
+                    {
+                        var creaseGeo = Geometry.RetrieveEntity(i);
+                        var line = (LineGeometry)creaseGeo;
+                        creaseX1 = line.EndPoint1.x;
+                        creaseX2 = line.EndPoint2.x;
+                        creaseY1 = line.EndPoint1.y;
+                        creaseY2 = line.EndPoint2.y;
+                        set = 1;
+                    }
+                    else
+                    {
+                        var creaseGeo2 = Geometry.RetrieveEntity(i);
+                        var line2 = (LineGeometry)creaseGeo2;
+                        creaseX3 = line2.EndPoint1.x;
+                        creaseX4 = line2.EndPoint2.x;
+                        creaseY3 = line2.EndPoint1.y;
+                        creaseY4 = line2.EndPoint2.y;
+                        CreateLine1();
+                        CreateLine2();
+
+                        var creaseResultGeometryNew = SearchManager.GetSelectedGeometry();
+                        foreach (var entity in creaseResultGeometryNew)
+                        {
+                            entity.Color = 11;
+                            entity.Level = createdLowerCrease;
+                            entity.Selected = false;
+                            entity.Commit();
+                        }
+                        //Moves result geometry
+
+                        //Clears geometry in result
+                        GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                        //Deselects all
+                        SelectionManager.UnselectAllGeometry();
+
+                        set = 0;
+                    }
+                }
+            } // Connects crease offsets for the lower
+            void DemoAlterLine()
+            {
+                //Unselects all Geometry
+                SelectionManager.UnselectAllGeometry();
+                //Turns off all visible levels
+                var shown = LevelsManager.GetVisibleLevelNumbers();
+                foreach (var level in shown)
+                {
+                    LevelsManager.SetLevelVisible(level, false);
+                }
+                LevelsManager.RefreshLevelsManager();
+                //Sets level 101 to main level and visible
+                LevelsManager.SetMainLevel(101);
+                LevelsManager.SetLevelVisible(101, true);
+                LevelsManager.RefreshLevelsManager();
+                //GraphicsManager.Repaint(true);
+
+                var geomask = new GeometryMask { Lines = true };
+                var geoSel = new SelectionMask { };
+                var geo = SearchManager.GetGeometry(geomask, geoSel, 101);
+                if (geo != null)
+                {
+                    //Selects each line. Determines orientation and alters by 1 inch from both ends
+                    foreach (var singleGeo in geo)
+                    {
+                        var line = (LineGeometry)singleGeo;
+                        //If line is vertical
+                        if (line.Data.Point1.x == line.Data.Point2.x)
+                        {
+                            if (line.Data.Point1.y >= line.Data.Point2.y)
+                            {
+                                line.Data.Point1.y += -0.07;
+                                line.Data.Point2.y += +0.07;
+                                line.Selected = false;
+                            };
+                            if (line.Data.Point1.y <= line.Data.Point2.y)
+                            {
+                                line.Data.Point1.y += +0.07;
+                                line.Data.Point2.y += -0.07;
+                                line.Selected = false;
+                            };
+                        };
+                        //If line is horizontal
+                        if (line.Data.Point1.y == line.Data.Point2.y)
+                        {
+                            if (line.Data.Point1.x >= line.Data.Point2.x)
+                            {
+                                line.Data.Point1.x += -0.07;
+                                line.Data.Point2.x += +0.07;
+                                line.Selected = false;
+                            };
+                            if (line.Data.Point1.x <= line.Data.Point2.x)
+                            {
+                                line.Data.Point1.x += +0.07;
+                                line.Data.Point2.x += -0.07;
+                                line.Selected = false;
+                            };
+                        };
+                        //Stores result in Mastercam
+                        line.Commit();
+                    }
+                    //Updates screen shown
+                    //GraphicsManager.Repaint(true);
+                }
+            } // Shortens creases
+
+            deSelect();
+            DemoAlterLine();
+            deSelect();
+            offsetCreasechain();
+            deSelect();
+            connectUpperLines();
+            deSelect();
+            connectLowerLines();
+            deSelect();
+            deSelect();
             translate();
+            deSelect();
             findIntersectionOfLines();
+            deSelect();
             findIntersectionOfArcs();
+            deSelect();
             clearTempLinesAndArcs();
+            deSelect();
             breakArcsWithPoints();
+            deSelect();
             selectNewGeo();
+            deSelect();
             colorCrossovers();
+            deSelect();
             movePoints();
+            deSelect();
             seperateGeometry();
+            deSelect();
             ChainManager.ChainTolerance = 0.0001;
             offsetCutchain80();
+            deSelect();
             offsetCutchain81();
+            deSelect();
             shortenChains500();
+            deSelect();
             findLineChainEnds500();
+            deSelect();
             findArcChainEnds500();
+            deSelect();
             shortenChains501();
+            deSelect();
             findArcChainEnds501();
+            deSelect();
             findLineChainEnds501();
             deSelect();
 
