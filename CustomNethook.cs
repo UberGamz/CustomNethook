@@ -1975,7 +1975,7 @@ namespace _CustomNethook
                 }
                 LevelsManager.SetLevelVisible(80, true);
                 LevelsManager.RefreshLevelsManager();
-                //GraphicsManager.Repaint(true);
+                GraphicsManager.Repaint(true);
                 int createdUpperLevel = 500;
                 int createdLowerLevel = 501;
                 LevelsManager.SetLevelName(500, "Upper Created Cut Geo");
@@ -4459,6 +4459,7 @@ namespace _CustomNethook
             deSelect();
             connectLowerLines();
             deSelect();
+            GraphicsManager.Repaint(true);
             deSelect();
             translate();
             deSelect();
