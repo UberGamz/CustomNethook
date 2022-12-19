@@ -10,16 +10,10 @@ using Mastercam.GeometryUtility;
 using Mastercam.Support;
 using Mastercam.Curves;
 using Mastercam.BasicGeometry;
-using Mastercam.Database.Interop;
-using System.Diagnostics;
-using System.Windows.Forms.VisualStyles;
-using System.Security.Claims;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using Mastercam.IO.Types;
-using System.Drawing.Drawing2D;
 
 namespace _CustomNethook
 {
@@ -56,14 +50,6 @@ namespace _CustomNethook
             var upperCreaseID = new List<int>();
             var lowerCreaseID = new List<int>();
             MCView Top = new MCView();
-            var creaseX1 = 0.0;
-            var creaseX2 = 0.0;
-            var creaseY1 = 0.0;
-            var creaseY2 = 0.0;
-            var creaseX3 = 0.0;
-            var creaseX4 = 0.0;
-            var creaseY3 = 0.0;
-            var creaseY4 = 0.0;
 
             void translate()
             {
@@ -4135,6 +4121,16 @@ namespace _CustomNethook
                 GraphicsManager.ClearColors(new GroupSelectionMask(true));
                 GraphicsManager.Repaint();
             }
+            void deSelect()
+            {
+                var selectedGeo = SearchManager.GetGeometry();
+                foreach (var entity in selectedGeo)
+                {
+                    entity.Retrieve();
+                    entity.Selected = false;
+                    entity.Commit();
+                }
+            }
 
             translate();
             findIntersectionOfLines();
@@ -4154,7 +4150,7 @@ namespace _CustomNethook
             shortenChains501();
             findArcChainEnds501();
             findLineChainEnds501();
-
+            deSelect();
 
             GraphicsManager.Repaint(true);
             return MCamReturn.NoErrors;
