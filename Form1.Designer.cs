@@ -187,6 +187,8 @@
             this.orientationSelection = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.materialSelector = new System.Windows.Forms.ComboBox();
+            this.maleLandWidthPicked = new System.Windows.Forms.Label();
+            this.femaleLandWidthPicked = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -351,6 +353,8 @@
             this.tableLayoutPanel1.Controls.Add(this.label120, 4, 29);
             this.tableLayoutPanel1.Controls.Add(this.label121, 4, 30);
             this.tableLayoutPanel1.Controls.Add(this.materialSelector, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.maleLandWidthPicked, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.femaleLandWidthPicked, 4, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 31;
@@ -2306,6 +2310,30 @@
             this.materialSelector.Size = new System.Drawing.Size(202, 21);
             this.materialSelector.TabIndex = 166;
             // 
+            // maleLandWidthPicked
+            // 
+            this.maleLandWidthPicked.AutoSize = true;
+            this.maleLandWidthPicked.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.maleLandWidthPicked.Location = new System.Drawing.Point(300, 0);
+            this.maleLandWidthPicked.Margin = new System.Windows.Forms.Padding(0);
+            this.maleLandWidthPicked.Name = "maleLandWidthPicked";
+            this.maleLandWidthPicked.Size = new System.Drawing.Size(98, 20);
+            this.maleLandWidthPicked.TabIndex = 167;
+            this.maleLandWidthPicked.Text = "null";
+            this.maleLandWidthPicked.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // femaleLandWidthPicked
+            // 
+            this.femaleLandWidthPicked.AutoSize = true;
+            this.femaleLandWidthPicked.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.femaleLandWidthPicked.Location = new System.Drawing.Point(496, 0);
+            this.femaleLandWidthPicked.Margin = new System.Windows.Forms.Padding(0);
+            this.femaleLandWidthPicked.Name = "femaleLandWidthPicked";
+            this.femaleLandWidthPicked.Size = new System.Drawing.Size(99, 20);
+            this.femaleLandWidthPicked.TabIndex = 168;
+            this.femaleLandWidthPicked.Text = "null";
+            this.femaleLandWidthPicked.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2488,5 +2516,7 @@
         private System.Windows.Forms.ComboBox orientationSelection;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox materialSelector;
+        private System.Windows.Forms.Label maleLandWidthPicked;
+        private System.Windows.Forms.Label femaleLandWidthPicked;
     }
 }
