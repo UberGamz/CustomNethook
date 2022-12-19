@@ -27,10 +27,5 @@ namespace CustomNethook
 
         }
 
-
-        private void button1_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
     }
 }

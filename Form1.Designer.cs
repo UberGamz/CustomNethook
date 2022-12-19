@@ -184,6 +184,9 @@
             this.OK = new System.Windows.Forms.Button();
             this.OverlapTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.orientationSelection = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.materialSelector = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -347,6 +350,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label119, 4, 28);
             this.tableLayoutPanel1.Controls.Add(this.label120, 4, 29);
             this.tableLayoutPanel1.Controls.Add(this.label121, 4, 30);
+            this.tableLayoutPanel1.Controls.Add(this.materialSelector, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 31;
@@ -2253,7 +2257,7 @@
             // 
             // OverlapTextBox
             // 
-            this.OverlapTextBox.Location = new System.Drawing.Point(688, 585);
+            this.OverlapTextBox.Location = new System.Drawing.Point(688, 59);
             this.OverlapTextBox.Name = "OverlapTextBox";
             this.OverlapTextBox.Size = new System.Drawing.Size(100, 20);
             this.OverlapTextBox.TabIndex = 37;
@@ -2262,11 +2266,45 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(613, 588);
+            this.label4.Location = new System.Drawing.Point(613, 62);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 38;
             this.label4.Text = "Blade Overlap";
+            // 
+            // orientationSelection
+            // 
+            this.orientationSelection.FormattingEnabled = true;
+            this.orientationSelection.Items.AddRange(new object[] {
+            "leftToRight",
+            "rightToLeft"});
+            this.orientationSelection.Location = new System.Drawing.Point(688, 31);
+            this.orientationSelection.Name = "orientationSelection";
+            this.orientationSelection.Size = new System.Drawing.Size(100, 21);
+            this.orientationSelection.TabIndex = 39;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(629, 36);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.TabIndex = 40;
+            this.label6.Text = "Orientation";
+            // 
+            // materialSelector
+            // 
+            this.materialSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.materialSelector.FormattingEnabled = true;
+            this.materialSelector.Items.AddRange(new object[] {
+            "recycledBoard",
+            "virginBoard",
+            "liquidPackaging"});
+            this.materialSelector.Location = new System.Drawing.Point(0, 0);
+            this.materialSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.materialSelector.Name = "materialSelector";
+            this.materialSelector.Size = new System.Drawing.Size(202, 21);
+            this.materialSelector.TabIndex = 166;
             // 
             // Form1
             // 
@@ -2275,6 +2313,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(801, 646);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.orientationSelection);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.OverlapTextBox);
             this.Controls.Add(this.OK);
@@ -2445,5 +2485,8 @@
         private System.Windows.Forms.Button OK;
         private System.Windows.Forms.TextBox OverlapTextBox;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox orientationSelection;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox materialSelector;
     }
 }
