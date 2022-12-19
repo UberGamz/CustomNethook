@@ -60,6 +60,15 @@ namespace _CustomNethook
             var creaseY4 = 0.0;
             int createdUpperCrease = 502;
             int createdLowerCrease = 503;
+            var materialWidth = 0.010;
+            var materialType = "OogyBooby";
+
+
+
+
+
+
+
 
             void translate()
             {

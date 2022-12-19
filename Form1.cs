@@ -16,5 +16,21 @@ namespace CustomNethook
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+        private void button1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
