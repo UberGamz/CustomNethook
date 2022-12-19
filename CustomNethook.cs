@@ -14,6 +14,7 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using CustomNethook;
 
 namespace _CustomNethook
 {
@@ -26,6 +27,10 @@ namespace _CustomNethook
         const UInt32 MouseEventLeftUp = 0x0202;
         public Mastercam.App.Types.MCamReturn CustomNethookRun(Mastercam.App.Types.MCamReturn notused)
         {
+
+            var m = new Form1();
+            m.Show();
+
             var tempList1 = new List<int>(); // list of x+, y+ entities
             var tempList2 = new List<int>(); // list of x-, y- entitites
             var tempList3 = new List<int>(); // list of starting arcs
