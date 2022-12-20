@@ -26,7 +26,6 @@ namespace CustomNethook
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void OK_click(object sender, EventArgs e)
@@ -39,8 +38,12 @@ namespace CustomNethook
             mcolumn = 1;
             if (row != null && mcolumn != null && fcolumn != null)
             {
-                var mtempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
-                maleLandWidthPicked.Text = mtempControl;
+                var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
+                maleLandWidthPicked.Text = tempControl;
+                var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
+                femaleLandWidthPicked.Text = ftempControl;
             }
         }
 
@@ -49,8 +52,12 @@ namespace CustomNethook
             mcolumn = 2;
             if (row != null && mcolumn != null && fcolumn != null)
             {
-                var mtempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
-                maleLandWidthPicked.Text = mtempControl;
+                var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
+                maleLandWidthPicked.Text = tempControl;
+                var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
+                femaleLandWidthPicked.Text = ftempControl;
             }
 
         }
@@ -60,7 +67,11 @@ namespace CustomNethook
             fcolumn = 3;
             if (row != null && mcolumn != null && fcolumn != null)
             {
+                var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
+                maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -71,7 +82,11 @@ namespace CustomNethook
             fcolumn = 4;
             if (row != null && mcolumn != null && fcolumn != null)
             {
+                var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
+                maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -82,8 +97,10 @@ namespace CustomNethook
             row = 2;
             if (row != null && mcolumn != null && fcolumn != null){
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
         }
@@ -93,8 +110,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -105,8 +124,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -117,8 +138,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -129,8 +152,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -141,8 +166,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -153,8 +180,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -165,8 +194,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -177,8 +208,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -189,8 +222,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -201,8 +236,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -213,8 +250,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -225,8 +264,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -237,8 +278,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -249,8 +292,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -261,8 +306,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -273,8 +320,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -285,8 +334,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -297,8 +348,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -309,8 +362,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -321,8 +376,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -333,8 +390,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -345,8 +404,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -357,8 +418,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -369,8 +432,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -381,8 +446,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -393,8 +460,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -405,8 +474,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
@@ -417,8 +488,10 @@ namespace CustomNethook
             if (row != null && mcolumn != null && fcolumn != null)
             {
                 var tempControl = tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)mcolumn, (int)row).BackColor = Color.Teal;
                 maleLandWidthPicked.Text = tempControl;
                 var ftempControl = tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).Text;
+                tableLayoutPanel1.GetControlFromPosition((int)fcolumn, (int)row).BackColor = Color.Teal;
                 femaleLandWidthPicked.Text = ftempControl;
             }
 
