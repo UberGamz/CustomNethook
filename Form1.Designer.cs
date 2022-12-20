@@ -58,10 +58,10 @@
             this.BC36 = new System.Windows.Forms.Button();
             this.BC37 = new System.Windows.Forms.Button();
             this.BC38 = new System.Windows.Forms.Button();
-            this.MaleLandWidthWithGrain = new System.Windows.Forms.Button();
-            this.MaleLandWidthAgainstGrain = new System.Windows.Forms.Button();
-            this.FemaleLandWidthWithGrain = new System.Windows.Forms.Button();
-            this.FealeLandWidthAgainstGrain = new System.Windows.Forms.Button();
+            this.MaleLandWidthWithGrainBtn = new System.Windows.Forms.Button();
+            this.MaleLandWidthAgainstGrainBtn = new System.Windows.Forms.Button();
+            this.FemaleLandWidthWithGrainBtn = new System.Windows.Forms.Button();
+            this.FealeLandWidthAgainstGrainBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -181,14 +181,14 @@
             this.label119 = new System.Windows.Forms.Label();
             this.label120 = new System.Windows.Forms.Label();
             this.label121 = new System.Windows.Forms.Label();
+            this.materialSelector = new System.Windows.Forms.ComboBox();
+            this.maleLandWidthPicked = new System.Windows.Forms.Label();
+            this.femaleLandWidthPicked = new System.Windows.Forms.Label();
             this.OK = new System.Windows.Forms.Button();
             this.OverlapTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.orientationSelection = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.materialSelector = new System.Windows.Forms.ComboBox();
-            this.maleLandWidthPicked = new System.Windows.Forms.Label();
-            this.femaleLandWidthPicked = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -229,10 +229,10 @@
             this.tableLayoutPanel1.Controls.Add(this.BC36, 0, 28);
             this.tableLayoutPanel1.Controls.Add(this.BC37, 0, 29);
             this.tableLayoutPanel1.Controls.Add(this.BC38, 0, 30);
-            this.tableLayoutPanel1.Controls.Add(this.MaleLandWidthWithGrain, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.MaleLandWidthAgainstGrain, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.FemaleLandWidthWithGrain, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.FealeLandWidthAgainstGrain, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.MaleLandWidthWithGrainBtn, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.MaleLandWidthAgainstGrainBtn, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.FemaleLandWidthWithGrainBtn, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.FealeLandWidthAgainstGrainBtn, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 1, 0);
@@ -770,57 +770,57 @@
             this.BC38.Text = "0.038";
             this.BC38.UseVisualStyleBackColor = true;
             // 
-            // MaleLandWidthWithGrain
+            // MaleLandWidthWithGrainBtn
             // 
-            this.MaleLandWidthWithGrain.AutoSize = true;
-            this.MaleLandWidthWithGrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.MaleLandWidthWithGrain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MaleLandWidthWithGrain.Location = new System.Drawing.Point(202, 20);
-            this.MaleLandWidthWithGrain.Margin = new System.Windows.Forms.Padding(0);
-            this.MaleLandWidthWithGrain.Name = "MaleLandWidthWithGrain";
-            this.MaleLandWidthWithGrain.Size = new System.Drawing.Size(98, 20);
-            this.MaleLandWidthWithGrain.TabIndex = 29;
-            this.MaleLandWidthWithGrain.Text = "With Grain";
-            this.MaleLandWidthWithGrain.UseVisualStyleBackColor = true;
+            this.MaleLandWidthWithGrainBtn.AutoSize = true;
+            this.MaleLandWidthWithGrainBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MaleLandWidthWithGrainBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MaleLandWidthWithGrainBtn.Location = new System.Drawing.Point(202, 20);
+            this.MaleLandWidthWithGrainBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.MaleLandWidthWithGrainBtn.Name = "MaleLandWidthWithGrainBtn";
+            this.MaleLandWidthWithGrainBtn.Size = new System.Drawing.Size(98, 20);
+            this.MaleLandWidthWithGrainBtn.TabIndex = 29;
+            this.MaleLandWidthWithGrainBtn.Text = "With Grain";
+            this.MaleLandWidthWithGrainBtn.UseVisualStyleBackColor = true;
             // 
-            // MaleLandWidthAgainstGrain
+            // MaleLandWidthAgainstGrainBtn
             // 
-            this.MaleLandWidthAgainstGrain.AutoSize = true;
-            this.MaleLandWidthAgainstGrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.MaleLandWidthAgainstGrain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MaleLandWidthAgainstGrain.Location = new System.Drawing.Point(300, 20);
-            this.MaleLandWidthAgainstGrain.Margin = new System.Windows.Forms.Padding(0);
-            this.MaleLandWidthAgainstGrain.Name = "MaleLandWidthAgainstGrain";
-            this.MaleLandWidthAgainstGrain.Size = new System.Drawing.Size(98, 20);
-            this.MaleLandWidthAgainstGrain.TabIndex = 30;
-            this.MaleLandWidthAgainstGrain.Text = "Against Grain";
-            this.MaleLandWidthAgainstGrain.UseVisualStyleBackColor = true;
+            this.MaleLandWidthAgainstGrainBtn.AutoSize = true;
+            this.MaleLandWidthAgainstGrainBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MaleLandWidthAgainstGrainBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MaleLandWidthAgainstGrainBtn.Location = new System.Drawing.Point(300, 20);
+            this.MaleLandWidthAgainstGrainBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.MaleLandWidthAgainstGrainBtn.Name = "MaleLandWidthAgainstGrainBtn";
+            this.MaleLandWidthAgainstGrainBtn.Size = new System.Drawing.Size(98, 20);
+            this.MaleLandWidthAgainstGrainBtn.TabIndex = 30;
+            this.MaleLandWidthAgainstGrainBtn.Text = "Against Grain";
+            this.MaleLandWidthAgainstGrainBtn.UseVisualStyleBackColor = true;
             // 
-            // FemaleLandWidthWithGrain
+            // FemaleLandWidthWithGrainBtn
             // 
-            this.FemaleLandWidthWithGrain.AutoSize = true;
-            this.FemaleLandWidthWithGrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FemaleLandWidthWithGrain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FemaleLandWidthWithGrain.Location = new System.Drawing.Point(398, 20);
-            this.FemaleLandWidthWithGrain.Margin = new System.Windows.Forms.Padding(0);
-            this.FemaleLandWidthWithGrain.Name = "FemaleLandWidthWithGrain";
-            this.FemaleLandWidthWithGrain.Size = new System.Drawing.Size(98, 20);
-            this.FemaleLandWidthWithGrain.TabIndex = 31;
-            this.FemaleLandWidthWithGrain.Text = "With Grain";
-            this.FemaleLandWidthWithGrain.UseVisualStyleBackColor = true;
+            this.FemaleLandWidthWithGrainBtn.AutoSize = true;
+            this.FemaleLandWidthWithGrainBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FemaleLandWidthWithGrainBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FemaleLandWidthWithGrainBtn.Location = new System.Drawing.Point(398, 20);
+            this.FemaleLandWidthWithGrainBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.FemaleLandWidthWithGrainBtn.Name = "FemaleLandWidthWithGrainBtn";
+            this.FemaleLandWidthWithGrainBtn.Size = new System.Drawing.Size(98, 20);
+            this.FemaleLandWidthWithGrainBtn.TabIndex = 31;
+            this.FemaleLandWidthWithGrainBtn.Text = "With Grain";
+            this.FemaleLandWidthWithGrainBtn.UseVisualStyleBackColor = true;
             // 
-            // FealeLandWidthAgainstGrain
+            // FealeLandWidthAgainstGrainBtn
             // 
-            this.FealeLandWidthAgainstGrain.AutoSize = true;
-            this.FealeLandWidthAgainstGrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FealeLandWidthAgainstGrain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FealeLandWidthAgainstGrain.Location = new System.Drawing.Point(496, 20);
-            this.FealeLandWidthAgainstGrain.Margin = new System.Windows.Forms.Padding(0);
-            this.FealeLandWidthAgainstGrain.Name = "FealeLandWidthAgainstGrain";
-            this.FealeLandWidthAgainstGrain.Size = new System.Drawing.Size(99, 20);
-            this.FealeLandWidthAgainstGrain.TabIndex = 32;
-            this.FealeLandWidthAgainstGrain.Text = "Against Grain";
-            this.FealeLandWidthAgainstGrain.UseVisualStyleBackColor = true;
+            this.FealeLandWidthAgainstGrainBtn.AutoSize = true;
+            this.FealeLandWidthAgainstGrainBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FealeLandWidthAgainstGrainBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FealeLandWidthAgainstGrainBtn.Location = new System.Drawing.Point(496, 20);
+            this.FealeLandWidthAgainstGrainBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.FealeLandWidthAgainstGrainBtn.Name = "FealeLandWidthAgainstGrainBtn";
+            this.FealeLandWidthAgainstGrainBtn.Size = new System.Drawing.Size(99, 20);
+            this.FealeLandWidthAgainstGrainBtn.TabIndex = 32;
+            this.FealeLandWidthAgainstGrainBtn.Text = "Against Grain";
+            this.FealeLandWidthAgainstGrainBtn.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -2250,6 +2250,44 @@
             this.label121.Text = "0.110";
             this.label121.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // materialSelector
+            // 
+            this.materialSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.materialSelector.FormattingEnabled = true;
+            this.materialSelector.Items.AddRange(new object[] {
+            "recycledBoard",
+            "virginBoard",
+            "liquidPackaging"});
+            this.materialSelector.Location = new System.Drawing.Point(0, 0);
+            this.materialSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.materialSelector.Name = "materialSelector";
+            this.materialSelector.Size = new System.Drawing.Size(202, 21);
+            this.materialSelector.TabIndex = 166;
+            // 
+            // maleLandWidthPicked
+            // 
+            this.maleLandWidthPicked.AutoSize = true;
+            this.maleLandWidthPicked.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.maleLandWidthPicked.Location = new System.Drawing.Point(300, 0);
+            this.maleLandWidthPicked.Margin = new System.Windows.Forms.Padding(0);
+            this.maleLandWidthPicked.Name = "maleLandWidthPicked";
+            this.maleLandWidthPicked.Size = new System.Drawing.Size(98, 20);
+            this.maleLandWidthPicked.TabIndex = 167;
+            this.maleLandWidthPicked.Text = "null";
+            this.maleLandWidthPicked.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // femaleLandWidthPicked
+            // 
+            this.femaleLandWidthPicked.AutoSize = true;
+            this.femaleLandWidthPicked.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.femaleLandWidthPicked.Location = new System.Drawing.Point(496, 0);
+            this.femaleLandWidthPicked.Margin = new System.Windows.Forms.Padding(0);
+            this.femaleLandWidthPicked.Name = "femaleLandWidthPicked";
+            this.femaleLandWidthPicked.Size = new System.Drawing.Size(99, 20);
+            this.femaleLandWidthPicked.TabIndex = 168;
+            this.femaleLandWidthPicked.Text = "null";
+            this.femaleLandWidthPicked.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // OK
             // 
             this.OK.Location = new System.Drawing.Point(714, 611);
@@ -2295,44 +2333,6 @@
             this.label6.Size = new System.Drawing.Size(58, 13);
             this.label6.TabIndex = 40;
             this.label6.Text = "Orientation";
-            // 
-            // materialSelector
-            // 
-            this.materialSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialSelector.FormattingEnabled = true;
-            this.materialSelector.Items.AddRange(new object[] {
-            "recycledBoard",
-            "virginBoard",
-            "liquidPackaging"});
-            this.materialSelector.Location = new System.Drawing.Point(0, 0);
-            this.materialSelector.Margin = new System.Windows.Forms.Padding(0);
-            this.materialSelector.Name = "materialSelector";
-            this.materialSelector.Size = new System.Drawing.Size(202, 21);
-            this.materialSelector.TabIndex = 166;
-            // 
-            // maleLandWidthPicked
-            // 
-            this.maleLandWidthPicked.AutoSize = true;
-            this.maleLandWidthPicked.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.maleLandWidthPicked.Location = new System.Drawing.Point(300, 0);
-            this.maleLandWidthPicked.Margin = new System.Windows.Forms.Padding(0);
-            this.maleLandWidthPicked.Name = "maleLandWidthPicked";
-            this.maleLandWidthPicked.Size = new System.Drawing.Size(98, 20);
-            this.maleLandWidthPicked.TabIndex = 167;
-            this.maleLandWidthPicked.Text = "null";
-            this.maleLandWidthPicked.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // femaleLandWidthPicked
-            // 
-            this.femaleLandWidthPicked.AutoSize = true;
-            this.femaleLandWidthPicked.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.femaleLandWidthPicked.Location = new System.Drawing.Point(496, 0);
-            this.femaleLandWidthPicked.Margin = new System.Windows.Forms.Padding(0);
-            this.femaleLandWidthPicked.Name = "femaleLandWidthPicked";
-            this.femaleLandWidthPicked.Size = new System.Drawing.Size(99, 20);
-            this.femaleLandWidthPicked.TabIndex = 168;
-            this.femaleLandWidthPicked.Text = "null";
-            this.femaleLandWidthPicked.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -2387,10 +2387,10 @@
         private System.Windows.Forms.Button BC36;
         private System.Windows.Forms.Button BC37;
         private System.Windows.Forms.Button BC38;
-        private System.Windows.Forms.Button MaleLandWidthWithGrain;
-        private System.Windows.Forms.Button MaleLandWidthAgainstGrain;
-        private System.Windows.Forms.Button FealeLandWidthAgainstGrain;
-        private System.Windows.Forms.Button FemaleLandWidthWithGrain;
+        private System.Windows.Forms.Button MaleLandWidthWithGrainBtn;
+        private System.Windows.Forms.Button MaleLandWidthAgainstGrainBtn;
+        private System.Windows.Forms.Button FealeLandWidthAgainstGrainBtn;
+        private System.Windows.Forms.Button FemaleLandWidthWithGrainBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
