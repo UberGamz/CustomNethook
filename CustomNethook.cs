@@ -15,11 +15,15 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using CustomNethook;
+using System.Drawing.Text;
+using System.Security.Cryptography.X509Certificates;
 
 namespace _CustomNethook
 {
+
     public class CustomNethook : Mastercam.App.NetHook3App
     {
+        
         [DllImport("user32.dll")]
         static extern void mouse_event(UInt32 dwFlags, UInt32 dx, UInt32 dy, UInt32 dwData, IntPtr dwExtraInfo);
 
@@ -28,8 +32,8 @@ namespace _CustomNethook
         public Mastercam.App.Types.MCamReturn CustomNethookRun(Mastercam.App.Types.MCamReturn notused)
         {
 
-            var m = new Form1();
-            m.Show();
+            var form = new Form1();
+            form.ShowDialog();
 
             var tempList1 = new List<int>(); // list of x+, y+ entities
             var tempList2 = new List<int>(); // list of x-, y- entitites
@@ -65,9 +69,17 @@ namespace _CustomNethook
             var creaseY4 = 0.0;
             int createdUpperCrease = 502;
             int createdLowerCrease = 503;
-            var maleLandWidth = 0.0;
-            var femaleLandWidth = 0.0;
-            var overlap = 0.005;
+
+            
+            var maleLandWidth = form.maleLandWidthPicked.Text;
+            var femaleLandWidth = form.femaleLandWidthPicked.Text;
+            var overlap = form.OverlapTextBox.Text;
+            var orientation = form.orientationSelection.Text;
+            Mastercam.IO.DialogManager.OK(maleLandWidth, "");
+            Mastercam.IO.DialogManager.OK(femaleLandWidth, "");
+            Mastercam.IO.DialogManager.OK(overlap, "");
+            Mastercam.IO.DialogManager.OK(orientation, "");
+
 
 
 

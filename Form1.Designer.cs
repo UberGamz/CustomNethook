@@ -405,6 +405,7 @@
             this.BC10.TabIndex = 0;
             this.BC10.Text = "0.010";
             this.BC10.UseVisualStyleBackColor = true;
+            this.BC10.Click += new System.EventHandler(this.BC10_click);
             // 
             // BC11
             // 
@@ -418,6 +419,7 @@
             this.BC11.TabIndex = 1;
             this.BC11.Text = "0.011";
             this.BC11.UseVisualStyleBackColor = true;
+            this.BC11.Click += new System.EventHandler(this.BC11_click);
             // 
             // BC12
             // 
@@ -431,6 +433,7 @@
             this.BC12.TabIndex = 2;
             this.BC12.Text = "0.012";
             this.BC12.UseVisualStyleBackColor = true;
+            this.BC12.Click += new System.EventHandler(this.BC12_click);
             // 
             // BC13
             // 
@@ -444,6 +447,7 @@
             this.BC13.TabIndex = 3;
             this.BC13.Text = "0.013";
             this.BC13.UseVisualStyleBackColor = true;
+            this.BC13.Click += new System.EventHandler(this.BC13_click);
             // 
             // BC14
             // 
@@ -457,6 +461,7 @@
             this.BC14.TabIndex = 4;
             this.BC14.Text = "0.014";
             this.BC14.UseVisualStyleBackColor = true;
+            this.BC14.Click += new System.EventHandler(this.BC14_click);
             // 
             // BC15
             // 
@@ -470,6 +475,7 @@
             this.BC15.TabIndex = 5;
             this.BC15.Text = "0.015";
             this.BC15.UseVisualStyleBackColor = true;
+            this.BC15.Click += new System.EventHandler(this.BC15_click);
             // 
             // BC16
             // 
@@ -483,6 +489,7 @@
             this.BC16.TabIndex = 6;
             this.BC16.Text = "0.016";
             this.BC16.UseVisualStyleBackColor = true;
+            this.BC16.Click += new System.EventHandler(this.BC16_click);
             // 
             // BC17
             // 
@@ -496,6 +503,7 @@
             this.BC17.TabIndex = 7;
             this.BC17.Text = "0.017";
             this.BC17.UseVisualStyleBackColor = true;
+            this.BC17.Click += new System.EventHandler(this.BC17_click);
             // 
             // BC18
             // 
@@ -509,6 +517,7 @@
             this.BC18.TabIndex = 8;
             this.BC18.Text = "0.018";
             this.BC18.UseVisualStyleBackColor = true;
+            this.BC18.Click += new System.EventHandler(this.BC18_click);
             // 
             // BC19
             // 
@@ -522,6 +531,7 @@
             this.BC19.TabIndex = 9;
             this.BC19.Text = "0.019";
             this.BC19.UseVisualStyleBackColor = true;
+            this.BC19.Click += new System.EventHandler(this.BC19_click);
             // 
             // BC20
             // 
@@ -535,6 +545,7 @@
             this.BC20.TabIndex = 10;
             this.BC20.Text = "0.020";
             this.BC20.UseVisualStyleBackColor = true;
+            this.BC20.Click += new System.EventHandler(this.BC20_click);
             // 
             // BC21
             // 
@@ -548,6 +559,7 @@
             this.BC21.TabIndex = 11;
             this.BC21.Text = "0.021";
             this.BC21.UseVisualStyleBackColor = true;
+            this.BC21.Click += new System.EventHandler(this.BC21_click);
             // 
             // BC22
             // 
@@ -561,6 +573,7 @@
             this.BC22.TabIndex = 12;
             this.BC22.Text = "0.022";
             this.BC22.UseVisualStyleBackColor = true;
+            this.BC22.Click += new System.EventHandler(this.BC22_click);
             // 
             // BC23
             // 
@@ -574,6 +587,7 @@
             this.BC23.TabIndex = 13;
             this.BC23.Text = "0.023";
             this.BC23.UseVisualStyleBackColor = true;
+            this.BC23.Click += new System.EventHandler(this.BC23_click);
             // 
             // BC24
             // 
@@ -587,6 +601,7 @@
             this.BC24.TabIndex = 14;
             this.BC24.Text = "0.024";
             this.BC24.UseVisualStyleBackColor = true;
+            this.BC24.Click += new System.EventHandler(this.BC24_click);
             // 
             // BC25
             // 
@@ -600,6 +615,7 @@
             this.BC25.TabIndex = 15;
             this.BC25.Text = "0.025";
             this.BC25.UseVisualStyleBackColor = true;
+            this.BC25.Click += new System.EventHandler(this.BC25_click);
             // 
             // BC26
             // 
@@ -613,6 +629,7 @@
             this.BC26.TabIndex = 16;
             this.BC26.Text = "0.026";
             this.BC26.UseVisualStyleBackColor = true;
+            this.BC26.Click += new System.EventHandler(this.BC26_click);
             // 
             // BC27
             // 
@@ -626,6 +643,7 @@
             this.BC27.TabIndex = 17;
             this.BC27.Text = "0.027";
             this.BC27.UseVisualStyleBackColor = true;
+            this.BC27.Click += new System.EventHandler(this.BC27_click);
             // 
             // BC28
             // 
@@ -639,6 +657,7 @@
             this.BC28.TabIndex = 18;
             this.BC28.Text = "0.028";
             this.BC28.UseVisualStyleBackColor = true;
+            this.BC28.Click += new System.EventHandler(this.BC28_click);
             // 
             // BC29
             // 
@@ -652,6 +671,7 @@
             this.BC29.TabIndex = 19;
             this.BC29.Text = "0.029";
             this.BC29.UseVisualStyleBackColor = true;
+            this.BC29.Click += new System.EventHandler(this.BC29_click);
             // 
             // BC30
             // 
@@ -665,6 +685,7 @@
             this.BC30.TabIndex = 20;
             this.BC30.Text = "0.030";
             this.BC30.UseVisualStyleBackColor = true;
+            this.BC30.Click += new System.EventHandler(this.BC30_click);
             // 
             // BC31
             // 
@@ -678,6 +699,7 @@
             this.BC31.TabIndex = 21;
             this.BC31.Text = "0.031";
             this.BC31.UseVisualStyleBackColor = true;
+            this.BC31.Click += new System.EventHandler(this.BC31_click);
             // 
             // BC32
             // 
@@ -691,6 +713,7 @@
             this.BC32.TabIndex = 22;
             this.BC32.Text = "0.032";
             this.BC32.UseVisualStyleBackColor = true;
+            this.BC32.Click += new System.EventHandler(this.BC32_click);
             // 
             // BC33
             // 
@@ -704,6 +727,7 @@
             this.BC33.TabIndex = 23;
             this.BC33.Text = "0.033";
             this.BC33.UseVisualStyleBackColor = true;
+            this.BC33.Click += new System.EventHandler(this.BC33_click);
             // 
             // BC34
             // 
@@ -717,6 +741,7 @@
             this.BC34.TabIndex = 24;
             this.BC34.Text = "0.034";
             this.BC34.UseVisualStyleBackColor = true;
+            this.BC34.Click += new System.EventHandler(this.BC34_click);
             // 
             // BC35
             // 
@@ -730,6 +755,7 @@
             this.BC35.TabIndex = 25;
             this.BC35.Text = "0.035";
             this.BC35.UseVisualStyleBackColor = true;
+            this.BC35.Click += new System.EventHandler(this.BC35_click);
             // 
             // BC36
             // 
@@ -743,6 +769,7 @@
             this.BC36.TabIndex = 26;
             this.BC36.Text = "0.036";
             this.BC36.UseVisualStyleBackColor = true;
+            this.BC36.Click += new System.EventHandler(this.BC36_click);
             // 
             // BC37
             // 
@@ -756,6 +783,7 @@
             this.BC37.TabIndex = 27;
             this.BC37.Text = "0.037";
             this.BC37.UseVisualStyleBackColor = true;
+            this.BC37.Click += new System.EventHandler(this.BC37_click);
             // 
             // BC38
             // 
@@ -769,6 +797,7 @@
             this.BC38.TabIndex = 28;
             this.BC38.Text = "0.038";
             this.BC38.UseVisualStyleBackColor = true;
+            this.BC38.Click += new System.EventHandler(this.BC38_click);
             // 
             // MaleLandWidthWithGrainBtn
             // 
@@ -782,6 +811,7 @@
             this.MaleLandWidthWithGrainBtn.TabIndex = 29;
             this.MaleLandWidthWithGrainBtn.Text = "With Grain";
             this.MaleLandWidthWithGrainBtn.UseVisualStyleBackColor = true;
+            this.MaleLandWidthWithGrainBtn.Click += new System.EventHandler(this.MaleLandWidthWithGrainBtn_click);
             // 
             // MaleLandWidthAgainstGrainBtn
             // 
@@ -795,6 +825,7 @@
             this.MaleLandWidthAgainstGrainBtn.TabIndex = 30;
             this.MaleLandWidthAgainstGrainBtn.Text = "Against Grain";
             this.MaleLandWidthAgainstGrainBtn.UseVisualStyleBackColor = true;
+            this.MaleLandWidthAgainstGrainBtn.Click += new System.EventHandler(this.MaleLandWidthAgainstGrainBtn_click);
             // 
             // FemaleLandWidthWithGrainBtn
             // 
@@ -808,6 +839,7 @@
             this.FemaleLandWidthWithGrainBtn.TabIndex = 31;
             this.FemaleLandWidthWithGrainBtn.Text = "With Grain";
             this.FemaleLandWidthWithGrainBtn.UseVisualStyleBackColor = true;
+            this.FemaleLandWidthWithGrainBtn.Click += new System.EventHandler(this.FemaleLandWidthWithGrainBtn_click);
             // 
             // FealeLandWidthAgainstGrainBtn
             // 
@@ -821,6 +853,7 @@
             this.FealeLandWidthAgainstGrainBtn.TabIndex = 32;
             this.FealeLandWidthAgainstGrainBtn.Text = "Against Grain";
             this.FealeLandWidthAgainstGrainBtn.UseVisualStyleBackColor = true;
+            this.FealeLandWidthAgainstGrainBtn.Click += new System.EventHandler(this.FealeLandWidthAgainstGrainBtn_click);
             // 
             // label1
             // 
@@ -2268,6 +2301,7 @@
             // 
             this.maleLandWidthPicked.AutoSize = true;
             this.maleLandWidthPicked.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.maleLandWidthPicked.ForeColor = System.Drawing.SystemColors.ControlText;
             this.maleLandWidthPicked.Location = new System.Drawing.Point(300, 0);
             this.maleLandWidthPicked.Margin = new System.Windows.Forms.Padding(0);
             this.maleLandWidthPicked.Name = "maleLandWidthPicked";
@@ -2296,6 +2330,7 @@
             this.OK.TabIndex = 36;
             this.OK.Text = "OK";
             this.OK.UseVisualStyleBackColor = true;
+            this.OK.Click += new System.EventHandler(this.OK_click);
             // 
             // OverlapTextBox
             // 
@@ -2303,6 +2338,7 @@
             this.OverlapTextBox.Name = "OverlapTextBox";
             this.OverlapTextBox.Size = new System.Drawing.Size(100, 20);
             this.OverlapTextBox.TabIndex = 37;
+            this.OverlapTextBox.Tag = "";
             this.OverlapTextBox.Text = "0.005";
             // 
             // label4
@@ -2511,12 +2547,12 @@
         private System.Windows.Forms.Label label120;
         private System.Windows.Forms.Label label121;
         private System.Windows.Forms.Button OK;
-        private System.Windows.Forms.TextBox OverlapTextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox orientationSelection;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox materialSelector;
-        private System.Windows.Forms.Label maleLandWidthPicked;
-        private System.Windows.Forms.Label femaleLandWidthPicked;
+        public System.Windows.Forms.Label maleLandWidthPicked;
+        public System.Windows.Forms.TextBox OverlapTextBox;
+        public System.Windows.Forms.ComboBox orientationSelection;
+        public System.Windows.Forms.Label femaleLandWidthPicked;
     }
 }
