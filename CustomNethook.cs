@@ -75,9 +75,21 @@ namespace _CustomNethook
             var femaleLandWidth = form.femaleLandWidthPicked.Text;
             var overlap = form.OverlapTextBox.Text;
             var orientation = form.orientationSelection.Text;
+            var maleLandWidthNumber = maleLandWidth;
+            var femaleLandWidthNumber = femaleLandWidth;
+            var overlapNumber = overlap;
+            var orientationNumber = orientation;
+            var upperCreaseWidth = (maleLandWidthNumber / 2); // male
+            var lowerCreaseWidth = femaleLandWidthNumber; // female
+            var lowerCreaseStartDistance = (upperCreaseWidth/2)+ lowerCreaseWidth;
+            var lowerCreaseEndDistance = lowerCreaseStartDistance + lowerCreaseWidth;
+            var lowerSideOne = 0.024-((Int32.Parse(overlap))/2);
+            var lowerSideTwo = (overlapNumber / 2);
+            var upperSideOne = (overlapNumber / 2);
+            var upperSideTwo = 0.040 - (overlapNumber / 2);
 
 
-            void translate()
+            void translateRL()
             {
                 SelectionManager.UnselectAllGeometry();
                 LevelsManager.RefreshLevelsManager();
@@ -100,6 +112,67 @@ namespace _CustomNethook
                 Point3D endPointUpper = new Point3D(-0.001, -0.001, 0.0);
                 Point3D endPointLower = new Point3D(0.001, 0.001, 0.0);
                 Point3D resultPoint = new Point3D(-0.001, 0.001, 0.0);
+                foreach (var i in tempSelectedGeometry1)
+                {
+                    tempList3.Add(i.GetEntityID());
+                }
+
+                var temp1Geometry = SearchManager.SelectAllGeometryOnLevel(10, true);
+                var tempSelectedGeometry1Result = SearchManager.GetSelectedGeometry();
+                foreach (var entity in tempSelectedGeometry1Result)
+                {
+                    entity.Color = 10;
+                    entity.Selected = false;
+                    entity.Translate(startPoint, endPointUpper, Top, Top);
+                    tempList1.Add(entity.GetEntityID());
+                    entity.Commit();
+                }
+                GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                SelectionManager.UnselectAllGeometry();
+
+
+                var temp2Geometry = SearchManager.SelectAllGeometryOnLevel(11, true);
+                var tempSelectedGeometry2Result = SearchManager.GetSelectedGeometry();
+                foreach (var entity in tempSelectedGeometry2Result)
+                {
+                    entity.Color = 11;
+                    entity.Selected = false;
+                    entity.Translate(startPoint, endPointLower, Top, Top);
+                    tempList2.Add(entity.GetEntityID());
+                    entity.Commit();
+                }
+                GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                SelectionManager.UnselectAllGeometry();
+
+                tempSelectedGeometry1Result = null;
+                tempSelectedGeometry1 = null;
+                tempSelectedGeometry2Result = null;
+                tempSelectedGeometry2 = null;
+
+            } // Moves line in X+Y+ direction and in X-Y- direction
+            void translateLR()
+            {
+                SelectionManager.UnselectAllGeometry();
+                LevelsManager.RefreshLevelsManager();
+                LevelsManager.SetMainLevel(75);
+                var shown = LevelsManager.GetVisibleLevelNumbers();
+                foreach (var level in shown)
+                {
+                    LevelsManager.SetLevelVisible(level, false);
+                }
+                LevelsManager.SetLevelVisible(75, true);
+                LevelsManager.RefreshLevelsManager();
+                var tempChain1 = SearchManager.SelectAllGeometryOnLevel(75, true);
+                var tempSelectedGeometry1 = SearchManager.GetSelectedGeometry();
+                var temp1 = GeometryManipulationManager.CopySelectedGeometryToLevel(10, true);
+                SelectionManager.UnselectAllGeometry();
+                var tempChain2 = SearchManager.SelectAllGeometryOnLevel(75, true);
+                var tempSelectedGeometry2 = SearchManager.GetSelectedGeometry();
+                var temp2 = GeometryManipulationManager.CopySelectedGeometryToLevel(11, true);
+                Point3D startPoint = new Point3D(0.0, 0.0, 0.0);
+                Point3D endPointUpper = new Point3D(+0.001, +0.001, 0.0);
+                Point3D endPointLower = new Point3D(-0.001, -0.001, 0.0);
+                Point3D resultPoint = new Point3D(+0.001, -0.001, 0.0);
                 foreach (var i in tempSelectedGeometry1)
                 {
                     tempList3.Add(i.GetEntityID());
@@ -2023,8 +2096,8 @@ namespace _CustomNethook
                         if (chain.Area != t.Area)
                         {
                             chain.Direction = ChainDirectionType.Clockwise;
-                            var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Right, .0225, OffsetRollCornerType.None, .5, false, .005, false);
-                            var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Left, .0025, OffsetRollCornerType.None, .5, false, .005, false);
+                            var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Right, lowerSideOne, OffsetRollCornerType.None, .5, false, .005, false);
+                            var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Left, lowerSideTwo, OffsetRollCornerType.None, .5, false, .005, false);
                             var cutResultGeometry = SearchManager.GetResultGeometry();
                             foreach (var entity in cutResultGeometry)
                             {
@@ -2034,8 +2107,8 @@ namespace _CustomNethook
                                 entity.Commit();
                             }
                             GraphicsManager.ClearColors(new GroupSelectionMask(true));
-                            var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Right, .0025, OffsetRollCornerType.None, .5, false, .005, false);
-                            var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Left, .0385, OffsetRollCornerType.None, .5, false, .005, false);
+                            var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Right, upperSideOne, OffsetRollCornerType.None, .5, false, .005, false);
+                            var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Left, upperSideTwo, OffsetRollCornerType.None, .5, false, .005, false);
                             var cutResultGeometryNew = SearchManager.GetResultGeometry();
                             foreach (var entity in cutResultGeometryNew)
                             {
@@ -2100,8 +2173,8 @@ namespace _CustomNethook
                         if (chain.Area != t.Area)
                         {
                             chain.Direction = chainDirection;
-                            var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Left, .0225, OffsetRollCornerType.None, .5, false, .005, false);
-                            var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Right, .0025, OffsetRollCornerType.None, .5, false, .005, false);
+                            var lowerChainLarge = chain.OffsetChain2D(OffsetSideType.Left, lowerSideOne, OffsetRollCornerType.None, .5, false, .005, false);
+                            var lowerChainSmall = chain.OffsetChain2D(OffsetSideType.Right, lowerSideTwo, OffsetRollCornerType.None, .5, false, .005, false);
                             var cutResultGeometry = SearchManager.GetResultGeometry();
                             foreach (var entity in cutResultGeometry)
                             {
@@ -2112,8 +2185,8 @@ namespace _CustomNethook
                             }
                             GraphicsManager.ClearColors(new GroupSelectionMask(true));
 
-                            var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Left, .0025, OffsetRollCornerType.None, .5, false, .005, false);
-                            var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Right, .0385, OffsetRollCornerType.None, .5, false, .005, false);
+                            var upperChainLarge = chain.OffsetChain2D(OffsetSideType.Left, upperSideOne, OffsetRollCornerType.None, .5, false, .005, false);
+                            var upperChainSmall = chain.OffsetChain2D(OffsetSideType.Right, upperSideTwo, OffsetRollCornerType.None, .5, false, .005, false);
                             var cutResultGeometryNew = SearchManager.GetResultGeometry();
                             foreach (var entity in cutResultGeometryNew)
                             {
@@ -4277,10 +4350,10 @@ namespace _CustomNethook
                 foreach (var chain in selectedCreaseChain)
                 {
                     //offsets line of lower
-                    var lowerChainCrease1 = chain.OffsetChain2D(OffsetSideType.Left, .040, OffsetRollCornerType.None, .5, false, .005, false);
-                    var lowerChainCrease2 = chain.OffsetChain2D(OffsetSideType.Left, .065, OffsetRollCornerType.None, .5, false, .005, false);
-                    var lowerChainCrease3 = chain.OffsetChain2D(OffsetSideType.Right, .040, OffsetRollCornerType.None, .5, false, .005, false);
-                    var lowerChainCrease4 = chain.OffsetChain2D(OffsetSideType.Right, .065, OffsetRollCornerType.None, .5, false, .005, false);
+                    var lowerChainCrease1 = chain.OffsetChain2D(OffsetSideType.Left, lowerCreaseStartDistance, OffsetRollCornerType.None, .5, false, .005, false);
+                    var lowerChainCrease2 = chain.OffsetChain2D(OffsetSideType.Left, lowerCreaseEndDistance, OffsetRollCornerType.None, .5, false, .005, false);
+                    var lowerChainCrease3 = chain.OffsetChain2D(OffsetSideType.Right, lowerCreaseStartDistance, OffsetRollCornerType.None, .5, false, .005, false);
+                    var lowerChainCrease4 = chain.OffsetChain2D(OffsetSideType.Right, lowerCreaseEndDistance, OffsetRollCornerType.None, .5, false, .005, false);
                     //Colors and selects result geometry
                     var creaseResultGeometry = SearchManager.GetResultGeometry();
                     foreach (var entity in creaseResultGeometry)
@@ -4295,8 +4368,8 @@ namespace _CustomNethook
                     GraphicsManager.ClearColors(new GroupSelectionMask(true));
 
                     //offsets line of upper
-                    var upperChainCrease1 = chain.OffsetChain2D(OffsetSideType.Left, .014, OffsetRollCornerType.None, .5, false, .005, false);
-                    var upperChainCrease2 = chain.OffsetChain2D(OffsetSideType.Right, .014, OffsetRollCornerType.None, .5, false, .005, false);
+                    var upperChainCrease1 = chain.OffsetChain2D(OffsetSideType.Left, upperCreaseWidth, OffsetRollCornerType.None, .5, false, .005, false);
+                    var upperChainCrease2 = chain.OffsetChain2D(OffsetSideType.Right, upperCreaseWidth, OffsetRollCornerType.None, .5, false, .005, false);
                     //Colors and selects result geometry
                     var creaseResultGeometryNew = SearchManager.GetResultGeometry();
                     foreach (var entity in creaseResultGeometryNew)
@@ -4477,7 +4550,8 @@ namespace _CustomNethook
             deSelect();
             GraphicsManager.Repaint(true);
             deSelect();
-            translate();
+            if (orientation == "RightToLeft") { translateRL(); }
+            if (orientation == "LeftToRight") { translateLR(); }
             deSelect();
             findIntersectionOfLines();
             deSelect();
