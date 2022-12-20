@@ -858,6 +858,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Gainsboro;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(202, 160);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
@@ -906,6 +907,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Gainsboro;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Location = new System.Drawing.Point(202, 40);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
@@ -918,6 +920,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Gainsboro;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Location = new System.Drawing.Point(202, 60);
             this.label8.Margin = new System.Windows.Forms.Padding(0);
@@ -930,6 +933,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Gainsboro;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Location = new System.Drawing.Point(202, 80);
             this.label9.Margin = new System.Windows.Forms.Padding(0);
@@ -942,6 +946,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Gainsboro;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Location = new System.Drawing.Point(202, 100);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
@@ -954,6 +959,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Gainsboro;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label11.Location = new System.Drawing.Point(202, 120);
             this.label11.Margin = new System.Windows.Forms.Padding(0);
@@ -966,6 +972,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Gainsboro;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label12.Location = new System.Drawing.Point(202, 140);
             this.label12.Margin = new System.Windows.Forms.Padding(0);
@@ -978,6 +985,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Gainsboro;
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label13.Location = new System.Drawing.Point(202, 180);
             this.label13.Margin = new System.Windows.Forms.Padding(0);
@@ -990,6 +998,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Gainsboro;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label14.Location = new System.Drawing.Point(202, 200);
             this.label14.Margin = new System.Windows.Forms.Padding(0);
@@ -1002,6 +1011,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Gainsboro;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label15.Location = new System.Drawing.Point(202, 220);
             this.label15.Margin = new System.Windows.Forms.Padding(0);
@@ -1014,6 +1024,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Gainsboro;
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label16.Location = new System.Drawing.Point(202, 240);
             this.label16.Margin = new System.Windows.Forms.Padding(0);
@@ -1026,6 +1037,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.Gainsboro;
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label17.Location = new System.Drawing.Point(202, 260);
             this.label17.Margin = new System.Windows.Forms.Padding(0);
@@ -1038,6 +1050,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.Color.Gainsboro;
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label18.Location = new System.Drawing.Point(202, 280);
             this.label18.Margin = new System.Windows.Forms.Padding(0);
@@ -1050,6 +1063,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
+            this.label19.BackColor = System.Drawing.Color.Gainsboro;
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label19.Location = new System.Drawing.Point(202, 300);
             this.label19.Margin = new System.Windows.Forms.Padding(0);
@@ -1062,6 +1076,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
+            this.label20.BackColor = System.Drawing.Color.Gainsboro;
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label20.Location = new System.Drawing.Point(202, 320);
             this.label20.Margin = new System.Windows.Forms.Padding(0);
@@ -1074,6 +1089,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.Color.Gainsboro;
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label21.Location = new System.Drawing.Point(202, 340);
             this.label21.Margin = new System.Windows.Forms.Padding(0);
@@ -1086,6 +1102,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
+            this.label22.BackColor = System.Drawing.Color.Gainsboro;
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label22.Location = new System.Drawing.Point(202, 360);
             this.label22.Margin = new System.Windows.Forms.Padding(0);
@@ -1098,6 +1115,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
+            this.label23.BackColor = System.Drawing.Color.Gainsboro;
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label23.Location = new System.Drawing.Point(202, 380);
             this.label23.Margin = new System.Windows.Forms.Padding(0);
@@ -1110,6 +1128,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
+            this.label24.BackColor = System.Drawing.Color.Gainsboro;
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label24.Location = new System.Drawing.Point(202, 400);
             this.label24.Margin = new System.Windows.Forms.Padding(0);
@@ -1122,6 +1141,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.Gainsboro;
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label25.Location = new System.Drawing.Point(202, 420);
             this.label25.Margin = new System.Windows.Forms.Padding(0);
@@ -1134,6 +1154,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
+            this.label26.BackColor = System.Drawing.Color.Gainsboro;
             this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label26.Location = new System.Drawing.Point(202, 440);
             this.label26.Margin = new System.Windows.Forms.Padding(0);
@@ -1146,6 +1167,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.Gainsboro;
             this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label27.Location = new System.Drawing.Point(202, 460);
             this.label27.Margin = new System.Windows.Forms.Padding(0);
@@ -1158,6 +1180,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
+            this.label28.BackColor = System.Drawing.Color.Gainsboro;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label28.Location = new System.Drawing.Point(202, 480);
             this.label28.Margin = new System.Windows.Forms.Padding(0);
@@ -1170,6 +1193,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
+            this.label29.BackColor = System.Drawing.Color.Gainsboro;
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label29.Location = new System.Drawing.Point(202, 500);
             this.label29.Margin = new System.Windows.Forms.Padding(0);
@@ -1182,6 +1206,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
+            this.label30.BackColor = System.Drawing.Color.Gainsboro;
             this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label30.Location = new System.Drawing.Point(202, 520);
             this.label30.Margin = new System.Windows.Forms.Padding(0);
@@ -1194,6 +1219,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.Color.Gainsboro;
             this.label31.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label31.Location = new System.Drawing.Point(202, 540);
             this.label31.Margin = new System.Windows.Forms.Padding(0);
@@ -1206,6 +1232,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
+            this.label32.BackColor = System.Drawing.Color.Gainsboro;
             this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label32.Location = new System.Drawing.Point(202, 560);
             this.label32.Margin = new System.Windows.Forms.Padding(0);
@@ -1218,6 +1245,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
+            this.label33.BackColor = System.Drawing.Color.Gainsboro;
             this.label33.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label33.Location = new System.Drawing.Point(202, 580);
             this.label33.Margin = new System.Windows.Forms.Padding(0);
@@ -1230,6 +1258,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
+            this.label34.BackColor = System.Drawing.Color.Gainsboro;
             this.label34.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label34.Location = new System.Drawing.Point(202, 600);
             this.label34.Margin = new System.Windows.Forms.Padding(0);
@@ -1242,6 +1271,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
+            this.label35.BackColor = System.Drawing.Color.Gainsboro;
             this.label35.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label35.Location = new System.Drawing.Point(300, 40);
             this.label35.Margin = new System.Windows.Forms.Padding(0);
@@ -1254,6 +1284,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.Color.Gainsboro;
             this.label36.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label36.Location = new System.Drawing.Point(300, 60);
             this.label36.Margin = new System.Windows.Forms.Padding(0);
@@ -1266,6 +1297,7 @@
             // label37
             // 
             this.label37.AutoSize = true;
+            this.label37.BackColor = System.Drawing.Color.Gainsboro;
             this.label37.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label37.Location = new System.Drawing.Point(300, 80);
             this.label37.Margin = new System.Windows.Forms.Padding(0);
@@ -1278,6 +1310,7 @@
             // label38
             // 
             this.label38.AutoSize = true;
+            this.label38.BackColor = System.Drawing.Color.Gainsboro;
             this.label38.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label38.Location = new System.Drawing.Point(300, 100);
             this.label38.Margin = new System.Windows.Forms.Padding(0);
@@ -1290,6 +1323,7 @@
             // label39
             // 
             this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.Color.Gainsboro;
             this.label39.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label39.Location = new System.Drawing.Point(300, 120);
             this.label39.Margin = new System.Windows.Forms.Padding(0);
@@ -1302,6 +1336,7 @@
             // label40
             // 
             this.label40.AutoSize = true;
+            this.label40.BackColor = System.Drawing.Color.Gainsboro;
             this.label40.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label40.Location = new System.Drawing.Point(300, 140);
             this.label40.Margin = new System.Windows.Forms.Padding(0);
@@ -1314,6 +1349,7 @@
             // label41
             // 
             this.label41.AutoSize = true;
+            this.label41.BackColor = System.Drawing.Color.Gainsboro;
             this.label41.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label41.Location = new System.Drawing.Point(300, 160);
             this.label41.Margin = new System.Windows.Forms.Padding(0);
@@ -1326,6 +1362,7 @@
             // label42
             // 
             this.label42.AutoSize = true;
+            this.label42.BackColor = System.Drawing.Color.Gainsboro;
             this.label42.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label42.Location = new System.Drawing.Point(300, 180);
             this.label42.Margin = new System.Windows.Forms.Padding(0);
@@ -1338,6 +1375,7 @@
             // label43
             // 
             this.label43.AutoSize = true;
+            this.label43.BackColor = System.Drawing.Color.Gainsboro;
             this.label43.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label43.Location = new System.Drawing.Point(300, 200);
             this.label43.Margin = new System.Windows.Forms.Padding(0);
@@ -1350,6 +1388,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
+            this.label44.BackColor = System.Drawing.Color.Gainsboro;
             this.label44.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label44.Location = new System.Drawing.Point(300, 220);
             this.label44.Margin = new System.Windows.Forms.Padding(0);
@@ -1362,6 +1401,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
+            this.label45.BackColor = System.Drawing.Color.Gainsboro;
             this.label45.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label45.Location = new System.Drawing.Point(300, 240);
             this.label45.Margin = new System.Windows.Forms.Padding(0);
@@ -1374,6 +1414,7 @@
             // label46
             // 
             this.label46.AutoSize = true;
+            this.label46.BackColor = System.Drawing.Color.Gainsboro;
             this.label46.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label46.Location = new System.Drawing.Point(300, 260);
             this.label46.Margin = new System.Windows.Forms.Padding(0);
@@ -1386,6 +1427,7 @@
             // label47
             // 
             this.label47.AutoSize = true;
+            this.label47.BackColor = System.Drawing.Color.Gainsboro;
             this.label47.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label47.Location = new System.Drawing.Point(300, 280);
             this.label47.Margin = new System.Windows.Forms.Padding(0);
@@ -1398,6 +1440,7 @@
             // label48
             // 
             this.label48.AutoSize = true;
+            this.label48.BackColor = System.Drawing.Color.Gainsboro;
             this.label48.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label48.Location = new System.Drawing.Point(300, 300);
             this.label48.Margin = new System.Windows.Forms.Padding(0);
@@ -1410,6 +1453,7 @@
             // label49
             // 
             this.label49.AutoSize = true;
+            this.label49.BackColor = System.Drawing.Color.Gainsboro;
             this.label49.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label49.Location = new System.Drawing.Point(300, 320);
             this.label49.Margin = new System.Windows.Forms.Padding(0);
@@ -1422,6 +1466,7 @@
             // label50
             // 
             this.label50.AutoSize = true;
+            this.label50.BackColor = System.Drawing.Color.Gainsboro;
             this.label50.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label50.Location = new System.Drawing.Point(300, 340);
             this.label50.Margin = new System.Windows.Forms.Padding(0);
@@ -1434,6 +1479,7 @@
             // label51
             // 
             this.label51.AutoSize = true;
+            this.label51.BackColor = System.Drawing.Color.Gainsboro;
             this.label51.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label51.Location = new System.Drawing.Point(300, 360);
             this.label51.Margin = new System.Windows.Forms.Padding(0);
@@ -1446,6 +1492,7 @@
             // label52
             // 
             this.label52.AutoSize = true;
+            this.label52.BackColor = System.Drawing.Color.Gainsboro;
             this.label52.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label52.Location = new System.Drawing.Point(300, 380);
             this.label52.Margin = new System.Windows.Forms.Padding(0);
@@ -1458,6 +1505,7 @@
             // label53
             // 
             this.label53.AutoSize = true;
+            this.label53.BackColor = System.Drawing.Color.Gainsboro;
             this.label53.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label53.Location = new System.Drawing.Point(300, 400);
             this.label53.Margin = new System.Windows.Forms.Padding(0);
@@ -1470,6 +1518,7 @@
             // label54
             // 
             this.label54.AutoSize = true;
+            this.label54.BackColor = System.Drawing.Color.Gainsboro;
             this.label54.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label54.Location = new System.Drawing.Point(300, 420);
             this.label54.Margin = new System.Windows.Forms.Padding(0);
@@ -1482,6 +1531,7 @@
             // label55
             // 
             this.label55.AutoSize = true;
+            this.label55.BackColor = System.Drawing.Color.Gainsboro;
             this.label55.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label55.Location = new System.Drawing.Point(300, 440);
             this.label55.Margin = new System.Windows.Forms.Padding(0);
@@ -1494,6 +1544,7 @@
             // label56
             // 
             this.label56.AutoSize = true;
+            this.label56.BackColor = System.Drawing.Color.Gainsboro;
             this.label56.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label56.Location = new System.Drawing.Point(300, 460);
             this.label56.Margin = new System.Windows.Forms.Padding(0);
@@ -1506,6 +1557,7 @@
             // label57
             // 
             this.label57.AutoSize = true;
+            this.label57.BackColor = System.Drawing.Color.Gainsboro;
             this.label57.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label57.Location = new System.Drawing.Point(300, 480);
             this.label57.Margin = new System.Windows.Forms.Padding(0);
@@ -1518,6 +1570,7 @@
             // label58
             // 
             this.label58.AutoSize = true;
+            this.label58.BackColor = System.Drawing.Color.Gainsboro;
             this.label58.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label58.Location = new System.Drawing.Point(300, 500);
             this.label58.Margin = new System.Windows.Forms.Padding(0);
@@ -1530,6 +1583,7 @@
             // label59
             // 
             this.label59.AutoSize = true;
+            this.label59.BackColor = System.Drawing.Color.Gainsboro;
             this.label59.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label59.Location = new System.Drawing.Point(300, 520);
             this.label59.Margin = new System.Windows.Forms.Padding(0);
@@ -1542,6 +1596,7 @@
             // label60
             // 
             this.label60.AutoSize = true;
+            this.label60.BackColor = System.Drawing.Color.Gainsboro;
             this.label60.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label60.Location = new System.Drawing.Point(300, 540);
             this.label60.Margin = new System.Windows.Forms.Padding(0);
@@ -1554,6 +1609,7 @@
             // label61
             // 
             this.label61.AutoSize = true;
+            this.label61.BackColor = System.Drawing.Color.Gainsboro;
             this.label61.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label61.Location = new System.Drawing.Point(300, 560);
             this.label61.Margin = new System.Windows.Forms.Padding(0);
@@ -1566,6 +1622,7 @@
             // label62
             // 
             this.label62.AutoSize = true;
+            this.label62.BackColor = System.Drawing.Color.Gainsboro;
             this.label62.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label62.Location = new System.Drawing.Point(300, 580);
             this.label62.Margin = new System.Windows.Forms.Padding(0);
@@ -1578,6 +1635,7 @@
             // label63
             // 
             this.label63.AutoSize = true;
+            this.label63.BackColor = System.Drawing.Color.Gainsboro;
             this.label63.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label63.Location = new System.Drawing.Point(300, 600);
             this.label63.Margin = new System.Windows.Forms.Padding(0);
@@ -1590,6 +1648,7 @@
             // label64
             // 
             this.label64.AutoSize = true;
+            this.label64.BackColor = System.Drawing.Color.Gainsboro;
             this.label64.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label64.Location = new System.Drawing.Point(398, 40);
             this.label64.Margin = new System.Windows.Forms.Padding(0);
@@ -1602,6 +1661,7 @@
             // label65
             // 
             this.label65.AutoSize = true;
+            this.label65.BackColor = System.Drawing.Color.Gainsboro;
             this.label65.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label65.Location = new System.Drawing.Point(398, 60);
             this.label65.Margin = new System.Windows.Forms.Padding(0);
@@ -1614,6 +1674,7 @@
             // label66
             // 
             this.label66.AutoSize = true;
+            this.label66.BackColor = System.Drawing.Color.Gainsboro;
             this.label66.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label66.Location = new System.Drawing.Point(398, 80);
             this.label66.Margin = new System.Windows.Forms.Padding(0);
@@ -1626,6 +1687,7 @@
             // label67
             // 
             this.label67.AutoSize = true;
+            this.label67.BackColor = System.Drawing.Color.Gainsboro;
             this.label67.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label67.Location = new System.Drawing.Point(398, 100);
             this.label67.Margin = new System.Windows.Forms.Padding(0);
@@ -1638,6 +1700,7 @@
             // label68
             // 
             this.label68.AutoSize = true;
+            this.label68.BackColor = System.Drawing.Color.Gainsboro;
             this.label68.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label68.Location = new System.Drawing.Point(398, 120);
             this.label68.Margin = new System.Windows.Forms.Padding(0);
@@ -1650,6 +1713,7 @@
             // label69
             // 
             this.label69.AutoSize = true;
+            this.label69.BackColor = System.Drawing.Color.Gainsboro;
             this.label69.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label69.Location = new System.Drawing.Point(398, 140);
             this.label69.Margin = new System.Windows.Forms.Padding(0);
@@ -1662,6 +1726,7 @@
             // label70
             // 
             this.label70.AutoSize = true;
+            this.label70.BackColor = System.Drawing.Color.Gainsboro;
             this.label70.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label70.Location = new System.Drawing.Point(398, 160);
             this.label70.Margin = new System.Windows.Forms.Padding(0);
@@ -1674,6 +1739,7 @@
             // label71
             // 
             this.label71.AutoSize = true;
+            this.label71.BackColor = System.Drawing.Color.Gainsboro;
             this.label71.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label71.Location = new System.Drawing.Point(398, 180);
             this.label71.Margin = new System.Windows.Forms.Padding(0);
@@ -1686,6 +1752,7 @@
             // label72
             // 
             this.label72.AutoSize = true;
+            this.label72.BackColor = System.Drawing.Color.Gainsboro;
             this.label72.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label72.Location = new System.Drawing.Point(398, 200);
             this.label72.Margin = new System.Windows.Forms.Padding(0);
@@ -1698,6 +1765,7 @@
             // label73
             // 
             this.label73.AutoSize = true;
+            this.label73.BackColor = System.Drawing.Color.Gainsboro;
             this.label73.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label73.Location = new System.Drawing.Point(398, 220);
             this.label73.Margin = new System.Windows.Forms.Padding(0);
@@ -1710,6 +1778,7 @@
             // label74
             // 
             this.label74.AutoSize = true;
+            this.label74.BackColor = System.Drawing.Color.Gainsboro;
             this.label74.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label74.Location = new System.Drawing.Point(398, 240);
             this.label74.Margin = new System.Windows.Forms.Padding(0);
@@ -1722,6 +1791,7 @@
             // label75
             // 
             this.label75.AutoSize = true;
+            this.label75.BackColor = System.Drawing.Color.Gainsboro;
             this.label75.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label75.Location = new System.Drawing.Point(398, 260);
             this.label75.Margin = new System.Windows.Forms.Padding(0);
@@ -1734,6 +1804,7 @@
             // label76
             // 
             this.label76.AutoSize = true;
+            this.label76.BackColor = System.Drawing.Color.Gainsboro;
             this.label76.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label76.Location = new System.Drawing.Point(398, 280);
             this.label76.Margin = new System.Windows.Forms.Padding(0);
@@ -1746,6 +1817,7 @@
             // label77
             // 
             this.label77.AutoSize = true;
+            this.label77.BackColor = System.Drawing.Color.Gainsboro;
             this.label77.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label77.Location = new System.Drawing.Point(398, 300);
             this.label77.Margin = new System.Windows.Forms.Padding(0);
@@ -1758,6 +1830,7 @@
             // label78
             // 
             this.label78.AutoSize = true;
+            this.label78.BackColor = System.Drawing.Color.Gainsboro;
             this.label78.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label78.Location = new System.Drawing.Point(398, 320);
             this.label78.Margin = new System.Windows.Forms.Padding(0);
@@ -1770,6 +1843,7 @@
             // label79
             // 
             this.label79.AutoSize = true;
+            this.label79.BackColor = System.Drawing.Color.Gainsboro;
             this.label79.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label79.Location = new System.Drawing.Point(398, 340);
             this.label79.Margin = new System.Windows.Forms.Padding(0);
@@ -1782,6 +1856,7 @@
             // label80
             // 
             this.label80.AutoSize = true;
+            this.label80.BackColor = System.Drawing.Color.Gainsboro;
             this.label80.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label80.Location = new System.Drawing.Point(398, 360);
             this.label80.Margin = new System.Windows.Forms.Padding(0);
@@ -1794,6 +1869,7 @@
             // label81
             // 
             this.label81.AutoSize = true;
+            this.label81.BackColor = System.Drawing.Color.Gainsboro;
             this.label81.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label81.Location = new System.Drawing.Point(398, 380);
             this.label81.Margin = new System.Windows.Forms.Padding(0);
@@ -1806,6 +1882,7 @@
             // label82
             // 
             this.label82.AutoSize = true;
+            this.label82.BackColor = System.Drawing.Color.Gainsboro;
             this.label82.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label82.Location = new System.Drawing.Point(398, 400);
             this.label82.Margin = new System.Windows.Forms.Padding(0);
@@ -1818,6 +1895,7 @@
             // label83
             // 
             this.label83.AutoSize = true;
+            this.label83.BackColor = System.Drawing.Color.Gainsboro;
             this.label83.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label83.Location = new System.Drawing.Point(398, 420);
             this.label83.Margin = new System.Windows.Forms.Padding(0);
@@ -1830,6 +1908,7 @@
             // label84
             // 
             this.label84.AutoSize = true;
+            this.label84.BackColor = System.Drawing.Color.Gainsboro;
             this.label84.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label84.Location = new System.Drawing.Point(398, 440);
             this.label84.Margin = new System.Windows.Forms.Padding(0);
@@ -1842,6 +1921,7 @@
             // label85
             // 
             this.label85.AutoSize = true;
+            this.label85.BackColor = System.Drawing.Color.Gainsboro;
             this.label85.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label85.Location = new System.Drawing.Point(398, 460);
             this.label85.Margin = new System.Windows.Forms.Padding(0);
@@ -1854,6 +1934,7 @@
             // label86
             // 
             this.label86.AutoSize = true;
+            this.label86.BackColor = System.Drawing.Color.Gainsboro;
             this.label86.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label86.Location = new System.Drawing.Point(398, 480);
             this.label86.Margin = new System.Windows.Forms.Padding(0);
@@ -1866,6 +1947,7 @@
             // label87
             // 
             this.label87.AutoSize = true;
+            this.label87.BackColor = System.Drawing.Color.Gainsboro;
             this.label87.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label87.Location = new System.Drawing.Point(398, 500);
             this.label87.Margin = new System.Windows.Forms.Padding(0);
@@ -1878,6 +1960,7 @@
             // label88
             // 
             this.label88.AutoSize = true;
+            this.label88.BackColor = System.Drawing.Color.Gainsboro;
             this.label88.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label88.Location = new System.Drawing.Point(398, 520);
             this.label88.Margin = new System.Windows.Forms.Padding(0);
@@ -1890,6 +1973,7 @@
             // label89
             // 
             this.label89.AutoSize = true;
+            this.label89.BackColor = System.Drawing.Color.Gainsboro;
             this.label89.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label89.Location = new System.Drawing.Point(398, 540);
             this.label89.Margin = new System.Windows.Forms.Padding(0);
@@ -1902,6 +1986,7 @@
             // label90
             // 
             this.label90.AutoSize = true;
+            this.label90.BackColor = System.Drawing.Color.Gainsboro;
             this.label90.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label90.Location = new System.Drawing.Point(398, 560);
             this.label90.Margin = new System.Windows.Forms.Padding(0);
@@ -1914,6 +1999,7 @@
             // label91
             // 
             this.label91.AutoSize = true;
+            this.label91.BackColor = System.Drawing.Color.Gainsboro;
             this.label91.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label91.Location = new System.Drawing.Point(398, 580);
             this.label91.Margin = new System.Windows.Forms.Padding(0);
@@ -1926,6 +2012,7 @@
             // label92
             // 
             this.label92.AutoSize = true;
+            this.label92.BackColor = System.Drawing.Color.Gainsboro;
             this.label92.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label92.Location = new System.Drawing.Point(398, 600);
             this.label92.Margin = new System.Windows.Forms.Padding(0);
@@ -1938,6 +2025,7 @@
             // label93
             // 
             this.label93.AutoSize = true;
+            this.label93.BackColor = System.Drawing.Color.Gainsboro;
             this.label93.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label93.Location = new System.Drawing.Point(496, 40);
             this.label93.Margin = new System.Windows.Forms.Padding(0);
@@ -1950,6 +2038,7 @@
             // label94
             // 
             this.label94.AutoSize = true;
+            this.label94.BackColor = System.Drawing.Color.Gainsboro;
             this.label94.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label94.Location = new System.Drawing.Point(496, 60);
             this.label94.Margin = new System.Windows.Forms.Padding(0);
@@ -1962,6 +2051,7 @@
             // label95
             // 
             this.label95.AutoSize = true;
+            this.label95.BackColor = System.Drawing.Color.Gainsboro;
             this.label95.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label95.Location = new System.Drawing.Point(496, 80);
             this.label95.Margin = new System.Windows.Forms.Padding(0);
@@ -1974,6 +2064,7 @@
             // label96
             // 
             this.label96.AutoSize = true;
+            this.label96.BackColor = System.Drawing.Color.Gainsboro;
             this.label96.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label96.Location = new System.Drawing.Point(496, 100);
             this.label96.Margin = new System.Windows.Forms.Padding(0);
@@ -1986,6 +2077,7 @@
             // label97
             // 
             this.label97.AutoSize = true;
+            this.label97.BackColor = System.Drawing.Color.Gainsboro;
             this.label97.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label97.Location = new System.Drawing.Point(496, 120);
             this.label97.Margin = new System.Windows.Forms.Padding(0);
@@ -1998,6 +2090,7 @@
             // label98
             // 
             this.label98.AutoSize = true;
+            this.label98.BackColor = System.Drawing.Color.Gainsboro;
             this.label98.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label98.Location = new System.Drawing.Point(496, 140);
             this.label98.Margin = new System.Windows.Forms.Padding(0);
@@ -2010,6 +2103,7 @@
             // label99
             // 
             this.label99.AutoSize = true;
+            this.label99.BackColor = System.Drawing.Color.Gainsboro;
             this.label99.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label99.Location = new System.Drawing.Point(496, 160);
             this.label99.Margin = new System.Windows.Forms.Padding(0);
@@ -2022,6 +2116,7 @@
             // label100
             // 
             this.label100.AutoSize = true;
+            this.label100.BackColor = System.Drawing.Color.Gainsboro;
             this.label100.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label100.Location = new System.Drawing.Point(496, 180);
             this.label100.Margin = new System.Windows.Forms.Padding(0);
@@ -2034,6 +2129,7 @@
             // label101
             // 
             this.label101.AutoSize = true;
+            this.label101.BackColor = System.Drawing.Color.Gainsboro;
             this.label101.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label101.Location = new System.Drawing.Point(496, 200);
             this.label101.Margin = new System.Windows.Forms.Padding(0);
@@ -2046,6 +2142,7 @@
             // label102
             // 
             this.label102.AutoSize = true;
+            this.label102.BackColor = System.Drawing.Color.Gainsboro;
             this.label102.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label102.Location = new System.Drawing.Point(496, 220);
             this.label102.Margin = new System.Windows.Forms.Padding(0);
@@ -2058,6 +2155,7 @@
             // label103
             // 
             this.label103.AutoSize = true;
+            this.label103.BackColor = System.Drawing.Color.Gainsboro;
             this.label103.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label103.Location = new System.Drawing.Point(496, 240);
             this.label103.Margin = new System.Windows.Forms.Padding(0);
@@ -2070,6 +2168,7 @@
             // label104
             // 
             this.label104.AutoSize = true;
+            this.label104.BackColor = System.Drawing.Color.Gainsboro;
             this.label104.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label104.Location = new System.Drawing.Point(496, 260);
             this.label104.Margin = new System.Windows.Forms.Padding(0);
@@ -2082,6 +2181,7 @@
             // label105
             // 
             this.label105.AutoSize = true;
+            this.label105.BackColor = System.Drawing.Color.Gainsboro;
             this.label105.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label105.Location = new System.Drawing.Point(496, 280);
             this.label105.Margin = new System.Windows.Forms.Padding(0);
@@ -2094,6 +2194,7 @@
             // label106
             // 
             this.label106.AutoSize = true;
+            this.label106.BackColor = System.Drawing.Color.Gainsboro;
             this.label106.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label106.Location = new System.Drawing.Point(496, 300);
             this.label106.Margin = new System.Windows.Forms.Padding(0);
@@ -2106,6 +2207,7 @@
             // label107
             // 
             this.label107.AutoSize = true;
+            this.label107.BackColor = System.Drawing.Color.Gainsboro;
             this.label107.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label107.Location = new System.Drawing.Point(496, 320);
             this.label107.Margin = new System.Windows.Forms.Padding(0);
@@ -2118,6 +2220,7 @@
             // label108
             // 
             this.label108.AutoSize = true;
+            this.label108.BackColor = System.Drawing.Color.Gainsboro;
             this.label108.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label108.Location = new System.Drawing.Point(496, 340);
             this.label108.Margin = new System.Windows.Forms.Padding(0);
@@ -2130,6 +2233,7 @@
             // label109
             // 
             this.label109.AutoSize = true;
+            this.label109.BackColor = System.Drawing.Color.Gainsboro;
             this.label109.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label109.Location = new System.Drawing.Point(496, 360);
             this.label109.Margin = new System.Windows.Forms.Padding(0);
@@ -2142,6 +2246,7 @@
             // label110
             // 
             this.label110.AutoSize = true;
+            this.label110.BackColor = System.Drawing.Color.Gainsboro;
             this.label110.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label110.Location = new System.Drawing.Point(496, 380);
             this.label110.Margin = new System.Windows.Forms.Padding(0);
@@ -2154,6 +2259,7 @@
             // label111
             // 
             this.label111.AutoSize = true;
+            this.label111.BackColor = System.Drawing.Color.Gainsboro;
             this.label111.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label111.Location = new System.Drawing.Point(496, 400);
             this.label111.Margin = new System.Windows.Forms.Padding(0);
@@ -2166,6 +2272,7 @@
             // label112
             // 
             this.label112.AutoSize = true;
+            this.label112.BackColor = System.Drawing.Color.Gainsboro;
             this.label112.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label112.Location = new System.Drawing.Point(496, 420);
             this.label112.Margin = new System.Windows.Forms.Padding(0);
@@ -2178,6 +2285,7 @@
             // label113
             // 
             this.label113.AutoSize = true;
+            this.label113.BackColor = System.Drawing.Color.Gainsboro;
             this.label113.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label113.Location = new System.Drawing.Point(496, 440);
             this.label113.Margin = new System.Windows.Forms.Padding(0);
@@ -2190,6 +2298,7 @@
             // label114
             // 
             this.label114.AutoSize = true;
+            this.label114.BackColor = System.Drawing.Color.Gainsboro;
             this.label114.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label114.Location = new System.Drawing.Point(496, 460);
             this.label114.Margin = new System.Windows.Forms.Padding(0);
@@ -2202,6 +2311,7 @@
             // label115
             // 
             this.label115.AutoSize = true;
+            this.label115.BackColor = System.Drawing.Color.Gainsboro;
             this.label115.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label115.Location = new System.Drawing.Point(496, 480);
             this.label115.Margin = new System.Windows.Forms.Padding(0);
@@ -2214,6 +2324,7 @@
             // label116
             // 
             this.label116.AutoSize = true;
+            this.label116.BackColor = System.Drawing.Color.Gainsboro;
             this.label116.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label116.Location = new System.Drawing.Point(496, 500);
             this.label116.Margin = new System.Windows.Forms.Padding(0);
@@ -2226,6 +2337,7 @@
             // label117
             // 
             this.label117.AutoSize = true;
+            this.label117.BackColor = System.Drawing.Color.Gainsboro;
             this.label117.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label117.Location = new System.Drawing.Point(496, 520);
             this.label117.Margin = new System.Windows.Forms.Padding(0);
@@ -2238,6 +2350,7 @@
             // label118
             // 
             this.label118.AutoSize = true;
+            this.label118.BackColor = System.Drawing.Color.Gainsboro;
             this.label118.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label118.Location = new System.Drawing.Point(496, 540);
             this.label118.Margin = new System.Windows.Forms.Padding(0);
@@ -2250,6 +2363,7 @@
             // label119
             // 
             this.label119.AutoSize = true;
+            this.label119.BackColor = System.Drawing.Color.Gainsboro;
             this.label119.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label119.Location = new System.Drawing.Point(496, 560);
             this.label119.Margin = new System.Windows.Forms.Padding(0);
@@ -2262,6 +2376,7 @@
             // label120
             // 
             this.label120.AutoSize = true;
+            this.label120.BackColor = System.Drawing.Color.Gainsboro;
             this.label120.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label120.Location = new System.Drawing.Point(496, 580);
             this.label120.Margin = new System.Windows.Forms.Padding(0);
@@ -2274,6 +2389,7 @@
             // label121
             // 
             this.label121.AutoSize = true;
+            this.label121.BackColor = System.Drawing.Color.Gainsboro;
             this.label121.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label121.Location = new System.Drawing.Point(496, 600);
             this.label121.Margin = new System.Windows.Forms.Padding(0);
