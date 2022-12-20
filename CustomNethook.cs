@@ -75,18 +75,6 @@ namespace _CustomNethook
             var femaleLandWidth = form.femaleLandWidthPicked.Text;
             var overlap = form.OverlapTextBox.Text;
             var orientation = form.orientationSelection.Text;
-            Mastercam.IO.DialogManager.OK(maleLandWidth, "");
-            Mastercam.IO.DialogManager.OK(femaleLandWidth, "");
-            Mastercam.IO.DialogManager.OK(overlap, "");
-            Mastercam.IO.DialogManager.OK(orientation, "");
-
-
-
-
-
-
-
-
 
 
             void translate()

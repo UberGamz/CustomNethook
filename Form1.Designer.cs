@@ -2296,6 +2296,7 @@
             this.materialSelector.Name = "materialSelector";
             this.materialSelector.Size = new System.Drawing.Size(202, 21);
             this.materialSelector.TabIndex = 166;
+            this.materialSelector.Text = "liquidPackaging";
             // 
             // maleLandWidthPicked
             // 
@@ -2360,6 +2361,7 @@
             this.orientationSelection.Name = "orientationSelection";
             this.orientationSelection.Size = new System.Drawing.Size(100, 21);
             this.orientationSelection.TabIndex = 39;
+            this.orientationSelection.Text = "leftToRight";
             // 
             // label6
             // 
