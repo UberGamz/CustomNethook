@@ -799,9 +799,6 @@ namespace _CustomNethook
                         {
                             if (entity is ArcGeometry arc && step == 0)
                             {
-                                arc.Color = 15;
-                                arc.Commit();
-                                DialogManager.OK("", "");
                                 arcX1 = arc.EndPoint1.x; // Arc 1 x 1
                                 arcX2 = arc.EndPoint2.x; // Arc 1 x 2
                                 arcY1 = arc.EndPoint1.y; // Arc 1 y 1
@@ -832,9 +829,6 @@ namespace _CustomNethook
                             
                             if (entity is LineGeometry line && step == 0)
                             {
-                                line.Color = 15;
-                                line.Commit();
-                                DialogManager.OK("", "");
                                 lineX1 = line.EndPoint1.x; // line 1 x 1
                                 lineX2 = line.EndPoint2.x; // line 1 x 2
                                 lineY1 = line.EndPoint1.y; // line 1 y 1
