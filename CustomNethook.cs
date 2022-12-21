@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using CustomNethook;
 using System.Drawing.Text;
 using System.Security.Cryptography.X509Certificates;
+using System.Globalization;
 
 namespace _CustomNethook
 {
@@ -70,24 +71,21 @@ namespace _CustomNethook
             int createdUpperCrease = 502;
             int createdLowerCrease = 503;
 
-            
             var maleLandWidth = form.maleLandWidthPicked.Text;
             var femaleLandWidth = form.femaleLandWidthPicked.Text;
             var overlap = form.OverlapTextBox.Text;
             var orientation = form.orientationSelection.Text;
-            var maleLandWidthNumber = maleLandWidth;
-            var femaleLandWidthNumber = femaleLandWidth;
-            var overlapNumber = overlap;
-            var orientationNumber = orientation;
-            var upperCreaseWidth = (maleLandWidthNumber / 2); // male
-            var lowerCreaseWidth = femaleLandWidthNumber; // female
-            var lowerCreaseStartDistance = (upperCreaseWidth/2)+ lowerCreaseWidth;
-            var lowerCreaseEndDistance = lowerCreaseStartDistance + lowerCreaseWidth;
-            var lowerSideOne = 0.024-((Int32.Parse(overlap))/2);
-            var lowerSideTwo = (overlapNumber / 2);
-            var upperSideOne = (overlapNumber / 2);
-            var upperSideTwo = 0.040 - (overlapNumber / 2);
-
+            double maleLandWidthNumber = double.Parse(maleLandWidth);
+            double femaleLandWidthNumber = double.Parse(femaleLandWidth);
+            double overlapNumber = double.Parse(overlap);
+            double upperCreaseWidth = maleLandWidthNumber / 2; // male
+            double lowerCreaseWidth = femaleLandWidthNumber; // female
+            double lowerCreaseStartDistance = (upperCreaseWidth/2)+ lowerCreaseWidth;
+            double lowerCreaseEndDistance = lowerCreaseStartDistance + lowerCreaseWidth;
+            double lowerSideOne = 0.024 - overlapNumber / 2;
+            double lowerSideTwo = overlapNumber / 2;
+            double upperSideOne = overlapNumber / 2;
+            double upperSideTwo = 0.040 - (overlapNumber / 2);
 
             void translateRL()
             {
@@ -170,9 +168,9 @@ namespace _CustomNethook
                 var tempSelectedGeometry2 = SearchManager.GetSelectedGeometry();
                 var temp2 = GeometryManipulationManager.CopySelectedGeometryToLevel(11, true);
                 Point3D startPoint = new Point3D(0.0, 0.0, 0.0);
-                Point3D endPointUpper = new Point3D(+0.001, +0.001, 0.0);
-                Point3D endPointLower = new Point3D(-0.001, -0.001, 0.0);
-                Point3D resultPoint = new Point3D(+0.001, -0.001, 0.0);
+                Point3D endPointUpper = new Point3D(+0.001, -0.001, 0.0);
+                Point3D endPointLower = new Point3D(-0.001, +0.001, 0.0);
+                //Point3D resultPoint = new Point3D(-0.001, +0.001, 0.0);
                 foreach (var i in tempSelectedGeometry1)
                 {
                     tempList3.Add(i.GetEntityID());
@@ -211,7 +209,7 @@ namespace _CustomNethook
                 tempSelectedGeometry2 = null;
 
             } // Moves line in X+Y+ direction and in X-Y- direction
-            void findIntersectionOfArcs()
+            void findIntersectionOfArcsRL()
             {
                 SelectionManager.UnselectAllGeometry();
                 foreach (var v in tempList1)
@@ -282,7 +280,7 @@ namespace _CustomNethook
                                     }
                                     if (((arc2StartDegrees < pt3degreeNeg) && (pt3degreeNeg < arc2EndDegrees)) || ((pt3degreeNeg < arc2StartDegrees) && (arc2EndDegrees < pt3degreeNeg)))
                                     {
-                                        var point3 = new Mastercam.BasicGeometry.PointGeometry(pt3);
+                                        var point3 = new PointGeometry(pt3);
                                         point3.Color = 94;
                                         point3.Level = 94;
                                         point3.Commit();
@@ -291,10 +289,11 @@ namespace _CustomNethook
                                     }
                                     if (((arc2StartDegrees < pt4degreeNeg) && (pt4degreeNeg < arc2EndDegrees)) || ((pt4degreeNeg < arc2StartDegrees) && (arc2EndDegrees < pt4degreeNeg)))
                                     {
-                                        var point4 = new Mastercam.BasicGeometry.PointGeometry(pt4);
+                                        var point4 = new PointGeometry(pt4);
                                         point4.Color = 94;
                                         point4.Level = 94;
                                         point4.Commit();
+                                        tempList4.Add(point4.GetEntityID());
                                         tempList9.Add(point4.GetEntityID());
                                     }
                                 }
@@ -303,7 +302,7 @@ namespace _CustomNethook
                     }
                 }
             } // Finds intersections of arcs
-            void findIntersectionOfLines()
+            void findIntersectionOfLinesRL()
             {
                 SelectionManager.UnselectAllGeometry();
                 Point3D startPoint = new Point3D(0.0, 0.0, 0.0);
@@ -380,6 +379,226 @@ namespace _CustomNethook
                     }
                 }
             } // Finds intersections of lines
+            void findIntersectionOfArcsLR()
+            {
+                SelectionManager.UnselectAllGeometry();
+                foreach (var v in tempList1)
+                {
+                    var ArcID = Geometry.RetrieveEntity(v);
+                    if (ArcID is ArcGeometry arc)
+                    {
+                        arc = (ArcGeometry)ArcID;
+                        var arc1X1 = arc.EndPoint1.x; // Arc 1 x 1
+                        var arc1X2 = arc.EndPoint2.x; // Arc 1 x 2
+                        var arc1Y1 = arc.EndPoint1.y; // Arc 1 y 1
+                        var arc1Y2 = arc.EndPoint2.y; // Arc 1 y 2
+                        var arc1Center = arc.Data.CenterPoint;
+                        Point3D arc1StartPoint = new Point3D(arc1X1, arc1Y1, 0.0);
+                        var arc1Rad = VectorManager.Distance(arc1Center, arc1StartPoint);
+                        var arcStartDegrees = arc.Data.StartAngleDegrees;
+                        var arcEndDegrees = arc.Data.EndAngleDegrees;
+                        foreach (var u in tempList2)
+                        {
+                            var secondArcID = Geometry.RetrieveEntity(u);
+                            if (secondArcID is ArcGeometry secondArc)
+                            {
+                                secondArc = (ArcGeometry)secondArcID;
+                                var arc2X1 = secondArc.EndPoint1.x; // Arc 2 x 1
+                                var arc2X2 = secondArc.EndPoint2.x; // Arc 2 x 2
+                                var arc2Y1 = secondArc.EndPoint1.y; // Arc 2 y 1
+                                var arc2Y2 = secondArc.EndPoint2.y; // Arc 2 y 2
+                                var arc2Center = secondArc.Data.CenterPoint;
+                                Point3D arc2StartPoint = new Point3D(arc2X1, arc2Y1, 0.0);
+                                var arc2Rad = VectorManager.Distance(arc2Center, arc2StartPoint);
+                                var arc2StartDegrees = secondArc.Data.StartAngleDegrees;
+                                var arc2EndDegrees = secondArc.Data.EndAngleDegrees;
+                                var C1C2 = VectorManager.Distance(arc1Center, arc2Center);
+                                if (C1C2 < arc1Rad + arc2Rad)
+                                {
+                                    var x1 = arc1Center.x;
+                                    var x2 = arc2Center.x;
+                                    var y1 = arc1Center.y;
+                                    var y2 = arc2Center.y;
+                                    var r1 = arc1Rad;
+                                    var r2 = arc2Rad;
+                                    var a = (((r1 * r1) - (r2 * r2) + (C1C2 * C1C2)) / (2 * C1C2));
+                                    var b = (((r2 * r2) - (r1 * r1) + (C1C2 * C1C2)) / (2 * C1C2));
+                                    var h = Math.Sqrt((r2 * r2) - (a * a));
+                                    var x5 = (x1 + (a / C1C2) * (x2 - x1));
+                                    var y5 = (y1 + (a / C1C2) * (y2 - y1));
+                                    var x3 = (x5 - (h * (y2 - y1)) / C1C2);
+                                    var y3 = (y5 + (h * (x2 - x1)) / C1C2);
+                                    var x4 = (x5 + (h * (y2 - y1)) / C1C2);
+                                    var y4 = (y5 - (h * (x2 - x1)) / C1C2);
+                                    Point3D pt3 = new Point3D(x3, y3, 0.0);
+                                    Point3D pt4 = new Point3D(x4, y4, 0.0);
+                                    var delta3Xneg = (x2 - pt3.x);
+                                    var delta3Yneg = (y2 - pt3.y);
+                                    var delta4Xneg = (x2 - pt4.x);
+                                    var delta4Yneg = (y2 - pt4.y);
+                                    var delta3Radneg = Math.Atan2(delta3Xneg, delta3Yneg);
+                                    var delta4Radneg = Math.Atan2(delta4Xneg, delta4Yneg);
+                                    var pt3degreeNeg = VectorManager.RadiansToDegrees(delta3Radneg);
+                                    var pt4degreeNeg = VectorManager.RadiansToDegrees(delta4Radneg);
+                                    pt3degreeNeg = Math.Round(pt3degreeNeg);
+                                    pt4degreeNeg = Math.Round(pt4degreeNeg);
+                                    arc2StartDegrees = Math.Round(arc2StartDegrees);
+                                    arc2EndDegrees = Math.Round(arc2EndDegrees);
+
+                                    if (pt3degreeNeg <= 0.0)
+                                    {
+                                        pt3degreeNeg = (pt3degreeNeg + 360);
+                                    }
+                                    if (pt4degreeNeg <= 0.0)
+                                    {
+                                        pt4degreeNeg = (pt4degreeNeg + 360);
+                                    }
+                                    if (pt3degreeNeg >= 360.0)
+                                    {
+                                        pt3degreeNeg = (pt3degreeNeg - 360);
+                                    }
+                                    if (pt4degreeNeg >= 360.0)
+                                    {
+                                        pt4degreeNeg = (pt4degreeNeg - 360);
+                                    }
+                                    if (arc2StartDegrees <= 0.0)
+                                    {
+                                        arc2StartDegrees = (arc2StartDegrees + 360);
+                                    }
+                                    if (arc2StartDegrees <= 0.0)
+                                    {
+                                        arc2StartDegrees = (arc2StartDegrees + 360);
+                                    }
+                                    if (arc2StartDegrees >= 360.0)
+                                    {
+                                        arc2StartDegrees = (arc2StartDegrees - 360);
+                                    }
+                                    if (arc2StartDegrees >= 360.0)
+                                    {
+                                        arc2StartDegrees = (arc2StartDegrees - 360);
+                                    }
+                                    if (arc2EndDegrees <= 0.0)
+                                    {
+                                        arc2EndDegrees = (arc2EndDegrees + 360);
+                                    }
+                                    if (arc2EndDegrees <= 0.0)
+                                    {
+                                        arc2EndDegrees = (arc2EndDegrees + 360);
+                                    }
+                                    if (arc2EndDegrees >= 360.0)
+                                    {
+                                        arc2EndDegrees = (arc2EndDegrees - 360);
+                                    }
+                                    if (arc2EndDegrees >= 360.0)
+                                    {
+                                        arc2EndDegrees = (arc2EndDegrees - 360);
+                                    }
+                                    if (((arc2StartDegrees < pt3degreeNeg) && (pt3degreeNeg < arc2EndDegrees)))
+                                    {
+                                        //arc2endDegree is 0
+                                        //art2startdegrees is 315
+                                        //pt3degreeNeg is 45
+
+                                        var point3 = new PointGeometry(pt4);//lower Left Of Arc
+                                        point3.Color = 94;
+                                        point3.Level = 94;
+                                        point3.Commit();
+                                        tempList4.Add(point3.GetEntityID());
+                                        tempList9.Add(point3.GetEntityID());
+                                    }
+                                    if (((arc2StartDegrees < pt4degreeNeg) && (pt4degreeNeg < arc2EndDegrees)))
+                                    {
+                                        //pt4degreeneg is 225
+                                        var point4 = new PointGeometry(pt3);//upper right of arc
+                                        point4.Color = 94;
+                                        point4.Level = 94;
+                                        point4.Commit();
+                                        tempList4.Add(point4.GetEntityID());
+                                        tempList9.Add(point4.GetEntityID());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } // Finds intersections of arcs
+            void findIntersectionOfLinesLR()
+            {
+                SelectionManager.UnselectAllGeometry();
+                Point3D startPoint = new Point3D(0.0, 0.0, 0.0);
+                Point3D resultPointUp = new Point3D(+0.001, +0.001, 0.0);
+                Point3D resultPointDown = new Point3D(-0.001, -0.001, 0.0);
+                foreach (var v in tempList1)
+                {
+                    var lineID = Geometry.RetrieveEntity(v);
+                    if (lineID is LineGeometry line)
+                    {
+                        line = (LineGeometry)lineID;
+                        var line1X1 = line.EndPoint1.x; // Line 1 x 1
+                        var line1X2 = line.EndPoint2.x; // Line 1 x 2
+                        var line1Y1 = line.EndPoint1.y; // Line 1 y 1
+                        var line1Y2 = line.EndPoint2.y; // Line 1 y 2
+                        foreach (var u in tempList2)
+                        {
+                            var secondLineID = Geometry.RetrieveEntity(u);
+                            if (secondLineID is LineGeometry secondLine)
+                            {
+                                secondLine = (LineGeometry)secondLineID;
+                                var line2X1 = secondLine.EndPoint1.x; // Line 2 x 1
+                                var line2X2 = secondLine.EndPoint2.x; // Line 2 x 2
+                                var line2Y1 = secondLine.EndPoint1.y; // Line 2 y 1
+                                var line2Y2 = secondLine.EndPoint2.y; // Line 2 y 2
+                                var slope1 = (line1Y2 - line1Y1) / (line1X2 - line1X1); // check slope of line 1
+                                var slope2 = (line2Y2 - line2Y1) / (line2X2 - line2X1); // check slope of line 2
+                                if (slope1 != slope2)
+                                { // if slopes dont match lines are not parallel
+                                    // calculates intersections
+                                    var a1 = line1Y2 - line1Y1;
+                                    var b1 = line1X1 - line1X2;
+                                    var c1 = a1 * line1X1 + b1 * line1Y1;
+                                    var a2 = line2Y2 - line2Y1;
+                                    var b2 = line2X1 - line2X2;
+                                    var c2 = a2 * line2X1 + b2 * line2Y1;
+                                    var delta = a1 * b2 - a2 * b1;
+                                    Point3D pt1 = new Point3D((b2 * c1 - b1 * c2) / delta, (a1 * c2 - a2 * c1) / delta, 0.0); // point of intersection
+                                    var AB = Math.Sqrt((line1X2 - line1X1) * (line1X2 - line1X1) + (line1Y2 - line1Y1) * (line1Y2 - line1Y1));
+                                    var AP = Math.Sqrt((pt1.x - line1X1) * (pt1.x - line1X1) + (pt1.y - line1Y1) * (pt1.y - line1Y1));
+                                    var PB = Math.Sqrt((line1X2 - pt1.x) * (line1X2 - pt1.x) + (line1Y2 - pt1.y) * (line1Y2 - pt1.y));
+                                    var AB2 = Math.Sqrt((line2X2 - line2X1) * (line2X2 - line2X1) + (line2Y2 - line2Y1) * (line2Y2 - line2Y1));
+                                    var AP2 = Math.Sqrt((pt1.x - line2X1) * (pt1.x - line2X1) + (pt1.y - line2Y1) * (pt1.y - line2Y1));
+                                    var PB2 = Math.Sqrt((line2X2 - pt1.x) * (line2X2 - pt1.x) + (line2Y2 - pt1.y) * (line2Y2 - pt1.y));
+                                    if (AB == AP + PB)
+                                    { // if point on line 1
+                                        if (AB2 == AP2 + PB2)
+                                        { // if point on line 2
+                                            if ((line1Y1 <= pt1.y && pt1.y <= line2Y1) || (line1X1 <= pt1.x && pt1.x <= line2X1))
+                                            { // if needs to shift up and right
+                                                var newPoint = new Mastercam.BasicGeometry.PointGeometry(pt1);
+                                                newPoint.Color = 94;
+                                                newPoint.Level = 94;
+                                                newPoint.Translate(startPoint, resultPointUp, Top, Top);
+                                                newPoint.Commit();
+                                                tempList9.Add(newPoint.GetEntityID());
+                                                GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                                            }
+                                            if ((line1Y1 >= pt1.y && pt1.y >= line2Y1) || (line1X1 >= pt1.x && pt1.x >= line2X1))
+                                            { // if needs to shift down and left
+                                                var newPoint = new Mastercam.BasicGeometry.PointGeometry(pt1);
+                                                newPoint.Color = 94;
+                                                newPoint.Level = 94;
+                                                newPoint.Translate(startPoint, resultPointDown, Top, Top);
+                                                newPoint.Commit();
+                                                tempList9.Add(newPoint.GetEntityID());
+                                                GraphicsManager.ClearColors(new GroupSelectionMask(true));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } // Finds intersections of lines
             void clearTempLinesAndArcs()
             {
                 foreach (var i in tempList1)
@@ -409,7 +628,7 @@ namespace _CustomNethook
                         var arc1Center = arc.Data.CenterPoint;
                         Point3D arc1StartPoint = new Point3D(arc1X1, arc1Y1, 0.0);
                         Point3D arc1EndPoint = new Point3D(arc1X2, arc1Y2, 0.0);
-                        var tolerance = 0.001;
+                        var tolerance = 0.005;
                         foreach (var v in tempList4)
                         {
                             var u = PointGeometry.RetrieveEntity(v);
@@ -418,17 +637,29 @@ namespace _CustomNethook
                                 var ux = point.Data.x;
                                 var uy = point.Data.y;
                                 Point3D uPoint = new Point3D(uy, ux, 0.0);
+                                var circleCenterX = arc.Data.CenterPoint.x;
+                                var circleCenterY = arc.Data.CenterPoint.y;
+                                var circleRad = arc.Data.Radius;
+                                var a = Math.Abs(circleCenterX) - Math.Abs(ux);
+                                var b = Math.Abs(circleCenterY) - Math.Abs(uy);
+                                var circlePointDistance = Math.Sqrt((Math.Pow(a, 2)) + (Math.Pow(b, 2)));
                                 var delta3Xneg = (arc1Center.x - uPoint.x);
                                 var delta3Yneg = (arc1Center.y - uPoint.y);
                                 var delta3Radneg = Math.Atan2(delta3Xneg, delta3Yneg);
                                 var pt3degreeNeg = VectorManager.RadiansToDegrees(delta3Radneg);
-                                if (pt3degreeNeg < 0.0)
+                                pt3degreeNeg = Math.Round(pt3degreeNeg);
+
+                                if (pt3degreeNeg <= 0.0)
                                 {
                                     pt3degreeNeg = (pt3degreeNeg + 360);
                                 }
+                                if (pt3degreeNeg >= 360.0)
+                                {
+                                    pt3degreeNeg = (pt3degreeNeg - 360);
+                                }
                                 var startToUDist = Math.Abs(VectorManager.Distance(arc1StartPoint, uPoint));
                                 var endToUDist = Math.Abs(VectorManager.Distance(arc1EndPoint, uPoint));
-                                if ((startToUDist >= (endToUDist - tolerance)) && (startToUDist <= (endToUDist + tolerance)))
+                                if (circlePointDistance - circleRad <= tolerance)
                                 {
                                     BreakManyPiecesParameters broken = new BreakManyPiecesParameters()
                                     {
@@ -501,12 +732,66 @@ namespace _CustomNethook
                         (t.Key).Commit();
                     }
                 }
+                foreach (var chain in selectedChains){
+                    var chainData = chainDetails.GetData(chain);
+                    var chainStartGeo = Geometry.RetrieveEntity(chain.FirstEntityId);
+                    if (chainStartGeo is ArcGeometry arcGeo){
+                        var chainStartGeoEP1 = arcGeo.EndPoint1;
+                        var chainStartGeoEP2 = arcGeo.EndPoint2;
+                        var chainStartGeoMidpoint = new Point3D(((chainStartGeoEP1.x + chainStartGeoEP2.x) / 2),((chainStartGeoEP1.y + chainStartGeoEP2.y) / 2),0.0);
+                        var chainEntity = ChainManager.GetGeometryInChain(chain);
+                        foreach (var entity in chainEntity){
+                            if (entity is ArcGeometry tempArc){
+                                var entityGeoEP1 = tempArc.EndPoint1;
+                                var entityGeoEP2 = tempArc.EndPoint2;
+                                var entityGeoMidpoint = new Point3D(((entityGeoEP1.x + entityGeoEP2.x) / 2), ((entityGeoEP1.y + entityGeoEP2.y) / 2), 0.0);
+                                if (chainStartGeoMidpoint.x > entityGeoMidpoint.x){
+                                    chainData.FirstEntity = entity;
+                               }
+                            }
+                            if (entity is LineGeometry tempLine){
+                                var entityGeoEP1 = tempLine.EndPoint1;
+                                var entityGeoEP2 = tempLine.EndPoint2;
+                                var entityGeoMidpoint = new Point3D(((entityGeoEP1.x + entityGeoEP2.x) / 2), ((entityGeoEP1.y + entityGeoEP2.y) / 2), 0.0);
+                                if (chainStartGeoMidpoint.x > entityGeoMidpoint.x){
+                                    chainData.FirstEntity = entity;
+                                }
+                            }
+                        }
+                    }
+                    if (chainStartGeo is LineGeometry lineGeo){
+                        var chainStartGeoEP1 = lineGeo.EndPoint1;
+                        var chainStartGeoEP2 = lineGeo.EndPoint2;
+                        var chainStartGeoMidpoint = new Point3D(((chainStartGeoEP1.x + chainStartGeoEP2.x) / 2), ((chainStartGeoEP1.y + chainStartGeoEP2.y) / 2), 0.0);
+                        var chainEntity = ChainManager.GetGeometryInChain(chain);
+                        foreach (var entity in chainEntity){
+                            if (entity is ArcGeometry tempArc){
+                                var entityGeoEP1 = tempArc.EndPoint1;
+                                var entityGeoEP2 = tempArc.EndPoint2;
+                                var entityGeoMidpoint = new Point3D(((entityGeoEP1.x + entityGeoEP2.x) / 2), ((entityGeoEP1.y + entityGeoEP2.y) / 2), 0.0);
+                                if (chainStartGeoMidpoint.x > entityGeoMidpoint.x){
+                                    chainData.FirstEntity = entity;
+                                }
+                            }
+                            if (entity is LineGeometry tempLine){
+                                var entityGeoEP1 = tempLine.EndPoint1;
+                                var entityGeoEP2 = tempLine.EndPoint2;
+                                var entityGeoMidpoint = new Point3D(((entityGeoEP1.x + entityGeoEP2.x) / 2), ((entityGeoEP1.y + entityGeoEP2.y) / 2), 0.0);
+                                if (chainStartGeoMidpoint.x > entityGeoMidpoint.x){
+                                    chainData.FirstEntity = entity;
+                                }
+                            }
+                        }
+                    }
+                    ChainManager.RelinkChains(ref selectedChains);
+                }
                 foreach (var chain in selectedChains)
                 {
+                    chain.Direction = chainDirection;
                     templist10.Clear();
                     step = 0;
-                    chain.Direction = chainDirection;
                     var chainEntity = ChainManager.GetGeometryInChain(chain);
+
                 stepStart:
                     if (step == 0)
                     {
@@ -514,6 +799,9 @@ namespace _CustomNethook
                         {
                             if (entity is ArcGeometry arc && step == 0)
                             {
+                                arc.Color = 15;
+                                arc.Commit();
+                                DialogManager.OK("", "");
                                 arcX1 = arc.EndPoint1.x; // Arc 1 x 1
                                 arcX2 = arc.EndPoint2.x; // Arc 1 x 2
                                 arcY1 = arc.EndPoint1.y; // Arc 1 y 1
@@ -541,8 +829,12 @@ namespace _CustomNethook
                                     }
                                 }
                             }
+                            
                             if (entity is LineGeometry line && step == 0)
                             {
+                                line.Color = 15;
+                                line.Commit();
+                                DialogManager.OK("", "");
                                 lineX1 = line.EndPoint1.x; // line 1 x 1
                                 lineX2 = line.EndPoint2.x; // line 1 x 2
                                 lineY1 = line.EndPoint1.y; // line 1 y 1
@@ -570,6 +862,7 @@ namespace _CustomNethook
                                     }
                                 }
                             }
+                            
                         }
                     }
                     if (step == 1)
@@ -4550,13 +4843,22 @@ namespace _CustomNethook
             deSelect();
             GraphicsManager.Repaint(true);
             deSelect();
-            if (orientation == "RightToLeft") { translateRL(); }
-            if (orientation == "LeftToRight") { translateLR(); }
+            if (orientation == "rightToLeft") { 
+                translateRL();
+                deSelect();
+                findIntersectionOfLinesRL();
+                deSelect();
+                findIntersectionOfArcsRL();
+            }
+            if (orientation == "leftToRight") { 
+                translateLR();
+                deSelect();
+                findIntersectionOfLinesLR();
+                deSelect();
+                findIntersectionOfArcsLR();
+            }
             deSelect();
-            findIntersectionOfLines();
-            deSelect();
-            findIntersectionOfArcs();
-            deSelect();
+            GraphicsManager.Repaint(true);
             clearTempLinesAndArcs();
             deSelect();
             breakArcsWithPoints();
@@ -4565,6 +4867,8 @@ namespace _CustomNethook
             deSelect();
             colorCrossovers();
             deSelect();
+            GraphicsManager.Repaint(true);
+            return MCamReturn.NoErrors;
             movePoints();
             deSelect();
             seperateGeometry();
