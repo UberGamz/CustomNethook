@@ -5495,7 +5495,6 @@ namespace _CustomNethook
                         var result = VectorManager.RadiansToDegrees(Math.Atan2(deltaY, deltaX));
                         if (result < 0) { result = (result + 360); }
                         if (result >= 360) { result = (result - 360); }
-
                         if (result >= 0 && result <= 89)
                         {
                             var thisPoint = new PointGeometry(new Point3D(pt2.x, pt2.y, 0.0));
@@ -5578,6 +5577,7 @@ namespace _CustomNethook
                                     var deltaX = (pt2.x - pt1.x);
                                     var result = VectorManager.RadiansToDegrees(Math.Atan2(deltaY, deltaX));
                                     if (result < 0) { result = (result + 360); }
+                                    if (result >= 360) { result = (result - 360); }
                                     if (result >= 0 && result <= 179)
                                     {
                                         var thisLine = line.GetEntityID();
@@ -6010,7 +6010,7 @@ namespace _CustomNethook
                                 noThisLine.Retrieve();
                                 pt1 = noThisLine.EndPoint1;
                                 pt2 = noThisLine.EndPoint2;
-                                GeometryManipulationManager.RotateGeometry(pt2, 90, Top, true);
+                                GeometryManipulationManager.RotateGeometry(pt2, -90, Top, true);
                                 var additionalLine = SearchManager.GetResultGeometry();
                                 if (additionalLine[0] is LineGeometry newLine)
                                 {
@@ -6075,7 +6075,7 @@ namespace _CustomNethook
                                 noThisLine.Retrieve();
                                 pt1 = noThisLine.EndPoint1;
                                 pt2 = noThisLine.EndPoint2;
-                                GeometryManipulationManager.RotateGeometry(pt1, -90, Top, true);
+                                GeometryManipulationManager.RotateGeometry(pt1, 90, Top, true);
                                 var additionalLine = SearchManager.GetResultGeometry();
                                 if (additionalLine[0] is LineGeometry newLine)
                                 {
@@ -6123,20 +6123,17 @@ namespace _CustomNethook
                                 noThisLine.Retrieve();
                                 pt1 = noThisLine.EndPoint1;
                                 pt2 = noThisLine.EndPoint2;
-                                GeometryManipulationManager.RotateGeometry(pt1, -90, Top, true);
+                                GeometryManipulationManager.RotateGeometry(pt1, 90, Top, true);
                                 var additionalLine = SearchManager.GetResultGeometry();
                                 if (additionalLine[0] is LineGeometry newLine)
                                 {
                                     var additionalLineLength = VectorManager.Distance(newLine.EndPoint1, newLine.EndPoint2);
                                     var newAdditionalLineLength = additionalLineLength - 1.815;
-                                    newLine.Scale(newLine.EndPoint1, newAdditionalLineLength / additionalLineLength);
+                                    newLine.Scale(newLine.EndPoint2, newAdditionalLineLength / additionalLineLength);
                                     newLine.Color = 37;
                                     newLine.Commit();
                                     GraphicsManager.ClearColors(new GroupSelectionMask(true));
                                     additionalLine = null;
-                                    var thisPoint = new PointGeometry(new Point3D(newLine.Data.Point2.x, newLine.Data.Point2.y, 0.0));
-                                    thisPoint.Commit();
-                                    finalPointList500.Add(thisPoint.GetEntityID());
                                 }
                             }
                             if (thisLine.Color == 53)
