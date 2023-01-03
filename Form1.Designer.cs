@@ -2463,7 +2463,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(613, 62);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.Size = new System.Drawing.Size(84, 15);
             this.label4.TabIndex = 38;
             this.label4.Text = "Blade Overlap";
             // 
@@ -2484,7 +2484,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(629, 36);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.Size = new System.Drawing.Size(67, 15);
             this.label6.TabIndex = 40;
             this.label6.Text = "Orientation";
             // 
